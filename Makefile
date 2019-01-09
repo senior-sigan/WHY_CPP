@@ -13,3 +13,6 @@ serve:
 
 compile:
 	cd cmake-build-debug/example;make -j4
+
+run:
+	cd cmake-build-debug/example;./example
