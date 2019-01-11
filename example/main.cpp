@@ -26,7 +26,7 @@ class Game: public ApplicationListener {
   }
 };
 
-int main() {
+int main(int argc, char *argv[]) {
   Game game;
   Application app(&game);
   app.Run();
