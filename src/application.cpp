@@ -2,12 +2,26 @@
 #include "logger.h"
 #include <SDL2/SDL.h>
 
-Application::Application(ApplicationListener *const listener, int width, int height) : listener(listener) {
+Application::Application(
+    ApplicationListener *const listener,
+    const ApplicationConfig &config
+) : listener(listener) {
   if (SDL_Init(SDL_INIT_VIDEO) != 0) {
     logSDLError("SDL_Init");
     return; // TODO: what? throw exception?
   }
-  win = SDL_CreateWindow("Hello World!", 100, 100, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+  Uint32 flags = SDL_WINDOW_SHOWN;
+  if (config.is_fullscreen) {
+    flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
+  } else {
+    flags |= SDL_WINDOW_RESIZABLE;
+  }
+  win = SDL_CreateWindow(config.name.c_str(),
+                         SDL_WINDOWPOS_CENTERED,
+                         SDL_WINDOWPOS_CENTERED,
+                         config.width,
+                         config.height,
+                         flags);
   if (win == nullptr) {
     logSDLError("SDL_CreateWindow");
     return; // TODO: what? throw exception?
@@ -17,7 +31,7 @@ Application::Application(ApplicationListener *const listener, int width, int hei
     logSDLError("SDL_CreateRenderer");
     return; // TODO: what? throw exception?
   }
-  vram = new VideoMemory(width, height);
+  vram = new VideoMemory(config.width, config.height);
   texture = new SDLTexture(ren, *vram);
 }
 Application::~Application() {
