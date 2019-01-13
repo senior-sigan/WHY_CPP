@@ -5,9 +5,9 @@
 
 class ApplicationListener {
  public:
-  virtual void OnCreate() {};
-  virtual void OnDispose() {};
-  virtual void OnPause() {};
+  virtual void OnCreate(Context&) {};
+  virtual void OnDispose(Context&) {};
+  virtual void OnPause(Context&) {};
   virtual void OnRender(Context&) {};
   virtual ~ApplicationListener() = default;
 };

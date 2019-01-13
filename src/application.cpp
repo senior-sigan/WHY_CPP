@@ -28,8 +28,8 @@ Application::~Application() {
   SDL_Quit();
 }
 void Application::Run() {
-  listener->OnCreate();
   Context ctx(*vram);
+  listener->OnCreate(ctx);
   auto now = SDL_GetPerformanceCounter();
   auto last = now;
   double delta_time = 0.0;
@@ -43,7 +43,7 @@ void Application::Run() {
     listener->OnRender(ctx);
     Render();
   }
-  listener->OnDispose();
+  listener->OnDispose(ctx);
 }
 void Application::Render() {
   SDL_RenderClear(ren);
