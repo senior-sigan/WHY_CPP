@@ -1,6 +1,8 @@
 #include <whycpp/drawing.h>
 #include "context_impl.h"
 #include <algorithm>
+#include "video_memory.h"
+#include <whycpp/color.h>
 
 int GetDisplayWidth(const Context &ctx) {
   return ctx.GetVRAM().GetWidth();

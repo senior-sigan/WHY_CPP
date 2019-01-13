@@ -2,8 +2,9 @@
 #define WHYCPP_DRAWING_H
 
 #include <cstdint>
-#include <whycpp/context.h>
-#include <whycpp/color.h>
+
+class Context;
+struct RGBA;
 
 int GetDisplayWidth(const Context &ctx);
 int GetDisplayHeight(const Context &ctx);

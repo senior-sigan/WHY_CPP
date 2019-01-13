@@ -1,7 +1,7 @@
 #ifndef WHYCPP_TIME_H
 #define WHYCPP_TIME_H
 
-#include <whycpp/context.h>
+class Context;
 
 double GetTime(const Context&);
 double GetDelta(const Context&);

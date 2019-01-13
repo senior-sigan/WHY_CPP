@@ -1,7 +1,7 @@
 #ifndef WHYCPP_CONTEXT_IMPL_H
 #define WHYCPP_CONTEXT_IMPL_H
 
-#include "video_memory.h"
+class VideoMemory;
 
 class Context {
  public:

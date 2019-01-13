@@ -5,6 +5,7 @@
 #include <whycpp/time.h>
 #include <math.h>
 #include <vector>
+#include <whycpp/color.h>
 
 const int PALETTE_LEN = 16;
 const RGBA PALETTE[PALETTE_LEN] = {

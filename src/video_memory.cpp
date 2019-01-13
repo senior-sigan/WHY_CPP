@@ -1,4 +1,5 @@
 #include "video_memory.h"
+#include <whycpp/color.h>
 
 VideoMemory::VideoMemory(int width, int height) : width(width), height(height) {
   texture = new RGBA *[width];

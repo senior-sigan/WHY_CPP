@@ -2,6 +2,8 @@
 #include "logger.h"
 #include <cmath>
 #include <algorithm>
+#include <whycpp/color.h>
+#include "video_memory.h"
 
 SDLTexture::SDLTexture(SDL_Renderer *ren, const VideoMemory &vram) : ren(ren), vram(vram) {
   buffer = new uint8_t[vram.GetWidth() * vram.GetHeight() * 4];

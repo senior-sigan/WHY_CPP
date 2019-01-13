@@ -1,7 +1,7 @@
 #ifndef WHYCPP_APPLICATION_LISTENER_H
 #define WHYCPP_APPLICATION_LISTENER_H
 
-#include <whycpp/context.h>
+class Context;
 
 class ApplicationListener {
  public:

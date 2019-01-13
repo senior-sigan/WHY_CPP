@@ -3,7 +3,8 @@
 
 #include <cstdint>
 #include <SDL2/SDL_render.h>
-#include "video_memory.h"
+
+class VideoMemory;
 
 class SDLTexture {
  public:

@@ -1,7 +1,7 @@
 #ifndef WHYCPP_VIDEO_MEMORY_H
 #define WHYCPP_VIDEO_MEMORY_H
 
-#include <whycpp/color.h>
+struct RGBA;
 
 class VideoMemory {
  public:

@@ -2,13 +2,13 @@
 #define WHYCPP_APPLICATION_H
 
 #include <string>
-#include <whycpp/application_config.h>
-#include <whycpp/application_listener.h>
 #include <SDL2/SDL_video.h>
 #include <SDL2/SDL_render.h>
-#include "sdl_texture.h"
-#include "video_memory.h"
-#include "context_impl.h"
+
+class ApplicationListener;
+class VideoMemory;
+class SDLTexture;
+struct ApplicationConfig;
 
 class Application {
  public:
