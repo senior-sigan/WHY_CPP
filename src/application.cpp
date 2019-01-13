@@ -30,7 +30,15 @@ Application::~Application() {
 void Application::Run() {
   listener->OnCreate();
   Context ctx(*vram);
+  auto now = SDL_GetPerformanceCounter();
+  auto last = now;
+  double delta_time = 0.0;
   while (!quit) {
+    last = now;
+    now = SDL_GetPerformanceCounter();
+    delta_time = ((now - last) * 1000) / static_cast<double>(SDL_GetPerformanceFrequency());
+    delta_time /= 1000.0; // convert to seconds
+    ctx.Tick(delta_time);
     HandleEvents();
     listener->OnRender(ctx);
     Render();
