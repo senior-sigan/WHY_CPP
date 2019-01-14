@@ -15,6 +15,9 @@ class VideoMemory {
   int width;
   int height;
   RGBA **texture;
+
+  int CheckX(int x) const;
+  int CheckY(int y) const;
 };
 
 #endif //WHYCPP_VIDEO_MEMORY_H
