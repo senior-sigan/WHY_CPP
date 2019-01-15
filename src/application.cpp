@@ -57,10 +57,12 @@ void Application::Run() {
     now = SDL_GetPerformanceCounter();
     delta_time = ((now - last) * 1000) / static_cast<double>(SDL_GetPerformanceFrequency());
     delta_time /= 1000.0; // convert to seconds
-    ctx.Tick(delta_time);
-    HandleEvents();
-    listener->OnRender(ctx);
-    Render();
+    HandleEvents(ctx);
+    if (!paused) {
+      ctx.Tick(delta_time);
+      listener->OnRender(ctx);
+      Render();
+    }
   }
   listener->OnDispose(ctx);
 }
@@ -69,11 +71,25 @@ void Application::Render() {
   texture->Render();
   SDL_RenderPresent(ren);
 }
-void Application::HandleEvents() {
+void Application::HandleEvents(Context &ctx) {
   SDL_Event e;
   while (SDL_PollEvent(&e)) {
-    if (e.type == SDL_QUIT) {
+    if (e.type == SDL_QUIT || e.type == SDL_APP_TERMINATING) {
       quit = true;
+    }
+    if (e.type == SDL_APP_WILLENTERBACKGROUND || e.type == SDL_APP_DIDENTERBACKGROUND) {
+      paused = true;
+      listener->OnPause(ctx);
+    }
+    if (e.type == SDL_APP_WILLENTERFOREGROUND || e.type == SDL_APP_DIDENTERFOREGROUND) {
+      paused = false;
+      listener->OnResume(ctx);
+    }
+    if (e.type == SDL_KEYDOWN) {
+      ctx.KeyDown(e.key.keysym);
+    }
+    if (e.type == SDL_KEYUP) {
+      ctx.KeyUp(e.key.keysym);
     }
   }
 }

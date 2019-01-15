@@ -9,6 +9,7 @@ class ApplicationListener;
 class VideoMemory;
 class SDLTexture;
 struct ApplicationConfig;
+class Context;
 
 class Application {
  public:
@@ -24,10 +25,11 @@ class Application {
   ApplicationListener *const listener;
 
   bool quit = false;
+  bool paused = false;
 
   void Render();
 
-  void HandleEvents();
+  void HandleEvents(Context &ctx);
 };
 
 #endif //WHYCPP_APPLICATION_H

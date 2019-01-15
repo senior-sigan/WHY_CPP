@@ -2,6 +2,7 @@
 #define WHYCPP_CONTEXT_IMPL_H
 
 class VideoMemory;
+struct SDL_Keysym;
 
 class Context {
  public:
@@ -17,10 +18,10 @@ class Context {
   double GetDelta() const {
     return current_delta;
   }
-  void Tick(double delta) {
-    current_delta = delta;
-    time += delta;
-  }
+
+  void Tick(double delta);
+  void KeyUp(const SDL_Keysym& keysym);
+  void KeyDown(const SDL_Keysym& keysym);
  private:
   VideoMemory& vram;
   double time = 0.0;
