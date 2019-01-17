@@ -73,6 +73,7 @@ void Application::Render() {
 }
 void Application::HandleEvents(Context &ctx) {
   SDL_Event e;
+  ctx.ResetKeys();
   while (SDL_PollEvent(&e)) {
     if (e.type == SDL_QUIT || e.type == SDL_APP_TERMINATING) {
       quit = true;

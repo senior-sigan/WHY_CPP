@@ -16,10 +16,10 @@ void SetPixel(Context &ctx, int x, int y, const RGBA &color) {
 const RGBA GetPixel(const Context &ctx, int x, int y) {
   return ctx.GetVRAM().Get(x, y);
 }
-void DrawClearScreen(Context &ctx) {
+void DrawClearScreen(Context &ctx, const RGBA &color) {
   for (int x = 0; x < GetDisplayWidth(ctx); x++) {
     for (int y = 0; y < GetDisplayHeight(ctx); y++) {
-      SetPixel(ctx, x, y, {0, 0, 0, 0});
+      SetPixel(ctx, x, y, color);
     }
   }
 }

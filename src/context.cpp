@@ -3,10 +3,19 @@
 #include <iostream>
 
 void Context::KeyUp(const SDL_Keysym &keysym) {
-  std::cout << "UP " << keysym.scancode << std::endl;
+  if (static_cast<int>(keysym.scancode) >= KEY_NUM_KEYS) return;
+  buttons[keysym.scancode] = false;
+  clicked[keysym.scancode] = true;
 }
 void Context::KeyDown(const SDL_Keysym &keysym) {
-  std::cout << "DOWN" << keysym.scancode << std::endl;
+  if (static_cast<int>(keysym.scancode) >= KEY_NUM_KEYS) return;
+  buttons[keysym.scancode] = true;
+  clicked[keysym.scancode] = false;
+}
+void Context::ResetKeys() {
+  for (int i = 0; i < KEY_NUM_KEYS; i++) {
+    clicked[i] = false;
+  }
 }
 void Context::Tick(double delta) {
   current_delta = delta;
