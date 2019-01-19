@@ -1,6 +1,9 @@
 #ifndef WHYCPP_BUTTONS_H
 #define WHYCPP_BUTTONS_H
 
+/**
+ * Enumerates the list of buttons we could handle in the code.
+ */
 enum Button {
   KEY_unknown = 0,
   KEY_A = 4,

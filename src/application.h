@@ -2,14 +2,14 @@
 #define WHYCPP_APPLICATION_H
 
 #include <string>
-#include <SDL2/SDL_video.h>
-#include <SDL2/SDL_render.h>
 
 class ApplicationListener;
 class VideoMemory;
 class SDLTexture;
 struct ApplicationConfig;
 class Context;
+struct SDL_Renderer;
+struct SDL_Window;
 
 class Application {
  public:
