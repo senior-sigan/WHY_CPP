@@ -3,7 +3,7 @@
 #include <whycpp/whycpp.h>
 #include <whycpp/drawing.h>
 #include <whycpp/time.h>
-#include <math.h>
+#include <cmath>
 #include <vector>
 #include <whycpp/color.h>
 #include <whycpp/buttons.h>
