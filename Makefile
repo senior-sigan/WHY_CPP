@@ -16,3 +16,7 @@ compile:
 
 run:
 	cd cmake-build-debug/example;./example
+
+doxygen:
+	rm -rf docs
+	doxygen Doxyfile

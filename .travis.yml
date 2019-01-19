@@ -11,6 +11,7 @@ addons:
 
 script:
   - doxygen Doxyfile
+  - touch docs/html/.nojekyll
 
 deploy:
   provider: pages
