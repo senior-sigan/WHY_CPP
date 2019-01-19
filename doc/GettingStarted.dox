@@ -1,0 +1,14 @@
+/** @page GettingStarted Getting started
+
+This is a very short guide on how to get started with WHYCPP.
+
+@section GettingStartedInstallation How to "install" Eigen?
+
+TBDL
+
+@section GettingStartedFirstProgram A simple first program
+
+Here is a rather simple program to get you started.
+
+@include QuickStart_example.cpp
+*/

@@ -19,4 +19,5 @@ file(GLOB_RECURSE TEST_SOURCES ${TEST_SOURCES_DIR}/*.cpp)
 
 add_subdirectory(src)
 add_subdirectory(example)
+add_subdirectory(doc/examples)
 #add_subdirectory(test)
