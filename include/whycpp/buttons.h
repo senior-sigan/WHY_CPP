@@ -2,6 +2,12 @@
 #define WHYCPP_BUTTONS_H
 
 /**
+ * @addtogroup Input
+ *
+ * @{
+ */
+
+/**
  * Enumerates the list of buttons we could handle in the code.
  */
 enum Button {
@@ -71,5 +77,7 @@ enum Button {
   KEY_RALT = 230,
   KEY_NUM_KEYS = 256, // not a key, just marks the number of scancodes for array bounds
 };
+
+/** @} */
 
 #endif //WHYCPP_BUTTONS_H

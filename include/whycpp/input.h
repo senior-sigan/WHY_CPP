@@ -6,6 +6,13 @@
 class Context;
 
 /**
+ * @defgroup Input
+ * @brief Functions to handle user input
+ *
+ * @{
+ */
+
+/**
  * Check whether the button is being pressed right now or not.
  * @param context of the application
  * @param btn to check
@@ -20,5 +27,7 @@ bool IsPressed(const Context &context, const Button& btn);
  * @return
  */
 bool IsClicked(const Context &context, const Button& btn);
+
+/** @} */
 
 #endif //WHYCPP_INPUTS_H

@@ -4,6 +4,11 @@
 class Context;
 
 /**
+ * @addtogroup Application
+ * @{
+ */
+
+/**
  * @class ApplicationListener
  *
  * ApplicationListener is the entry point into the WHYCPP application.
@@ -28,5 +33,7 @@ class ApplicationListener {
   virtual void OnRender(Context &) {};
   virtual ~ApplicationListener() = default;
 };
+
+/** @} */
 
 #endif //WHYCPP_APPLICATION_LISTENER_H

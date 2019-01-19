@@ -6,6 +6,13 @@
 class ApplicationListener;
 
 /**
+ * @defgroup Application
+ * @brief Functions to configure application start-up
+ *
+ * @{
+ */
+
+/**
  * It's a wrapper for the `Run` function to hide the process of allocating memory for the ApplicationListener object.
  * @tparam Listener is an ApplicationListener implementation
  * @param config is the configuration of the application
@@ -24,5 +31,7 @@ void RunApp(const ApplicationConfig &config = {256, 144, "Application"}) {
  * @param config is the configuration of the application
  */
 void Run(ApplicationListener *listener, const ApplicationConfig &config = {256, 144, "Application"});
+
+/** @} */
 
 #endif //WHYCPP_WHYCPP_H

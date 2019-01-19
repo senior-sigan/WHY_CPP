@@ -6,6 +6,13 @@
 class Context;
 
 /**
+ * @defgroup Drawing
+ * @brief Functions to draw something on the screen
+ *
+ * @{
+ */
+
+/**
  *
  * @param context
  * @return display width in pixels
@@ -51,5 +58,7 @@ void DrawClearScreen(Context &context, const RGBA &color = {0, 0, 0, 0});
 void DrawLine(Context &context, int x0, int y0, int x1, int y1, const RGBA &color);
 void DrawRectFill(Context &context, int x, int y, int w, int h, const RGBA &color);
 void DrawRect(Context &context, int x, int y, int w, int h, const RGBA &color);
+
+/** @} */
 
 #endif //WHYCPP_DRAWING_H
