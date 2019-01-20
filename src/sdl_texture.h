@@ -8,6 +8,12 @@ struct SDL_Renderer;
 struct SDL_Texture;
 struct SDL_Rect;
 
+/**
+ * @addtogroup DrawingInternals
+ *
+ * @{
+ */
+
 class SDLTexture {
  public:
   explicit SDLTexture(SDL_Renderer *ren, const VideoMemory &vram);
@@ -23,5 +29,7 @@ class SDLTexture {
   void Draw();
   SDL_Rect CalcSizes();
 };
+
+/** @} */
 
 #endif //WHYCPP_SDLTEXTURE_H

@@ -3,7 +3,7 @@
 #include <SDL2/SDL.h>
 #include "sdl_texture.h"
 #include "video_memory.h"
-#include "context_impl.h"
+#include "context.h"
 #include <whycpp/application_config.h>
 #include <whycpp/application_listener.h>
 

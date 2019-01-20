@@ -7,6 +7,22 @@
 class VideoMemory;
 struct SDL_Keysym;
 
+/**
+ * @addtogroup ApplicationInternals
+ * @ingroup Internals
+ *
+ * @{
+ */
+
+/**
+ * @class Context
+ *
+ * Context implementation is hidden from the users, because it contains some low-level logic.
+ * Users are supposed to use a forward declaration of the context and functions
+ * which receives Context as a parameter.
+ *
+ * @see WHYCPP_PublicAPI
+ */
 class Context {
  public:
   explicit Context(VideoMemory &vram) : vram(vram) {
@@ -34,15 +50,17 @@ class Context {
   }
 
   void Tick(double delta);
-  void KeyUp(const SDL_Keysym& keysym);
-  void KeyDown(const SDL_Keysym& keysym);
+  void KeyUp(const SDL_Keysym &keysym);
+  void KeyDown(const SDL_Keysym &keysym);
   void ResetKeys();
  private:
-  VideoMemory& vram;
+  VideoMemory &vram;
   double time = 0.0;
   double current_delta = 0.0;
   std::vector<bool> buttons;
   std::vector<bool> clicked;
 };
+
+/** @} */
 
 #endif //WHYCPP_CONTEXT_IMPL_H

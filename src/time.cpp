@@ -1,5 +1,5 @@
 #include <whycpp/time.h>
-#include "context_impl.h"
+#include "context.h"
 
 double GetTime(const Context& ctx) {
   return ctx.GetTime();

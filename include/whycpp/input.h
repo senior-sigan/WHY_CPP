@@ -7,6 +7,7 @@ class Context;
 
 /**
  * @defgroup Input
+ * @ingroup WHYCPP_PublicAPI
  * @brief Functions to handle user input
  *
  * @{

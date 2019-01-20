@@ -7,6 +7,7 @@ class Context;
 
 /**
  * @defgroup Drawing
+ * @ingroup WHYCPP_PublicAPI
  * @brief Functions to draw something on the screen
  *
  * @{
@@ -56,7 +57,32 @@ void DrawClearScreen(Context &context, const RGBA &color = {0, 0, 0, 0});
  * @param color of the line
  */
 void DrawLine(Context &context, int x0, int y0, int x1, int y1, const RGBA &color);
+/**
+ * Draw a rectangle and fill it with color.
+ * To draw it you need a left-upper corner coordinates [x,y] and rectangle width and height.
+ * @param context
+ * @param x coordinate of the left-upper corner
+ * @param y coordinate of the left-upper corner
+ * @param w width of the rectangle to draw
+ * @param h width of the rectangle to draw
+ * @param color of the borders and filler
+ * @see DrawRect()
+ */
 void DrawRectFill(Context &context, int x, int y, int w, int h, const RGBA &color);
+/**
+ * Draw a rectangle borders with the color.
+ * Rectangle body is transparent.
+ *
+ * To draw it you need a left-upper corner coordinates [x,y] and rectangle width and height.
+ * @param context
+ * @param x coordinate of the left-upper corner
+ * @param y coordinate of the left-upper corner
+ * @param w width of the rectangle to draw
+ * @param h width of the rectangle to draw
+ * @param color of the borders and filler
+ *
+ * @see DrawRectFill()
+ */
 void DrawRect(Context &context, int x, int y, int w, int h, const RGBA &color);
 
 /** @} */

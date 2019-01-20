@@ -3,6 +3,18 @@
 
 struct RGBA;
 
+/**
+ * @defgroup DrawingInternals Drawing
+ * @ingroup Internals
+ * @brief Internal drawing implementations.
+ *
+ * @{
+ */
+
+/**
+ * @class VideoMemory
+ * Holds information about screen pixels in the RGBA matrix.
+ */
 class VideoMemory {
  public:
   int GetWidth() const;
@@ -19,5 +31,7 @@ class VideoMemory {
   int CheckX(int x) const;
   int CheckY(int y) const;
 };
+
+/** @} */
 
 #endif //WHYCPP_VIDEO_MEMORY_H

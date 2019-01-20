@@ -5,6 +5,7 @@ class Context;
 
 /**
  * @defgroup Time
+ * @ingroup WHYCPP_PublicAPI
  * @brief Functions to get application time
  *
  * @{

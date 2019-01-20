@@ -6,7 +6,13 @@
 class ApplicationListener;
 
 /**
+ * @defgroup WHYCPP_PublicAPI WHYCPP Public API
+ * @brief API for game developers.
+ */
+
+/**
  * @defgroup Application
+ * @ingroup WHYCPP_PublicAPI
  * @brief Functions to configure application start-up
  *
  * @{
