@@ -3,20 +3,16 @@
 #include <iostream>
 
 VideoMemory::VideoMemory(int width, int height) : width(width), height(height) {
-  texture = new RGBA *[width];
+  // TODO: may be throw an exception when width, height < 0?
+  texture = std::make_unique<std::unique_ptr<RGBA[]>[]>(static_cast<size_t>(width));
   for (int i = 0; i < width; i++) {
-    texture[i] = new RGBA[height];
+    texture[i] = std::make_unique<RGBA[]>(static_cast<size_t>(height));
     for (int j = 0; j < height; j++) {
       texture[i][j] = {0, 0, 0, 0};
     }
   }
 }
-VideoMemory::~VideoMemory() {
-  for (int i = 0; i < width; i++) {
-    delete[] texture[i];
-  }
-  delete[] texture;
-}
+VideoMemory::~VideoMemory() = default;
 void VideoMemory::Set(int x, int y, const RGBA &color) {
   texture[CheckX(x)][CheckY(y)] = color;
 }
@@ -32,14 +28,14 @@ int VideoMemory::GetWidth() const {
 int VideoMemory::CheckX(int x) const {
   if (x >= width || x < 0) {
     std::cout << "[WARN][VideoMemory]: X is out of bound, should be [0, " << width << "), but " << x << std::endl;
-    return std::clamp(x, 0, width-1);
+    return std::clamp(x, 0, width - 1);
   }
   return x;
 }
 int VideoMemory::CheckY(int y) const {
   if (y >= height || y < 0) {
     std::cout << "[WARN][VideoMemory]: Y is out of bound, should be [0, " << height << "), but " << y << std::endl;
-    return std::clamp(y, 0, height-1);
+    return std::clamp(y, 0, height - 1);
   }
   return y;
 }

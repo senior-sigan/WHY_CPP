@@ -2,6 +2,8 @@
 #define WHYCPP_SDLTEXTURE_H
 
 #include <cstdint>
+#include <memory>
+#include "sdl_deleter.h"
 
 class VideoMemory;
 struct SDL_Renderer;
@@ -16,15 +18,15 @@ struct SDL_Rect;
 
 class SDLTexture {
  public:
-  explicit SDLTexture(SDL_Renderer *ren, const VideoMemory &vram);
+  explicit SDLTexture(const std::unique_ptr<SDL_Renderer, sdl_deleter>& ren, const VideoMemory &vram);
   virtual ~SDLTexture();
 
   void Render();
  private:
-  SDL_Renderer *ren;
+  const std::unique_ptr<SDL_Renderer, sdl_deleter>& ren;
   const VideoMemory& vram;
-  uint8_t *buffer;
-  SDL_Texture *tex;
+  std::unique_ptr<uint8_t[]> buffer;
+  std::unique_ptr<SDL_Texture, sdl_deleter> tex;
 
   void Draw();
   SDL_Rect CalcSizes();

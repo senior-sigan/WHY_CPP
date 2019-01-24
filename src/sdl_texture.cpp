@@ -5,26 +5,25 @@
 #include "video_memory.h"
 #include <SDL2/SDL_render.h>
 
-SDLTexture::SDLTexture(SDL_Renderer *ren, const VideoMemory &vram) : ren(ren), vram(vram) {
-  buffer = new uint8_t[vram.GetWidth() * vram.GetHeight() * 4];
-  tex = SDL_CreateTexture(ren,
-                          SDL_PIXELFORMAT_ABGR8888,
-                          SDL_TEXTUREACCESS_STREAMING,
-                          vram.GetWidth(),
-                          vram.GetHeight());
-  if (tex == nullptr) {
+SDLTexture::SDLTexture(const std::unique_ptr<SDL_Renderer, sdl_deleter>& ren, const VideoMemory &vram) : ren(ren), vram(vram) {
+  auto buf_size = vram.GetWidth() * vram.GetHeight() * 4;
+  // TODO: buf_size should be > 0. Maybe throw an exception?
+  buffer = std::make_unique<uint8_t[]>(static_cast<size_t>(buf_size));
+  tex = std::unique_ptr<SDL_Texture, sdl_deleter>(SDL_CreateTexture(ren.get(),
+                                                                    SDL_PIXELFORMAT_ABGR8888,
+                                                                    SDL_TEXTUREACCESS_STREAMING,
+                                                                    vram.GetWidth(),
+                                                                    vram.GetHeight()), sdl_deleter());
+  if (!tex) {
     logSDLError("SDL_CreateTexture");
   }
 }
-SDLTexture::~SDLTexture() {
-  SDL_DestroyTexture(tex);
-  delete[] buffer;
-}
+SDLTexture::~SDLTexture() = default;
 void SDLTexture::Render() {
   Draw();
-  SDL_UpdateTexture(tex, nullptr, buffer, vram.GetWidth() * 4);
+  SDL_UpdateTexture(tex.get(), nullptr, buffer.get(), vram.GetWidth() * 4);
   auto dst = CalcSizes();
-  SDL_RenderCopy(ren, tex, nullptr, &dst);
+  SDL_RenderCopy(ren.get(), tex.get(), nullptr, &dst);
 }
 void SDLTexture::Draw() {
   for (int x = 0; x < vram.GetWidth(); x++) {
@@ -40,10 +39,10 @@ void SDLTexture::Draw() {
 }
 SDL_Rect SDLTexture::CalcSizes() {
   SDL_Rect dst = {0, 0, 0, 0};
-  SDL_QueryTexture(tex, nullptr, nullptr, &dst.w, &dst.h);
+  SDL_QueryTexture(tex.get(), nullptr, nullptr, &dst.w, &dst.h);
 
   int sw, sh;
-  SDL_GetRendererOutputSize(ren, &sw, &sh);
+  SDL_GetRendererOutputSize(ren.get(), &sw, &sh);
 
   float rw = static_cast<float>(sw) / dst.w;
   float rh = static_cast<float>(sh) / dst.h;

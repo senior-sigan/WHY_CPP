@@ -2,6 +2,7 @@
 #define WHYCPP_WHYCPP_H
 
 #include "application_config.h"
+#include <memory>
 
 class ApplicationListener;
 
@@ -25,8 +26,7 @@ class ApplicationListener;
  */
 template<typename Listener>
 void RunApp(const ApplicationConfig &config = {256, 144, "Application"}) {
-  Listener l;
-  Run(&l, config);
+  Run(std::make_shared<Listener>(), config);
 }
 
 /**
@@ -36,7 +36,7 @@ void RunApp(const ApplicationConfig &config = {256, 144, "Application"}) {
  * @param listener is an ApplicationListener implementation
  * @param config is the configuration of the application
  */
-void Run(ApplicationListener *listener, const ApplicationConfig &config = {256, 144, "Application"});
+void Run(std::shared_ptr<ApplicationListener> listener, const ApplicationConfig &config = {256, 144, "Application"});
 
 /** @} */
 

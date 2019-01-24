@@ -2,6 +2,8 @@
 #define WHYCPP_APPLICATION_H
 
 #include <string>
+#include <memory>
+#include "sdl_deleter.h"
 
 class ApplicationListener;
 class VideoMemory;
@@ -29,16 +31,16 @@ struct SDL_Window;
  */
 class Application {
  public:
-  explicit Application(ApplicationListener *listener, const ApplicationConfig& congig);
+  explicit Application(std::shared_ptr<ApplicationListener> listener, const ApplicationConfig &congig);
   virtual ~Application();
 
   void Run();
  private:
-  SDL_Renderer *ren;
-  SDL_Window *win;
-  VideoMemory *vram;
-  SDLTexture *texture;
-  ApplicationListener *const listener;
+  std::unique_ptr<SDL_Renderer, sdl_deleter> ren;
+  std::unique_ptr<SDL_Window, sdl_deleter> win;
+  std::shared_ptr<SDLTexture> texture;
+  std::shared_ptr<VideoMemory> vram;
+  const std::shared_ptr<ApplicationListener> listener;
 
   bool quit = false;
   bool paused = false;

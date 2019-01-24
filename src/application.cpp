@@ -8,7 +8,7 @@
 #include <whycpp/application_listener.h>
 
 Application::Application(
-    ApplicationListener *const listener,
+    const std::shared_ptr<ApplicationListener> listener,
     const ApplicationConfig &config
 ) : listener(listener) {
   if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -21,29 +21,29 @@ Application::Application(
   } else {
     flags |= SDL_WINDOW_RESIZABLE;
   }
-  win = SDL_CreateWindow(config.name.c_str(),
-                         SDL_WINDOWPOS_CENTERED,
-                         SDL_WINDOWPOS_CENTERED,
-                         config.width,
-                         config.height,
-                         flags);
-  if (win == nullptr) {
+  win = std::unique_ptr<SDL_Window, sdl_deleter>(
+      SDL_CreateWindow(config.name.c_str(),
+                       SDL_WINDOWPOS_CENTERED,
+                       SDL_WINDOWPOS_CENTERED,
+                       config.width,
+                       config.height,
+                       flags), sdl_deleter());
+  if (!win) {
     logSDLError("SDL_CreateWindow");
     return; // TODO: what? throw exception?
   }
-  ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-  if (ren == nullptr) {
+  ren = std::unique_ptr<SDL_Renderer, sdl_deleter>(
+      SDL_CreateRenderer(win.get(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC),
+      sdl_deleter()
+  );
+  if (!ren) {
     logSDLError("SDL_CreateRenderer");
     return; // TODO: what? throw exception?
   }
-  vram = new VideoMemory(config.width, config.height);
-  texture = new SDLTexture(ren, *vram);
+  vram = std::make_shared<VideoMemory>(config.width, config.height);
+  texture = std::make_shared<SDLTexture>(ren, *vram);
 }
 Application::~Application() {
-  delete texture;
-  delete vram;
-  SDL_DestroyRenderer(ren);
-  SDL_DestroyWindow(win);
   SDL_Quit();
 }
 void Application::Run() {
@@ -67,9 +67,9 @@ void Application::Run() {
   listener->OnDispose(ctx);
 }
 void Application::Render() {
-  SDL_RenderClear(ren);
+  SDL_RenderClear(ren.get());
   texture->Render();
-  SDL_RenderPresent(ren);
+  SDL_RenderPresent(ren.get());
 }
 void Application::HandleEvents(Context &ctx) {
   SDL_Event e;

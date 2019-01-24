@@ -1,6 +1,8 @@
 #ifndef WHYCPP_VIDEO_MEMORY_H
 #define WHYCPP_VIDEO_MEMORY_H
 
+#include <memory>
+
 struct RGBA;
 
 /**
@@ -26,7 +28,7 @@ class VideoMemory {
  private:
   int width;
   int height;
-  RGBA **texture;
+  std::unique_ptr<std::unique_ptr<RGBA[]>[]> texture;
 
   int CheckX(int x) const;
   int CheckY(int y) const;
