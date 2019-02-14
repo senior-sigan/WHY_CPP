@@ -1,6 +1,7 @@
 #include "video_memory.h"
 #include <whycpp/color.h>
 #include <iostream>
+#include <algorithm>
 
 VideoMemory::VideoMemory(int width, int height) : width(width), height(height) {
   // TODO: may be throw an exception when width, height < 0?
