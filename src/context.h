@@ -48,6 +48,10 @@ class Context {
     if (btn >= buttons.size()) return false;
     return clicked.at(btn);
   }
+  bool IsQuit() const;
+  void SetQuit(bool quit);
+  bool IsPaused() const;
+  void SetPaused(bool paused);
 
   void Tick(double delta);
   void KeyUp(const SDL_Keysym &keysym);
@@ -59,6 +63,8 @@ class Context {
   double current_delta = 0.0;
   std::vector<bool> buttons;
   std::vector<bool> clicked;
+  bool quit = false;
+  bool paused = false;
 };
 
 /** @} */

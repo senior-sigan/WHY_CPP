@@ -52,13 +52,13 @@ void Application::Run() {
   auto now = SDL_GetPerformanceCounter();
   auto last = now;
   double delta_time = 0.0;
-  while (!quit) {
+  while (!ctx.IsQuit()) {
     last = now;
     now = SDL_GetPerformanceCounter();
     delta_time = ((now - last) * 1000) / static_cast<double>(SDL_GetPerformanceFrequency());
     delta_time /= 1000.0; // convert to seconds
     HandleEvents(ctx);
-    if (!paused) {
+    if (!ctx.IsPaused()) {
       ctx.Tick(delta_time);
       listener->OnRender(ctx);
       Render();
@@ -76,14 +76,14 @@ void Application::HandleEvents(Context &ctx) {
   ctx.ResetKeys();
   while (SDL_PollEvent(&e)) {
     if (e.type == SDL_QUIT || e.type == SDL_APP_TERMINATING) {
-      quit = true;
+      ctx.SetQuit(true);
     }
     if (e.type == SDL_APP_WILLENTERBACKGROUND || e.type == SDL_APP_DIDENTERBACKGROUND) {
-      paused = true;
+      ctx.SetPaused(true);
       listener->OnPause(ctx);
     }
     if (e.type == SDL_APP_WILLENTERFOREGROUND || e.type == SDL_APP_DIDENTERFOREGROUND) {
-      paused = false;
+      ctx.SetPaused(false);
       listener->OnResume(ctx);
     }
     if (e.type == SDL_KEYDOWN) {

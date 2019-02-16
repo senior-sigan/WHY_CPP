@@ -9,6 +9,7 @@
 #include <whycpp/buttons.h>
 #include <whycpp/input.h>
 #include <whycpp/palette.h>
+#include <whycpp/lifecycle.h>
 
 int rnd(int bound) {
   return rand() % bound;
@@ -115,6 +116,9 @@ class ButtonsTest: public ApplicationListener {
     }
     if (IsPressed(ctx, Button::KEY_RIGHT)) {
       DrawClearScreen(ctx, PALETTE[4]);
+    }
+    if (IsPressed(ctx, Button::KEY_SPACE)) {
+      ExitApp(ctx);
     }
   }
 };

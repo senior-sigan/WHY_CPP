@@ -42,9 +42,6 @@ class Application {
   std::shared_ptr<VideoMemory> vram;
   const std::shared_ptr<ApplicationListener> listener;
 
-  bool quit = false;
-  bool paused = false;
-
   void Render();
 
   void HandleEvents(Context &ctx);

@@ -21,3 +21,15 @@ void Context::Tick(double delta) {
   current_delta = delta;
   time += delta;
 }
+bool Context::IsQuit() const {
+  return quit;
+}
+void Context::SetQuit(bool quit) {
+  Context::quit = quit;
+}
+bool Context::IsPaused() const {
+  return paused;
+}
+void Context::SetPaused(bool paused) {
+  Context::paused = paused;
+}
