@@ -6,6 +6,7 @@
 #include "context.h"
 #include <whycpp/application_config.h>
 #include <whycpp/application_listener.h>
+#include "default_font.h"
 
 Application::Application(
     const std::shared_ptr<ApplicationListener> listener,
@@ -47,7 +48,8 @@ Application::~Application() {
   SDL_Quit();
 }
 void Application::Run() {
-  Context ctx(*vram);
+  auto font = BuildDefaultFont();
+  Context ctx(*vram, font);
   listener->OnCreate(ctx);
   auto now = SDL_GetPerformanceCounter();
   auto last = now;

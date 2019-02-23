@@ -10,6 +10,7 @@
 #include <whycpp/input.h>
 #include <whycpp/palette.h>
 #include <whycpp/lifecycle.h>
+#include <whycpp/text.h>
 
 int rnd(int bound) {
   return rand() % bound;
@@ -70,13 +71,13 @@ class Fade : public ApplicationListener {
       int x = rnd(GetDisplayWidth(ctx));
       int y = rnd(GetDisplayHeight(ctx));
 
-      const RGBA& color = PALETTE[static_cast<int>(GetTime(ctx)) % PALETTE_LEN];
+      const RGBA &color = PALETTE[static_cast<int>(GetTime(ctx)) % PALETTE_LEN];
       SetPixel(ctx, x, y, color);
     }
   }
 };
 
-class PaletteShow: public ApplicationListener {
+class PaletteShow : public ApplicationListener {
  public:
   void OnRender(Context &ctx) override {
     const int w = GetDisplayWidth(ctx) / PALETTE_LEN;
@@ -86,7 +87,7 @@ class PaletteShow: public ApplicationListener {
   }
 };
 
-class RandomLines: public ApplicationListener {
+class RandomLines : public ApplicationListener {
  public:
   void OnRender(Context &ctx) override {
     int x0 = rnd(GetDisplayWidth(ctx));
@@ -95,16 +96,17 @@ class RandomLines: public ApplicationListener {
     int x1 = rnd(GetDisplayWidth(ctx));
     int y1 = rnd(GetDisplayHeight(ctx));
 
-    const RGBA& color = PALETTE[static_cast<int>(GetTime(ctx)) % PALETTE_LEN];
+    const RGBA &color = PALETTE[static_cast<int>(GetTime(ctx)) % PALETTE_LEN];
 
     DrawLine(ctx, x0, y0, x1, y1, color);
   }
 };
 
-class ButtonsTest: public ApplicationListener {
+class ButtonsTest : public ApplicationListener {
  public:
   void OnRender(Context &ctx) override {
     DrawClearScreen(ctx, PALETTE[0]);
+    Print(ctx, "Press Arrows\nPress Space to exit", 1,10, PALETTE[3], 2);
     if (IsPressed(ctx, Button::KEY_UP)) {
       DrawClearScreen(ctx, PALETTE[1]);
     }
@@ -123,7 +125,18 @@ class ButtonsTest: public ApplicationListener {
   }
 };
 
+class HelloText : public ApplicationListener {
+ public:
+  void OnCreate(Context &ctx) override {
+    DrawClearScreen(ctx, PALETTE[0]);
+    Print(ctx, 'H', 10, 10, PALETTE[2]);
+    Print(ctx, 'H', 10, 20, PALETTE[2], 2);
+    Print(ctx, "Hello World", 10, 40, PALETTE[3], 2);
+  }
+};
+
 int main(int argc, char *argv[]) {
+  RunApp<HelloText>();
   RunApp<ButtonsTest>();
   RunApp<PaletteShow>();
   RunApp<Fade>();

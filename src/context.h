@@ -3,9 +3,13 @@
 
 #include <vector>
 #include <whycpp/buttons.h>
+#include <map>
+#include <memory>
+#include <string>
 
 class VideoMemory;
 struct SDL_Keysym;
+class Font;
 
 /**
  * @addtogroup ApplicationInternals
@@ -25,7 +29,7 @@ struct SDL_Keysym;
  */
 class Context {
  public:
-  explicit Context(VideoMemory &vram) : vram(vram) {
+  explicit Context(VideoMemory &vram, Font& font) : vram(vram), font(font) {
     buttons.resize(Button::KEY_NUM_KEYS);
     clicked.resize(Button::KEY_NUM_KEYS);
   }
@@ -52,6 +56,8 @@ class Context {
   void SetQuit(bool quit);
   bool IsPaused() const;
   void SetPaused(bool paused);
+  Font& GetFont() const;
+  void SetFont(const Font& font);
 
   void Tick(double delta);
   void KeyUp(const SDL_Keysym &keysym);
@@ -65,6 +71,7 @@ class Context {
   std::vector<bool> clicked;
   bool quit = false;
   bool paused = false;
+  Font& font;
 };
 
 /** @} */

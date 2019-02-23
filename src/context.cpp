@@ -1,5 +1,6 @@
 #include <SDL2/SDL_keyboard.h>
 #include "context.h"
+#include <whycpp/font.h>
 #include <iostream>
 
 void Context::KeyUp(const SDL_Keysym &keysym) {
@@ -32,4 +33,10 @@ bool Context::IsPaused() const {
 }
 void Context::SetPaused(bool paused) {
   Context::paused = paused;
+}
+Font& Context::GetFont() const {
+  return font;
+}
+void Context::SetFont(const Font &font) {
+  Context::font = font;
 }
