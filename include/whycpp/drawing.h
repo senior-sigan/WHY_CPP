@@ -84,6 +84,33 @@ void DrawRectFill(Context &context, int x, int y, int w, int h, const RGBA &colo
  * @see DrawRectFill()
  */
 void DrawRect(Context &context, int x, int y, int w, int h, const RGBA &color);
+/**
+ * Draw a circle border with the color.
+ * Circle body is transparent
+ *
+ * @param context
+ * @param x coordinate of the circle's center
+ * @param y coordinate of the circle's center
+ * @param radius
+ * @param color
+ *
+ * @see DrawCircleFill()
+ */
+void DrawCircle(Context &context, int x, int y, int radius, const RGBA& color);
+/**
+ * Draw a circle border with the color.
+ * Circle body is filled with the same color as the border.
+ *
+ *
+ * @param context
+ * @param x coordinate of the circle's center
+ * @param y coordinate of the circle's center
+ * @param radius
+ * @param color
+ *
+ * @see DrawCircle()
+ */
+void DrawCircleFill(Context &context, int x, int y, int radius, const RGBA& color);
 
 /** @} */
 

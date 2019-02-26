@@ -135,7 +135,18 @@ class HelloText : public ApplicationListener {
   }
 };
 
+class Bubbles: public ApplicationListener {
+ public:
+  void OnCreate(Context &ctx) override {
+    DrawClearScreen(ctx, PALETTE[0]);
+    DrawCircle(ctx, 10, 10, 5, PALETTE[2]);
+    DrawCircleFill(ctx, 20, 20, 7, PALETTE[3]);
+    DrawCircle(ctx, 20, 20, 8, PALETTE[4]);
+  }
+};
+
 int main(int argc, char *argv[]) {
+  RunApp<Bubbles>();
   RunApp<HelloText>();
   RunApp<ButtonsTest>();
   RunApp<PaletteShow>();

@@ -55,4 +55,38 @@ void DrawRect(Context &ctx, int x, int y, int w, int h, const RGBA &color) {
   DrawLine(ctx, x + w, y, x + w, y + h, color);
   DrawLine(ctx, x, y + h, x + w, y + h, color);
 }
+void DrawCircle(Context &context, int x, int y, int radius, const RGBA &color) {
+  int r = radius;
+  int x_ = -r;
+  int y_ = 0;
+  int err = 2 - 2 * r;
+  do {
+    SetPixel(context, x - x_, y + y_, color);
+    SetPixel(context, x + x_, y - y_, color);
+
+    SetPixel(context, x - y_, y - x_, color);
+    SetPixel(context, x + y_, y + x_, color);
+    r = err;
+    if (r <= y_) err += ++y_ * 2 + 1;
+    if (r > x_ || err > y_) err += ++x_ * 2 + 1;
+  } while (x_ < 0);
+}
+void DrawCircleFill(Context &context, int x, int y, int radius, const RGBA &color) {
+  int r = radius;
+  int x_ = -r;
+  int y_ = 0;
+  int err = 2 - 2 * r;
+  do {
+    for (int i = x + x_; i <= x - x_; i++) {
+      SetPixel(context, i, y + y_, color);
+    }
+    for (int i = x + x_; i <= x - x_; i++) {
+      SetPixel(context, i, y - y_, color);
+    }
+
+    r = err;
+    if (r <= y_) err += ++y_ * 2 + 1;
+    if (r > x_ || err > y_) err += ++x_ * 2 + 1;
+  } while (x_ < 0);
+}
 
