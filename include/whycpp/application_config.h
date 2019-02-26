@@ -13,6 +13,8 @@ struct ApplicationConfig {
   const int height = 144;
   const std::string name = "Application";
   const bool is_fullscreen = false;
+  const int window_width = width * 3;
+  const int window_height = height * 3;
 };
 
 /** @} */

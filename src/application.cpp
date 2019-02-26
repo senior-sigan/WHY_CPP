@@ -26,8 +26,8 @@ Application::Application(
       SDL_CreateWindow(config.name.c_str(),
                        SDL_WINDOWPOS_CENTERED,
                        SDL_WINDOWPOS_CENTERED,
-                       config.width,
-                       config.height,
+                       config.window_width,
+                       config.window_height,
                        flags), sdl_deleter());
   if (!win) {
     logSDLError("SDL_CreateWindow");
