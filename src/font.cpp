@@ -1,6 +1,6 @@
 #include <whycpp/font.h>
 
-uint8_t Font::At(char ch, int row) const {
+int Font::At(char ch, int row) const {
   auto i = static_cast<unsigned long>(ch);
   return glyphs.at(i).data[row];
 }

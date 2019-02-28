@@ -13,7 +13,7 @@
 struct Glyph {
   // TODO: why do we fix font size?
   const static int SIZE = 8;
-  uint8_t data[SIZE];
+  int data[SIZE];
 };
 
 /**
@@ -22,7 +22,7 @@ struct Glyph {
 class Font {
  public:
   explicit Font(const std::vector<Glyph> &glyphs);
-  uint8_t At(char ch, int row) const;
+  int At(char ch, int row) const;
   int GetHeight() const;
   int GetWidth() const;
   int GetSpacing() const;
