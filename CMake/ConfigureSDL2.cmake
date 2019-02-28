@@ -11,7 +11,7 @@ execute_process(COMMAND ${CMAKE_COMMAND} --build .
 if(result)
     message(FATAL_ERROR "Build step for SDL2 failed: ${result}")
 endif()
-execute_process(COMMAND ${CMAKE_COMMAND} -E copy_directory include ${CMAKE_CURRENT_BINARY_DIR}/sdl2-headers/SDL2.
+execute_process(COMMAND ${CMAKE_COMMAND} -E copy_directory include ${CMAKE_CURRENT_BINARY_DIR}/sdl2-headers/SDL2
         RESULT_VARIABLE result
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/sdl2-src )
 if(result)
