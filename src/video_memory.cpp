@@ -4,22 +4,17 @@
 #include <algorithm>
 #include "clamp.h"
 
-VideoMemory::VideoMemory(int width, int height) : width(width), height(height) {
-  // TODO: may be throw an exception when width, height < 0?
-  texture = std::unique_ptr<std::unique_ptr<RGBA[]>[]>(new std::unique_ptr<RGBA[]>[width]);
-  for (int i = 0; i < width; i++) {
-    texture[i] = std::unique_ptr<RGBA[]>(new RGBA[height]);
-    for (int j = 0; j < height; j++) {
-      texture[i][j] = {0, 0, 0, 0};
-    }
-  }
-}
+VideoMemory::VideoMemory(int width, int height) : width(width), height(height),
+                                                  texture(std::vector<std::vector<RGBA>>(
+                                                      static_cast<unsigned long>(width),
+                                                      std::vector<RGBA>(static_cast<unsigned long>(height),
+                                                                        {0, 0, 0, 0}))) {}
 VideoMemory::~VideoMemory() = default;
 void VideoMemory::Set(int x, int y, const RGBA &color) {
   texture[CheckX(x)][CheckY(y)] = color;
 }
 const RGBA &VideoMemory::Get(int x, int y) const {
-  return texture[CheckX(x)][CheckY(y)];
+  return texture.at(static_cast<unsigned long>(CheckX(x))).at(static_cast<unsigned long>(CheckY(y)));
 }
 int VideoMemory::GetHeight() const {
   return height;

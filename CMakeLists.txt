@@ -28,6 +28,8 @@ if (SDL2_FROM_SOURCE)
     include(ConfigureSDL2)
 endif ()
 
+set(LODEPNG_HEADERS ${PROJECT_SOURCE_DIR}/lib/lodepng/include)
+add_subdirectory(lib/lodepng)
 add_subdirectory(src)
 add_subdirectory(example)
 add_subdirectory(doc/examples)

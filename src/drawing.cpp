@@ -3,6 +3,7 @@
 #include <algorithm>
 #include "video_memory.h"
 #include <whycpp/color.h>
+#include <iostream>
 
 int GetDisplayWidth(const Context &ctx) {
   return ctx.GetVRAM().GetWidth();
@@ -11,6 +12,8 @@ int GetDisplayHeight(const Context &ctx) {
   return ctx.GetVRAM().GetHeight();
 }
 void SetPixel(Context &ctx, int x, int y, const RGBA &color) {
+  if (color.alpha == 0)
+    return;
   ctx.GetVRAM().Set(x, y, color);
 }
 const RGBA GetPixel(const Context &ctx, int x, int y) {
@@ -90,3 +93,18 @@ void DrawCircleFill(Context &context, int x, int y, int radius, const RGBA &colo
   } while (x_ < 0);
 }
 
+void DrawSprite(Context &context,
+                int sprite_id,
+                int screen_x,
+                int screen_y,
+                int sheet_x,
+                int sheet_y,
+                int width,
+                int height) {
+  auto spr = context.GetSprite(sprite_id);
+  for (auto y = 0; y < height; y++) {
+    for (auto x = 0; x < width; x++) {
+      SetPixel(context, screen_x + x, screen_y + y, spr.Get(sheet_x + x, sheet_y + y));
+    }
+  }
+}

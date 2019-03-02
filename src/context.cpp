@@ -40,3 +40,10 @@ Font& Context::GetFont() const {
 void Context::SetFont(const Font &font) {
   Context::font = font;
 }
+int Context::AppendSprite(const VideoMemory& sprite) {
+  sprites.push_back(sprite);
+  return static_cast<int>(sprites.size() - 1);
+}
+const VideoMemory& Context::GetSprite(int index) const {
+  return sprites.at(static_cast<unsigned long>(index));
+}

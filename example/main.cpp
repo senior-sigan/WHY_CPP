@@ -11,6 +11,8 @@
 #include <whycpp/palette.h>
 #include <whycpp/lifecycle.h>
 #include <whycpp/text.h>
+#include <whycpp/import_sprites.h>
+#include <whycpp/animation.h>
 
 #define PI 3.14159265358979323846  /* pi */
 
@@ -149,7 +151,47 @@ class Bubbles : public ApplicationListener {
   }
 };
 
+class PngTexture : public ApplicationListener {
+  int id = -1;
+  std::shared_ptr<Animation> anim;
+ public:
+  void OnCreate(Context &context) override {
+    id = ImportSprite(context, "assets/atlas.png");
+    std::vector<std::pair<int, int>> sprites = {
+        {20 * 16, 40 * 16},
+        {21 * 16, 40 * 16},
+        {22 * 16, 40 * 16},
+        {23 * 16, 40 * 16},
+        {24 * 16, 40 * 16},
+        {20 * 16, 42 * 16},
+        {21 * 16, 42 * 16},
+        {22 * 16, 42 * 16},
+        {26 * 16, 40 * 16},
+        {20 * 16, 38 * 16},
+        {21 * 16, 38 * 16},
+        {22 * 16, 38 * 16},
+        {23 * 16, 38 * 16},
+        {24 * 16, 38 * 16},
+        {24 * 16, 38 * 16},
+        {26 * 16, 38 * 16},
+        {27 * 16, 38 * 16},
+        {28 * 16, 38 * 16},
+        {29 * 16, 38 * 16},
+        {30 * 16, 38 * 16},
+        {31 * 16, 38 * 16},
+    };
+    anim = std::make_shared<Animation>(16, 32, 8, sprites, id, true);
+  }
+
+  void OnRender(Context &context) override {
+    DrawSprite(context, id, 0, 0, 0, 0, GetDisplayWidth(context), GetDisplayHeight(context));
+    anim->Draw(context, 32, 32);
+    Print(context, "ANIMATION", 8, 64, PALETTE[3]);
+  }
+};
+
 int main(int argc, char *argv[]) {
+  RunApp<PngTexture>();
   RunApp<Bubbles>();
   RunApp<HelloText>();
   RunApp<ButtonsTest>();

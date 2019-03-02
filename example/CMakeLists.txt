@@ -13,3 +13,5 @@ endif()
 
 add_executable(example main.cpp)
 target_link_libraries(example whycpp)
+
+file(COPY assets/atlas.png DESTINATION ${CMAKE_BINARY_DIR}/example/assets)

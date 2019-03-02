@@ -4,6 +4,9 @@ include_directories(${PROJECT_INCLUDES_DIR})
 
 add_library(whycpp SHARED STATIC ${SOURCES} ${HEADERS} ${INCLUDES})
 
+target_include_directories(whycpp SYSTEM PRIVATE ${LODEPNG_HEADERS})
+target_link_libraries(whycpp lodepng)
+
 if (WIN32)
     target_link_libraries(whycpp winmm.lib)
 endif ()

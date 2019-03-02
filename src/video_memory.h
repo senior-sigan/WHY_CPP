@@ -2,8 +2,8 @@
 #define WHYCPP_VIDEO_MEMORY_H
 
 #include <memory>
-
-struct RGBA;
+#include <vector>
+#include <whycpp/color.h>
 
 /**
  * @defgroup DrawingInternals Drawing
@@ -28,7 +28,7 @@ class VideoMemory {
  private:
   int width;
   int height;
-  std::unique_ptr<std::unique_ptr<RGBA[]>[]> texture;
+  std::vector<std::vector<RGBA>> texture;
 
   int CheckX(int x) const;
   int CheckY(int y) const;

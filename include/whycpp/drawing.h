@@ -112,6 +112,7 @@ void DrawCircle(Context &context, int x, int y, int radius, const RGBA& color);
  */
 void DrawCircleFill(Context &context, int x, int y, int radius, const RGBA& color);
 
+void DrawSprite(Context& context, int sprite_id, int screen_x, int screen_y, int sheet_x, int sheet_y, int width, int height);
 /** @} */
 
 #endif //WHYCPP_DRAWING_H

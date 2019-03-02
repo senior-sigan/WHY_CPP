@@ -6,8 +6,8 @@
 #include <map>
 #include <memory>
 #include <string>
+#include "video_memory.h"
 
-class VideoMemory;
 struct SDL_Keysym;
 class Font;
 
@@ -58,6 +58,8 @@ class Context {
   void SetPaused(bool paused);
   Font& GetFont() const;
   void SetFont(const Font& font);
+  int AppendSprite(const VideoMemory& sprite);
+  const VideoMemory& GetSprite(int index) const;
 
   void Tick(double delta);
   void KeyUp(const SDL_Keysym &keysym);
@@ -72,6 +74,7 @@ class Context {
   bool quit = false;
   bool paused = false;
   Font& font;
+  std::vector<VideoMemory> sprites;
 };
 
 /** @} */
