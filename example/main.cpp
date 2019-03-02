@@ -45,8 +45,10 @@ class Prisma : public ApplicationListener {
     const RGBA blue = {0, 0, 255, 0};
 
     for (double i = fmod(t, 8.0); i < base; i += 8.0) {
-      DrawLine(ctx, static_cast<int>(i), 0, 0, static_cast<int>(base - i), red);
-      DrawLine(ctx, static_cast<int>(i), base, base, static_cast<int>(135 - i), green);
+      int x = static_cast<int>(i);
+      int y = static_cast<int>(base - i);
+      DrawLine(ctx, x, 0, 0, y, red);
+      DrawLine(ctx, x, base, base, y, green);
       t += 0.005;
     }
 
