@@ -18,7 +18,7 @@ file(GLOB_RECURSE HEADERS ${PROJECT_HEADERS_DIR}/*.h)
 file(GLOB_RECURSE SOURCES ${PROJECT_SOURCES_DIR}/*.cpp)
 file(GLOB_RECURSE TEST_SOURCES ${TEST_SOURCES_DIR}/*.cpp)
 
-set(SDL2_FROM_SOURCE OFF)
+set(SDL2_FROM_SOURCE ON) # if you have libsdl2 installed use OFF instead
 
 if (SDL2_FROM_SOURCE)
     include(ConfigureSDL2)

@@ -24,7 +24,7 @@ ExternalProject_Add(
         sdl2
 #            PREFIX ${DEPENDENCY_EXTRACT_DIR}
 #            DOWNLOAD_DIR ${DEPENDENCY_DOWNLOAD_DIR}
-        URL http://libsdl.org/release/SDL2-2.0.9.tar.gz
+        URL https://libsdl.org/release/SDL2-2.0.9.tar.gz
         URL_MD5 f2ecfba915c54f7200f504d8b48a5dfe
         SOURCE_DIR        "${CMAKE_CURRENT_BINARY_DIR}/sdl2-src"
         BINARY_DIR        "${CMAKE_CURRENT_BINARY_DIR}/sdl2-build"

@@ -12,6 +12,8 @@
 #include <whycpp/lifecycle.h>
 #include <whycpp/text.h>
 
+#define PI 3.14159265358979323846  /* pi */
+
 int rnd(int bound) {
   return rand() % bound;
 }
@@ -35,8 +37,8 @@ class Prisma : public ApplicationListener {
  public:
   void OnRender(Context &ctx) override {
     const int base = 143;
-    const double pi8 = M_PI / 8;
-    const double pi2 = M_PI * 2;
+    const double pi8 = PI / 8;
+    const double pi2 = PI * 2;
     DrawClearScreen(ctx);
     static double t = 0;
 
@@ -108,7 +110,7 @@ class ButtonsTest : public ApplicationListener {
  public:
   void OnRender(Context &ctx) override {
     DrawClearScreen(ctx, PALETTE[0]);
-    Print(ctx, "Press Arrows\nPress Space to exit", 1,10, PALETTE[3], 2);
+    Print(ctx, "Press Arrows\nPress Space to exit", 1, 10, PALETTE[3], 2);
     if (IsPressed(ctx, Button::KEY_UP)) {
       DrawClearScreen(ctx, PALETTE[1]);
     }
@@ -137,7 +139,7 @@ class HelloText : public ApplicationListener {
   }
 };
 
-class Bubbles: public ApplicationListener {
+class Bubbles : public ApplicationListener {
  public:
   void OnCreate(Context &ctx) override {
     DrawClearScreen(ctx, PALETTE[0]);
