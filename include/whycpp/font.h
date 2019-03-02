@@ -2,6 +2,7 @@
 #define WHYCPP_FONT_H
 
 #include <vector>
+#include <cstdint>
 
 /**
  * @addtogroup Text
@@ -13,7 +14,7 @@
 struct Glyph {
   // TODO: why do we fix font size?
   const static int SIZE = 8;
-  int data[SIZE];
+  uint8_t data[SIZE];
 };
 
 /**
@@ -22,7 +23,7 @@ struct Glyph {
 class Font {
  public:
   explicit Font(const std::vector<Glyph> &glyphs);
-  int At(char ch, int row) const;
+  uint8_t At(char ch, int row) const;
   int GetHeight() const;
   int GetWidth() const;
   int GetSpacing() const;

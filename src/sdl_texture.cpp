@@ -8,7 +8,7 @@
 SDLTexture::SDLTexture(const std::unique_ptr<SDL_Renderer, sdl_deleter>& ren, const VideoMemory &vram) : ren(ren), vram(vram) {
   auto buf_size = vram.GetWidth() * vram.GetHeight() * 4;
   // TODO: buf_size should be > 0. Maybe throw an exception?
-  buffer = std::make_unique<uint8_t[]>(static_cast<size_t>(buf_size));
+  buffer = std::unique_ptr<uint8_t[]>(new uint8_t[buf_size]);
   tex = std::unique_ptr<SDL_Texture, sdl_deleter>(SDL_CreateTexture(ren.get(),
                                                                     SDL_PIXELFORMAT_ABGR8888,
                                                                     SDL_TEXTUREACCESS_STREAMING,
