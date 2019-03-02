@@ -1,9 +1,10 @@
-#include "sdl_texture.h"
-#include "logger.h"
+#include <algorithm>
 #include <cmath>
 #include <whycpp/color.h>
-#include "video_memory.h"
 #include <SDL2/SDL_render.h>
+#include "sdl_texture.h"
+#include "logger.h"
+#include "video_memory.h"
 
 SDLTexture::SDLTexture(const std::unique_ptr<SDL_Renderer, sdl_deleter>& ren, const VideoMemory &vram) : ren(ren), vram(vram) {
   auto buf_size = vram.GetWidth() * vram.GetHeight() * 4;

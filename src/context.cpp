@@ -4,17 +4,17 @@
 #include <iostream>
 
 void Context::KeyUp(const SDL_Keysym &keysym) {
-  if (static_cast<int>(keysym.scancode) >= KEY_NUM_KEYS) return;
+  if (static_cast<unsigned int>(keysym.scancode) >= KEY_NUM_KEYS) return;
   buttons[keysym.scancode] = false;
   clicked[keysym.scancode] = true;
 }
 void Context::KeyDown(const SDL_Keysym &keysym) {
-  if (static_cast<int>(keysym.scancode) >= KEY_NUM_KEYS) return;
+  if (static_cast<unsigned int>(keysym.scancode) >= KEY_NUM_KEYS) return;
   buttons[keysym.scancode] = true;
   clicked[keysym.scancode] = false;
 }
 void Context::ResetKeys() {
-  for (int i = 0; i < KEY_NUM_KEYS; i++) {
+  for (unsigned int i = 0; i < KEY_NUM_KEYS; i++) {
     clicked[i] = false;
   }
 }

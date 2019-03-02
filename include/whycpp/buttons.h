@@ -10,7 +10,7 @@
 /**
  * Enumerates the list of buttons we could handle in the code.
  */
-enum Button {
+enum Button: unsigned int {
   KEY_unknown = 0,
   KEY_A = 4,
   KEY_B = 5,
