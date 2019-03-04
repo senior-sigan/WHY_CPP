@@ -22,7 +22,8 @@ file(GLOB_RECURSE HEADERS ${PROJECT_HEADERS_DIR}/*.h)
 file(GLOB_RECURSE SOURCES ${PROJECT_SOURCES_DIR}/*.cpp)
 file(GLOB_RECURSE TEST_SOURCES ${TEST_SOURCES_DIR}/*.cpp)
 
-if (NOT DEFINED SDL_POWER)
+if (NOT DEFINED SDL2_FROM_SOURCE)
+    message(STATUS "By default SDL2_FROM_SOURCE=ON")
     set(SDL2_FROM_SOURCE ON) # if you have libsdl2 installed use OFF instead
 endif()
 
