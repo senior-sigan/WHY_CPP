@@ -26,7 +26,7 @@ class ApplicationListener;
  */
 template<typename Listener>
 void RunApp(const ApplicationConfig &config = ApplicationConfig(256, 144, "Application", false)) {
-  Run(std::make_shared<Listener>(), config);
+  Run(new Listener(), config);
 }
 
 /**
@@ -36,7 +36,7 @@ void RunApp(const ApplicationConfig &config = ApplicationConfig(256, 144, "Appli
  * @param listener is an ApplicationListener implementation
  * @param config is the configuration of the application
  */
-void Run(std::shared_ptr<ApplicationListener> listener, const ApplicationConfig &config = ApplicationConfig(256, 144, "Application", false));
+void Run(ApplicationListener* listener, const ApplicationConfig &config = ApplicationConfig(256, 144, "Application", false));
 
 /** @} */
 

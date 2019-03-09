@@ -31,16 +31,16 @@ struct SDL_Window;
  */
 class Application {
  public:
-  explicit Application(std::shared_ptr<ApplicationListener> listener, const ApplicationConfig &congig);
+  explicit Application(ApplicationListener* listener, const ApplicationConfig &congig);
   virtual ~Application();
 
   void Run();
  private:
   std::unique_ptr<SDL_Renderer, sdl_deleter> ren;
   std::unique_ptr<SDL_Window, sdl_deleter> win;
-  std::shared_ptr<SDLTexture> texture;
-  std::shared_ptr<VideoMemory> vram;
-  const std::shared_ptr<ApplicationListener> listener;
+  std::unique_ptr<SDLTexture> texture;
+  std::unique_ptr<VideoMemory> vram;
+  const std::unique_ptr<ApplicationListener> listener;
 
   void Render();
 

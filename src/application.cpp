@@ -9,9 +9,9 @@
 #include "default_font.h"
 
 Application::Application(
-    const std::shared_ptr<ApplicationListener> listener,
+    ApplicationListener* listener,
     const ApplicationConfig &config
-) : listener(listener) {
+) : listener(std::unique_ptr<ApplicationListener>(listener)) {
   if (SDL_Init(SDL_INIT_VIDEO) != 0) {
     logSDLError("SDL_Init");
     return; // TODO: what? throw exception?
@@ -41,8 +41,8 @@ Application::Application(
     logSDLError("SDL_CreateRenderer");
     return; // TODO: what? throw exception?
   }
-  vram = std::make_shared<VideoMemory>(config.width, config.height);
-  texture = std::make_shared<SDLTexture>(ren, *vram);
+  vram = std::unique_ptr<VideoMemory>(new VideoMemory(config.width, config.height));
+  texture = std::unique_ptr<SDLTexture>(new SDLTexture(ren, *vram));
 }
 Application::~Application() {
   SDL_Quit();
