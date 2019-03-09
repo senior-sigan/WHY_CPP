@@ -190,7 +190,7 @@ class PngTexture : public ApplicationListener {
   }
 };
 
-int main(int argc, char *argv[]) {
+int main() {
   RunApp<PngTexture>();
   RunApp<Bubbles>();
   RunApp<HelloText>();

@@ -10,8 +10,6 @@
 
 using namespace std;
 
-const size_t PNG_HEADER_SIZE = 8;
-
 int ImportSprite(Context &context, const std::string &filename) {
   ifstream file(filename.c_str(), ios::in | ios::binary | ios::ate);
 
@@ -32,7 +30,7 @@ int ImportSprite(Context &context, const std::string &filename) {
 
   vector<unsigned char> image;
   unsigned long w, h;
-  int error = decodePNG(image, w, h, buffer.empty() ? 0 : &buffer[0], buffer.size());
+  int error = decodePNG(image, w, h, buffer.empty() ? nullptr : &buffer[0], buffer.size());
   if (error != 0) {
     cout << "Cannot decode png file '" << filename << "' error: " << error << endl;
   }

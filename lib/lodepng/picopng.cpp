@@ -67,7 +67,7 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
     {
       int makeFromLengths(const std::vector<unsigned long>& bitlen, unsigned long maxbitlen)
       { //make tree given the lengths
-        unsigned long numcodes = (unsigned long)(bitlen.size()), treepos = 0, nodefilled = 0;
+        unsigned long numcodes = bitlen.size(), treepos = 0, nodefilled = 0;
         std::vector<unsigned long> tree1d(numcodes), blcount(maxbitlen + 1, 0), nextcode(maxbitlen + 1, 0);
         for(unsigned long bits = 0; bits < numcodes; bits++) blcount[bitlen[bits]]++; //count number of instances of each code length
         for(unsigned long bits = 1; bits <= maxbitlen; bits++) nextcode[bits] = (nextcode[bits - 1] + blcount[bits - 1]) << 1;
@@ -89,7 +89,7 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
       }
       int decode(bool& decoded, unsigned long& result, size_t& treepos, unsigned long bit) const
       { //Decodes a symbol from the tree
-        unsigned long numcodes = (unsigned long)tree2d.size() / 2;
+        unsigned long numcodes = tree2d.size() / 2;
         if(treepos >= numcodes) return 11; //error: you appeared outside the codetree
         result = tree2d[2 * treepos + bit];
         decoded = (result < numcodes);
@@ -256,11 +256,11 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
     void decode(std::vector<unsigned char>& out, const unsigned char* in, size_t size, bool convert_to_rgba32)
     {
       error = 0;
-      if(size == 0 || in == 0) { error = 48; return; } //the given data is empty
+      if(size == 0 || in == nullptr) { error = 48; return; } //the given data is empty
       readPngHeader(&in[0], size); if(error) return;
       size_t pos = 33; //first byte of the first chunk after the header
       std::vector<unsigned char> idat; //the data from idat chunks
-      bool IEND = false, known_type = true;
+      bool IEND = false;
       info.key_defined = false;
       while(!IEND) //loop through the chunks, ignoring unknown chunks and stopping at IEND chunk. IDAT data is put at the start of the in buffer
       {
@@ -296,12 +296,12 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
           else if(info.colorType == 0)
           {
             if(chunkLength != 2) { error = 40; return; } //error: this chunk must be 2 bytes for greyscale image
-            info.key_defined = 1; info.key_r = info.key_g = info.key_b = 256 * in[pos] + in[pos + 1]; pos += 2;
+            info.key_defined = true; info.key_r = info.key_g = info.key_b = 256 * in[pos] + in[pos + 1]; pos += 2;
           }
           else if(info.colorType == 2)
           {
             if(chunkLength != 6) { error = 41; return; } //error: this chunk must be 6 bytes for RGB image
-            info.key_defined = 1;
+            info.key_defined = true;
             info.key_r = 256 * in[pos] + in[pos + 1]; pos += 2;
             info.key_g = 256 * in[pos] + in[pos + 1]; pos += 2;
             info.key_b = 256 * in[pos] + in[pos + 1]; pos += 2;
@@ -312,7 +312,6 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
         {
           if(!(in[pos + 0] & 32)) { error = 69; return; } //error: unknown critical chunk (5th bit of first byte of chunk type is 0)
           pos += (chunkLength + 4); //skip 4 letters and uninterpreted data of unimplemented chunk
-          known_type = false;
         }
         pos += 4; //step over CRC (which is ignored)
       }
@@ -322,7 +321,7 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
       error = zlib.decompress(scanlines, idat); if(error) return; //stop if the zlib decompressor returned an error
       size_t bytewidth = (bpp + 7) / 8, outlength = (info.height * info.width * bpp + 7) / 8;
       out.resize(outlength); //time to fill the out buffer
-      unsigned char* out_ = outlength ? &out[0] : 0; //use a regular pointer to the std::vector for faster code if compiled without optimization
+      unsigned char* out_ = outlength ? &out[0] : nullptr; //use a regular pointer to the std::vector for faster code if compiled without optimization
       if(info.interlaceMethod == 0) //no interlace, just filter
       {
         size_t linestart = 0, linelength = (info.width * bpp + 7) / 8; //length in bytes of a scanline, excluding the filtertype byte
@@ -330,7 +329,7 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
           for(unsigned long y = 0; y < info.height; y++)
           {
             unsigned long filterType = scanlines[linestart];
-            const unsigned char* prevline = (y == 0) ? 0 : &out_[(y - 1) * info.width * bytewidth];
+            const unsigned char* prevline = (y == 0) ? nullptr : &out_[(y - 1) * info.width * bytewidth];
             unFilterScanline(&out_[linestart - y], &scanlines[linestart + 1], prevline, bytewidth, filterType,  linelength); if(error) return;
             linestart += (1 + linelength); //go to start of next scanline
           }
@@ -340,7 +339,7 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
           for(size_t y = 0, obp = 0; y < info.height; y++)
           {
             unsigned long filterType = scanlines[linestart];
-            const unsigned char* prevline = (y == 0) ? 0 : &out_[(y - 1) * info.width * bytewidth];
+            const unsigned char* prevline = (y == 0) ? nullptr : &out_[(y - 1) * info.width * bytewidth];
             unFilterScanline(&templine[0], &scanlines[linestart + 1], prevline, bytewidth, filterType, linelength); if(error) return;
             for(size_t bp = 0; bp < info.width * bpp;) setBitOfReversedStream(obp, out_, readBitFromReversedStream(bp, &templine[0]));
             linestart += (1 + linelength); //go to start of next scanline
@@ -422,7 +421,7 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
       size_t bytewidth = (bpp + 7) / 8, linelength = 1 + ((bpp * passw + 7) / 8);
       for(unsigned long y = 0; y < passh; y++)
       {
-        unsigned char filterType = in[y * linelength], *prevline = (y == 0) ? 0 : lineo;
+        unsigned char filterType = in[y * linelength], *prevline = (y == 0) ? nullptr : lineo;
         unFilterScanline(linen, &in[y * linelength + 1], prevline, bytewidth, filterType, (w * bpp + 7) / 8); if(error) return;
         if(bpp >= 8) for(size_t i = 0; i < passw; i++) for(size_t b = 0; b < bytewidth; b++) //b = current byte of this pixel
               out[bytewidth * w * (passtop + spacey * y) + bytewidth * (passleft + spacex * i) + b] = linen[bytewidth * i + b];
@@ -460,7 +459,7 @@ int decodePNG(std::vector<unsigned char>& out_image, unsigned long& image_width,
     { //converts from any color type to 32-bit. return value = LodePNG error code
       size_t numpixels = w * h, bp = 0;
       out.resize(numpixels * 4);
-      unsigned char* out_ = out.empty() ? 0 : &out[0]; //faster if compiled without optimization
+      unsigned char* out_ = out.empty() ? nullptr : &out[0]; //faster if compiled without optimization
       if(infoIn.bitDepth == 8 && infoIn.colorType == 0) //greyscale
         for(size_t i = 0; i < numpixels; i++)
         {
