@@ -30,8 +30,8 @@ class VideoMemory {
   int height;
   std::vector<std::vector<RGBA>> texture;
 
-  int CheckX(int x) const;
-  int CheckY(int y) const;
+  size_t CheckX(int x) const;
+  size_t CheckY(int y) const;
 };
 
 /** @} */

@@ -46,7 +46,7 @@ const RGBA GetPixel(const Context &context, int x, int y);
  * @param context
  * @param color to fill the screen
  */
-void DrawClearScreen(Context &context, const RGBA &color = {0, 0, 0, 0});
+void DrawClearScreen(Context &context, const RGBA &color = {0, 0, 0, 255});
 /**
  * Draw line on the screen from the [x0,y0] to the [x1,y1] with a color.
  * @param context

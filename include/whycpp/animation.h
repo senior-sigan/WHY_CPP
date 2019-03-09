@@ -1,8 +1,8 @@
 #ifndef WHYCPP_ANIMATION_H
 #define WHYCPP_ANIMATION_H
 
-#include <vector>
 #include <utility>
+#include <vector>
 
 class Context;
 
@@ -16,14 +16,11 @@ class Animation {
   std::vector<std::pair<int, int>> sprites;
   bool full_cycle = false;
   double time = 0;
+
  public:
-  explicit Animation(int width,
-                     int height,
-                     int speed,
-                     std::vector<std::pair<int, int>> sprites,
-                     int sprite_id,
+  explicit Animation(int width, int height, int speed, std::vector<std::pair<int, int>> sprites, int sprite_id,
                      bool cycle);
   void Draw(Context& ctx, int x, int y);
 };
 
-#endif //WHYCPP_ANIMATION_H
+#endif  // WHYCPP_ANIMATION_H

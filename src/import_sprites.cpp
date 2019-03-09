@@ -19,7 +19,7 @@ int ImportSprite(Context &context, const std::string &filename) {
 
   vector<unsigned char> buffer;
   if (size > 0) {
-    buffer.resize((size_t) size);
+    buffer.resize(static_cast<unsigned long>(size));
     file.read(reinterpret_cast<char *>(&buffer[0]), size);
     cout << "Imported file '" << filename << "' of size " << size / 1024 << " Kb." << endl;
   } else {
@@ -41,7 +41,7 @@ int ImportSprite(Context &context, const std::string &filename) {
   VideoMemory sprite(static_cast<int>(w), static_cast<int>(h));
   for (int y = 0; y < sprite.GetHeight(); y++) {
     for (int x = 0; x < sprite.GetWidth(); x++) {
-      auto i = 4*(w * y + x);
+      auto i = 4*(w * static_cast<unsigned long>(y) + static_cast<unsigned long>(x));
       RGBA color{image[i], image[i + 1], image[i + 2], image[i + 3]};
       sprite.Set(x, y, color);
     }

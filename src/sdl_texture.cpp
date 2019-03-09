@@ -30,7 +30,9 @@ void SDLTexture::Draw() {
   for (int x = 0; x < vram.GetWidth(); x++) {
     for (int y = 0; y < vram.GetHeight(); y++) {
       auto color = vram.Get(x, y);
-      auto index = y * vram.GetWidth() + x;
+      auto i = y * vram.GetWidth() + x;
+      if (i < 0) i = 0;
+      auto index = static_cast<size_t >(i);
       buffer[4 * index + 0] = color.red;
       buffer[4 * index + 1] = color.green;
       buffer[4 * index + 2] = color.blue;

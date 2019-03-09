@@ -48,11 +48,7 @@ void Print(Context &ctx,
       continue;
     }
 
-    if (x_ < GetDisplayWidth(ctx) - font.GetWidth() && x > 0) {
-      Print(ctx, ch, x_, y_, color, size);
-    } else {
-      std::cout << "[WARN][Font#Print]: cannot print symbol '" << ch << "': out of screen." << std::endl;
-    }
+    Print(ctx, ch, x_, y_, color, size);
     x_ += (font.GetWidth() + font.GetSpacing()) * size;
   }
 }
