@@ -1,12 +1,13 @@
+#include "sdl_texture.h"
+#include <SDL2/SDL_render.h>
+#include <whycpp/color.h>
 #include <algorithm>
 #include <cmath>
-#include <whycpp/color.h>
-#include <SDL2/SDL_render.h>
-#include "sdl_texture.h"
+#include <iostream>
 #include "logger.h"
 #include "video_memory.h"
 
-SDLTexture::SDLTexture(const std::unique_ptr<SDL_Renderer, sdl_deleter>& ren, const VideoMemory &vram) : ren(ren), vram(vram) {
+SDLTexture::SDLTexture(const std::unique_ptr<SDL_Renderer, sdl_deleter>& ren, VideoMemory &vram) : ren(ren), vram(vram) {
   auto buf_size = vram.GetWidth() * vram.GetHeight() * 4;
   // TODO: buf_size should be > 0. Maybe throw an exception?
   buffer = std::unique_ptr<uint8_t[]>(new uint8_t[buf_size]);
@@ -24,6 +25,8 @@ void SDLTexture::Render() {
   Draw();
   SDL_UpdateTexture(tex.get(), nullptr, buffer.get(), vram.GetWidth() * 4);
   auto dst = CalcSizes();
+  vram.SetScreenHeight(dst.h);
+  vram.SetScreenWidth(dst.w);
   SDL_RenderCopy(ren.get(), tex.get(), nullptr, &dst);
 }
 void SDLTexture::Draw() {

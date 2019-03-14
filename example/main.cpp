@@ -190,8 +190,24 @@ class PngTexture : public ApplicationListener {
   }
 };
 
+class MouseTest: public ApplicationListener {
+ public:
+  void OnRender(Context &ctx) override {
+    int x = 0;
+    int y = 0;
+    GetMouse(ctx, x, y);
+    if (IsPressed(ctx, MOUSE_BUTTON_LEFT)) {
+      DrawCircleFill(ctx, x, y, 2, PALETTE[3]);
+    } else if (IsPressed(ctx, MOUSE_BUTTON_RIGHT)) {
+      DrawCircleFill(ctx, x, y, 2, PALETTE[4]);
+    } else {
+      DrawCircleFill(ctx, x, y, 2, PALETTE[5]);
+    }
+  }
+};
+
 int main() {
-  RunApp<PngTexture>();
+  RunApp<MouseTest>();
   RunApp<Bubbles>();
   RunApp<HelloText>();
   RunApp<ButtonsTest>();
@@ -200,6 +216,7 @@ int main() {
   RunApp<Prisma>();
   RunApp<ChessBoard>();
   RunApp<RandomLines>();
+  RunApp<PngTexture>();
 
   return 0;
 }

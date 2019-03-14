@@ -1,12 +1,12 @@
 #include "application.h"
-#include "logger.h"
 #include <SDL2/SDL.h>
-#include "sdl_texture.h"
-#include "video_memory.h"
-#include "context.h"
 #include <whycpp/application_config.h>
 #include <whycpp/application_listener.h>
+#include "context.h"
 #include "default_font.h"
+#include "logger.h"
+#include "sdl_texture.h"
+#include "video_memory.h"
 
 Application::Application(
     ApplicationListener* listener,
@@ -76,6 +76,14 @@ void Application::Render() {
 void Application::HandleEvents(Context &ctx) {
   SDL_Event e;
   ctx.ResetKeys();
+  int x, y;
+  SDL_GetMouseState(&x, &y);
+  if (ctx.GetVRAM().GetScreenHeight() != 0) {
+    ctx.mousePosY = y * ctx.GetVRAM().GetHeight() / ctx.GetVRAM().GetScreenHeight();
+  }
+  if (ctx.GetVRAM().GetScreenWidth() != 0) {
+    ctx.mousePosX = x * ctx.GetVRAM().GetWidth() / ctx.GetVRAM().GetScreenWidth();
+  }
   while (SDL_PollEvent(&e)) {
     if (e.type == SDL_QUIT || e.type == SDL_APP_TERMINATING) {
       ctx.SetQuit(true);
@@ -89,10 +97,16 @@ void Application::HandleEvents(Context &ctx) {
       listener->OnResume(ctx);
     }
     if (e.type == SDL_KEYDOWN) {
-      ctx.KeyDown(e.key.keysym);
+      ctx.KeyDown(e.key.keysym.scancode);
     }
     if (e.type == SDL_KEYUP) {
-      ctx.KeyUp(e.key.keysym);
+      ctx.KeyUp(e.key.keysym.scancode);
+    }
+    if (e.type == SDL_MOUSEBUTTONUP) {
+      ctx.KeyUp(e.button.button + 256u);
+    }
+    if (e.type == SDL_MOUSEBUTTONDOWN) {
+      ctx.KeyDown(e.button.button + 256u);
     }
   }
 }

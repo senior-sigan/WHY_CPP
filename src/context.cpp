@@ -1,17 +1,18 @@
-#include <SDL2/SDL_keyboard.h>
 #include "context.h"
+#include <SDL2/SDL_keyboard.h>
+#include <SDL2/SDL_mouse.h>
 #include <whycpp/font.h>
 #include <iostream>
 
-void Context::KeyUp(const SDL_Keysym &keysym) {
-  if (static_cast<unsigned int>(keysym.scancode) >= KEY_NUM_KEYS) return;
-  buttons[keysym.scancode] = false;
-  clicked[keysym.scancode] = true;
+void Context::KeyUp(const unsigned int code) {
+  if (code >= KEY_NUM_KEYS) return;
+  buttons[code] = false;
+  clicked[code] = true;
 }
-void Context::KeyDown(const SDL_Keysym &keysym) {
-  if (static_cast<unsigned int>(keysym.scancode) >= KEY_NUM_KEYS) return;
-  buttons[keysym.scancode] = true;
-  clicked[keysym.scancode] = false;
+void Context::KeyDown(const unsigned int code) {
+  if (code >= KEY_NUM_KEYS) return;
+  buttons[code] = true;
+  clicked[code] = false;
 }
 void Context::ResetKeys() {
   for (unsigned int i = 0; i < KEY_NUM_KEYS; i++) {

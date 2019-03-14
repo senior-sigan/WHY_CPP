@@ -18,13 +18,13 @@ struct SDL_Rect;
 
 class SDLTexture {
  public:
-  explicit SDLTexture(const std::unique_ptr<SDL_Renderer, sdl_deleter>& ren, const VideoMemory &vram);
+  explicit SDLTexture(const std::unique_ptr<SDL_Renderer, sdl_deleter>& ren, VideoMemory &vram);
   virtual ~SDLTexture();
 
   void Render();
  private:
   const std::unique_ptr<SDL_Renderer, sdl_deleter>& ren;
-  const VideoMemory& vram;
+  VideoMemory& vram;
   std::unique_ptr<uint8_t[]> buffer;
   std::unique_ptr<SDL_Texture, sdl_deleter> tex;
 

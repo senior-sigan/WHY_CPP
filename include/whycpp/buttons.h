@@ -75,7 +75,10 @@ enum Button: unsigned int {
   KEY_RCTRL = 228,
   KEY_RSHIFT = 229,
   KEY_RALT = 230,
-  KEY_NUM_KEYS = 256, // not a key, just marks the number of scancodes for array bounds
+  MOUSE_BUTTON_LEFT = 257,
+  MOUSE_BUTTON_MIDDLE = 258,
+  MOUSE_BUTTON_RIGHT = 259,
+  KEY_NUM_KEYS = 260, // not a key, just marks the number of scancodes for array bounds
 };
 
 /** @} */

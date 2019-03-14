@@ -19,6 +19,10 @@
  */
 class VideoMemory {
  public:
+  int GetScreenWidth() const;
+  void SetScreenWidth(int screen_width);
+  int GetScreenHeight() const;
+  void SetScreenHeight(int screen_height);
   int GetWidth() const;
   int GetHeight() const;
   const RGBA &Get(int x, int y) const;
@@ -28,6 +32,8 @@ class VideoMemory {
  private:
   int width;
   int height;
+  int screen_width = 0;
+  int screen_height = 0;
   std::vector<std::vector<RGBA>> texture;
 
   size_t CheckX(int x) const;

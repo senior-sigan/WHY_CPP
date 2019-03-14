@@ -1,11 +1,12 @@
 #ifndef WHYCPP_CONTEXT_IMPL_H
 #define WHYCPP_CONTEXT_IMPL_H
 
-#include <vector>
+#include <SDL2/SDL_scancode.h>
 #include <whycpp/buttons.h>
 #include <map>
 #include <memory>
 #include <string>
+#include <vector>
 #include "video_memory.h"
 
 struct SDL_Keysym;
@@ -29,7 +30,7 @@ class Font;
  */
 class Context {
  public:
-  explicit Context(VideoMemory &vram, Font& font) : vram(vram), font(font) {
+  explicit Context(VideoMemory &vram, Font &font) : vram(vram), font(font) {
     buttons.resize(Button::KEY_NUM_KEYS);
     clicked.resize(Button::KEY_NUM_KEYS);
   }
@@ -56,15 +57,16 @@ class Context {
   void SetQuit(bool quit);
   bool IsPaused() const;
   void SetPaused(bool paused);
-  Font& GetFont() const;
-  void SetFont(const Font& font);
-  int AppendSprite(const VideoMemory& sprite);
-  const VideoMemory& GetSprite(int index) const;
+  Font &GetFont() const;
+  void SetFont(const Font &font);
+  int AppendSprite(const VideoMemory &sprite);
+  const VideoMemory &GetSprite(int index) const;
 
   void Tick(double delta);
-  void KeyUp(const SDL_Keysym &keysym);
-  void KeyDown(const SDL_Keysym &keysym);
+  void KeyUp(unsigned int code);
+  void KeyDown(unsigned int code);
   void ResetKeys();
+
  private:
   VideoMemory &vram;
   double time = 0.0;
@@ -73,10 +75,14 @@ class Context {
   std::vector<bool> clicked;
   bool quit = false;
   bool paused = false;
-  Font& font;
+  Font &font;
   std::vector<VideoMemory> sprites;
+
+ public:
+  int mousePosX = 0;
+  int mousePosY = 0;
 };
 
 /** @} */
 
-#endif //WHYCPP_CONTEXT_IMPL_H
+#endif  // WHYCPP_CONTEXT_IMPL_H

@@ -1,14 +1,14 @@
 #include "video_memory.h"
 #include <whycpp/color.h>
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 #include "clamp.h"
 
-VideoMemory::VideoMemory(int width, int height) : width(width), height(height),
-                                                  texture(std::vector<std::vector<RGBA>>(
-                                                      static_cast<unsigned long>(width),
-                                                      std::vector<RGBA>(static_cast<unsigned long>(height),
-                                                                        {0, 0, 0, 0}))) {}
+VideoMemory::VideoMemory(int width, int height)
+    : width(width),
+      height(height),
+      texture(std::vector<std::vector<RGBA>>(static_cast<unsigned long>(width),
+                                             std::vector<RGBA>(static_cast<unsigned long>(height), {0, 0, 0, 0}))) {}
 VideoMemory::~VideoMemory() = default;
 void VideoMemory::Set(int x, int y, const RGBA &color) {
   texture.at(CheckX(x)).at(CheckY(y)) = color;
@@ -37,4 +37,18 @@ size_t VideoMemory::CheckY(int y) const {
     return static_cast<size_t>(clamp(y, 0, height - 1));
   }
   return static_cast<size_t>(y);
+}
+int VideoMemory::GetScreenWidth() const {
+  return screen_width;
+}
+void VideoMemory::SetScreenWidth(int screen_width_) {
+  if (screen_width_ < 1) return;
+  screen_width = screen_width_;
+}
+int VideoMemory::GetScreenHeight() const {
+  return screen_height;
+}
+void VideoMemory::SetScreenHeight(int screen_height_) {
+  if (screen_height_ < 1) return;
+  screen_height = screen_height_;
 }
