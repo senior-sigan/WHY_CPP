@@ -9,6 +9,7 @@ class ApplicationListener;
 class VideoMemory;
 class Context;
 class SDLContext;
+class Loop;
 
 /**
  * @defgroup Internals WHYCPP secret internal implementation details
@@ -35,8 +36,9 @@ class Application {
   void Update(Context& ctx, double delta_time);
   void RenderOrInit(); // it's lazy call
  private:
+  std::unique_ptr<Loop> loop;
+  std::unique_ptr<Context> context;
   std::unique_ptr<SDLContext> sdl_context;
-  std::unique_ptr<VideoMemory> vram;
   const std::unique_ptr<ApplicationListener> listener;
   const ApplicationConfig config;
 

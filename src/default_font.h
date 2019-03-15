@@ -3,6 +3,6 @@
 
 #include <whycpp/font.h>
 
-Font BuildDefaultFont();
+Font* BuildDefaultFont();
 
 #endif //WHYCPP_DEFAULT_FONT_H

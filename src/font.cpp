@@ -1,3 +1,5 @@
+#include <utility>
+
 #include <whycpp/font.h>
 
 uint8_t Font::At(char ch, int row) const {
@@ -13,4 +15,4 @@ int Font::GetWidth() const {
 int Font::GetSpacing() const {
   return spacing;
 }
-Font::Font(const std::vector<Glyph> &glyphs): glyphs(glyphs) {}
+Font::Font(std::vector<Glyph> glyphs): glyphs(std::move(glyphs)) {}

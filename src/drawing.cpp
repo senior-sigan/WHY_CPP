@@ -6,18 +6,18 @@
 #include <iostream>
 
 int GetDisplayWidth(const Context &ctx) {
-  return ctx.GetVRAM().GetWidth();
+  return ctx.GetVRAM()->GetWidth();
 }
 int GetDisplayHeight(const Context &ctx) {
-  return ctx.GetVRAM().GetHeight();
+  return ctx.GetVRAM()->GetHeight();
 }
 void SetPixel(Context &ctx, int x, int y, const RGBA &color) {
   if (color.alpha == 0)
     return;
-  ctx.GetVRAM().Set(x, y, color);
+  ctx.GetVRAM()->Set(x, y, color);
 }
 const RGBA GetPixel(const Context &ctx, int x, int y) {
-  return ctx.GetVRAM().Get(x, y);
+  return ctx.GetVRAM()->Get(x, y);
 }
 void DrawClearScreen(Context &ctx, const RGBA &color) {
   for (int x = 0; x < GetDisplayWidth(ctx); x++) {
@@ -104,7 +104,7 @@ void DrawSprite(Context &context,
   auto spr = context.GetSprite(sprite_id);
   for (auto y = 0; y < height; y++) {
     for (auto x = 0; x < width; x++) {
-      SetPixel(context, screen_x + x, screen_y + y, spr.Get(sheet_x + x, sheet_y + y));
+      SetPixel(context, screen_x + x, screen_y + y, spr->Get(sheet_x + x, sheet_y + y));
     }
   }
 }

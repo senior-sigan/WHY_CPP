@@ -3,26 +3,27 @@
 #include <whycpp/application_config.h>
 #include <whycpp/application_listener.h>
 #include <functional>
+#include <iostream>
 #include "context.h"
 #include "default_font.h"
 #include "loop.h"
+#include "sdl_context.h"
 #include "sdl_texture.h"
 #include "video_memory.h"
-#include "sdl_context.h"
 
 Application::Application(ApplicationListener* listener, const ApplicationConfig& config)
     : listener(std::unique_ptr<ApplicationListener>(listener)), config(config) {
-  vram = std::unique_ptr<VideoMemory>(new VideoMemory(config.width, config.height));
+  std::cout << "[DEBUG] Application created" << std::endl;
+
+  auto vram = new VideoMemory(config.width, config.height);
+  auto font = BuildDefaultFont();
+  context = std::unique_ptr<Context>(new Context(vram, font));
+
+  Loop::Callback lambda = [=](Context& ctx, double delta_time) { Update(ctx, delta_time); };
+  loop = std::unique_ptr<Loop>(new Loop(lambda, *context, this->listener.get()));
 }
 void Application::Run() {
-  auto font = BuildDefaultFont();
-  Context ctx(*vram, font);
-  Loop::Callback lambda = [=](Context& ctx, double delta_time) { Update(ctx, delta_time); };
-  Loop loop(lambda, ctx);
-
-  listener->OnCreate(ctx);
-  loop.Run();
-  listener->OnDispose(ctx);
+  loop->Run();  // this call is async in case of emscripten
 }
 void Application::Update(Context& ctx, double delta_time) {
   HandleEvents(ctx);
@@ -37,11 +38,11 @@ void Application::HandleEvents(Context& ctx) {
   ctx.ResetKeys();
   int x, y;
   SDL_GetMouseState(&x, &y);
-  if (ctx.GetVRAM().GetScreenHeight() != 0) {
-    ctx.mousePosY = y * ctx.GetVRAM().GetHeight() / ctx.GetVRAM().GetScreenHeight();
+  if (ctx.GetVRAM()->GetScreenHeight() != 0) {
+    ctx.mousePosY = y * ctx.GetVRAM()->GetHeight() / ctx.GetVRAM()->GetScreenHeight();
   }
-  if (ctx.GetVRAM().GetScreenWidth() != 0) {
-    ctx.mousePosX = x * ctx.GetVRAM().GetWidth() / ctx.GetVRAM().GetScreenWidth();
+  if (ctx.GetVRAM()->GetScreenWidth() != 0) {
+    ctx.mousePosX = x * ctx.GetVRAM()->GetWidth() / ctx.GetVRAM()->GetScreenWidth();
   }
   while (SDL_PollEvent(&e)) {
     if (e.type == SDL_QUIT || e.type == SDL_APP_TERMINATING) {
@@ -69,12 +70,14 @@ void Application::HandleEvents(Context& ctx) {
     }
   }
 }
-void Application::RenderOrInit(){
+void Application::RenderOrInit() {
   if (!sdl_context) {
     // YES. I know about class invariant, but we need this becasue of emscripten + sdl2 lifecycle problems.
     // Also, this is pattern "lazy".
-    sdl_context = std::unique_ptr<SDLContext>(new SDLContext(config, vram.get()));
+    sdl_context = std::unique_ptr<SDLContext>(new SDLContext(config, context->GetVRAM()));
   }
   sdl_context->Render();
 }
-Application::~Application() = default;
+Application::~Application() {
+  std::cout << "[DEBUG] Application destroyed" << std::endl;
+}

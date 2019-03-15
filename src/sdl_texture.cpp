@@ -7,15 +7,15 @@
 #include "logger.h"
 #include "video_memory.h"
 
-SDLTexture::SDLTexture(const std::unique_ptr<SDL_Renderer, sdl_deleter>& ren, VideoMemory &vram) : ren(ren), vram(vram) {
-  auto buf_size = vram.GetWidth() * vram.GetHeight() * 4;
+SDLTexture::SDLTexture(SDL_Renderer* ren, VideoMemory *vram) : ren(ren), vram(vram) {
+  auto buf_size = vram->GetWidth() * vram->GetHeight() * 4;
   // TODO: buf_size should be > 0. Maybe throw an exception?
   buffer = std::unique_ptr<uint8_t[]>(new uint8_t[buf_size]);
-  tex = std::unique_ptr<SDL_Texture, sdl_deleter>(SDL_CreateTexture(ren.get(),
+  tex = std::unique_ptr<SDL_Texture, sdl_deleter>(SDL_CreateTexture(ren,
                                                                     SDL_PIXELFORMAT_ABGR8888,
                                                                     SDL_TEXTUREACCESS_STREAMING,
-                                                                    vram.GetWidth(),
-                                                                    vram.GetHeight()), sdl_deleter());
+                                                                    vram->GetWidth(),
+                                                                    vram->GetHeight()), sdl_deleter());
   if (!tex) {
     logSDLError("SDL_CreateTexture");
   }
@@ -23,17 +23,17 @@ SDLTexture::SDLTexture(const std::unique_ptr<SDL_Renderer, sdl_deleter>& ren, Vi
 SDLTexture::~SDLTexture() = default;
 void SDLTexture::Render() {
   Draw();
-  SDL_UpdateTexture(tex.get(), nullptr, buffer.get(), vram.GetWidth() * 4);
+  SDL_UpdateTexture(tex.get(), nullptr, buffer.get(), vram->GetWidth() * 4);
   auto dst = CalcSizes();
-  vram.SetScreenHeight(dst.h);
-  vram.SetScreenWidth(dst.w);
-  SDL_RenderCopy(ren.get(), tex.get(), nullptr, &dst);
+  vram->SetScreenHeight(dst.h);
+  vram->SetScreenWidth(dst.w);
+  SDL_RenderCopy(ren, tex.get(), nullptr, &dst);
 }
 void SDLTexture::Draw() {
-  for (int x = 0; x < vram.GetWidth(); x++) {
-    for (int y = 0; y < vram.GetHeight(); y++) {
-      auto color = vram.Get(x, y);
-      auto i = y * vram.GetWidth() + x;
+  for (int x = 0; x < vram->GetWidth(); x++) {
+    for (int y = 0; y < vram->GetHeight(); y++) {
+      auto color = vram->Get(x, y);
+      auto i = y * vram->GetWidth() + x;
       if (i < 0) i = 0;
       auto index = static_cast<size_t >(i);
       buffer[4 * index + 0] = color.red;
@@ -48,7 +48,7 @@ SDL_Rect SDLTexture::CalcSizes() {
   SDL_QueryTexture(tex.get(), nullptr, nullptr, &dst.w, &dst.h);
 
   int sw, sh;
-  SDL_GetRendererOutputSize(ren.get(), &sw, &sh);
+  SDL_GetRendererOutputSize(ren, &sw, &sh);
 
   float rw = static_cast<float>(sw) / dst.w;
   float rh = static_cast<float>(sh) / dst.h;

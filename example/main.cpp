@@ -53,7 +53,7 @@ class Prisma : public ApplicationListener {
       int y = static_cast<int>(base - i);
       DrawLine(ctx, x, 0, 0, y, red);
       DrawLine(ctx, x, base, base, y, green);
-      t += 0.005;
+      t += GetDelta(ctx);
     }
 
     for (double i = fmod(t / 16, pi8); i < pi2; i += pi8) {

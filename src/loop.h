@@ -5,6 +5,8 @@
 #include <functional>
 #include "context.h"
 
+class ApplicationListener;
+
 class Loop {
  public:
   typedef std::function<void(Context&, double)> Callback;
@@ -13,14 +15,17 @@ class Loop {
   Uint64 now = 0;
   Uint64 last = 0;
   double delta_time = 0.0;
+  bool isRunning = true;
+
   Callback cb;
   Context& ctx;
-  bool isRunning = true;
+  ApplicationListener* listener;
 
   void RunLoop();
 
  public:
-  explicit Loop(Callback& callback, Context& ctx) : cb(callback), ctx(ctx) {}
+  explicit Loop(Callback& callback, Context& ctx, ApplicationListener* listener);
+  virtual ~Loop();
 
   void Run();
 

@@ -13,7 +13,7 @@ void Print(Context &ctx,
   auto font = ctx.GetFont();
   for (uint8_t row = 0; row < Glyph::SIZE; row++) {
     for (uint8_t col = 0; col < 8; col++) {
-      if (((font.At(ch, row) >> col) & 0x1) == 1) {
+      if (((font->At(ch, row) >> col) & 0x1) == 1) {
         for (int i = 0; i < size; i++) {
           for (int j = 0; j < size; j++) {
             SetPixel(ctx, x + col * size + i, y + row * size + j, color);
@@ -40,7 +40,7 @@ void Print(Context &ctx,
   for (char ch: str) {
     // TODO: it should be state machine, but .....
     if (ch == '\n') {
-      y_ += (font.GetHeight() + font.GetSpacing() + spacing) * size;
+      y_ += (font->GetHeight() + font->GetSpacing() + spacing) * size;
       x_ = x;
       continue;
     } else if (ch == '\r') {
@@ -49,6 +49,6 @@ void Print(Context &ctx,
     }
 
     Print(ctx, ch, x_, y_, color, size);
-    x_ += (font.GetWidth() + font.GetSpacing()) * size;
+    x_ += (font->GetWidth() + font->GetSpacing()) * size;
   }
 }
