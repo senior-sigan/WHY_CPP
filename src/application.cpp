@@ -2,19 +2,19 @@
 #include <SDL2/SDL.h>
 #include <whycpp/application_config.h>
 #include <whycpp/application_listener.h>
+#include <functional>
 #include "context.h"
 #include "default_font.h"
 #include "logger.h"
+#include "loop.h"
 #include "sdl_texture.h"
 #include "video_memory.h"
 
-Application::Application(
-    ApplicationListener* listener,
-    const ApplicationConfig &config
-) : listener(std::unique_ptr<ApplicationListener>(listener)) {
+Application::Application(ApplicationListener* listener, const ApplicationConfig& config)
+    : listener(std::unique_ptr<ApplicationListener>(listener)) {
   if (SDL_Init(SDL_INIT_VIDEO) != 0) {
     logSDLError("SDL_Init");
-    return; // TODO: what? throw exception?
+    return;  // TODO: what? throw exception?
   }
   Uint32 flags = SDL_WINDOW_SHOWN;
   if (config.is_fullscreen) {
@@ -23,23 +23,18 @@ Application::Application(
     flags |= SDL_WINDOW_RESIZABLE;
   }
   win = std::unique_ptr<SDL_Window, sdl_deleter>(
-      SDL_CreateWindow(config.name.c_str(),
-                       SDL_WINDOWPOS_CENTERED,
-                       SDL_WINDOWPOS_CENTERED,
-                       config.GetWindowWidth(),
-                       config.GetWindowHeight(),
-                       flags), sdl_deleter());
+      SDL_CreateWindow(config.name.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, config.GetWindowWidth(),
+                       config.GetWindowHeight(), flags),
+      sdl_deleter());
   if (!win) {
     logSDLError("SDL_CreateWindow");
-    return; // TODO: what? throw exception?
+    return;  // TODO: what? throw exception?
   }
   ren = std::unique_ptr<SDL_Renderer, sdl_deleter>(
-      SDL_CreateRenderer(win.get(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC),
-      sdl_deleter()
-  );
+      SDL_CreateRenderer(win.get(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC), sdl_deleter());
   if (!ren) {
     logSDLError("SDL_CreateRenderer");
-    return; // TODO: what? throw exception?
+    return;  // TODO: what? throw exception?
   }
   vram = std::unique_ptr<VideoMemory>(new VideoMemory(config.width, config.height));
   texture = std::unique_ptr<SDLTexture>(new SDLTexture(ren, *vram));
@@ -50,30 +45,27 @@ Application::~Application() {
 void Application::Run() {
   auto font = BuildDefaultFont();
   Context ctx(*vram, font);
+  Loop::Callback lambda = [=](Context& ctx, double delta_time) { Update(ctx, delta_time); };
+  Loop loop(lambda, ctx);
+
   listener->OnCreate(ctx);
-  auto now = SDL_GetPerformanceCounter();
-  auto last = now;
-  double delta_time = 0.0;
-  while (!ctx.IsQuit()) {
-    last = now;
-    now = SDL_GetPerformanceCounter();
-    delta_time = ((now - last) * 1000) / static_cast<double>(SDL_GetPerformanceFrequency());
-    delta_time /= 1000.0; // convert to seconds
-    HandleEvents(ctx);
-    if (!ctx.IsPaused()) {
-      ctx.Tick(delta_time);
-      listener->OnRender(ctx);
-      Render();
-    }
-  }
+  loop.Run();
   listener->OnDispose(ctx);
+}
+void Application::Update(Context& ctx, double delta_time) {
+  HandleEvents(ctx);
+  if (!ctx.IsPaused()) {
+    ctx.Tick(delta_time);
+    listener->OnRender(ctx);
+    Render();
+  }
 }
 void Application::Render() {
   SDL_RenderClear(ren.get());
   texture->Render();
   SDL_RenderPresent(ren.get());
 }
-void Application::HandleEvents(Context &ctx) {
+void Application::HandleEvents(Context& ctx) {
   SDL_Event e;
   ctx.ResetKeys();
   int x, y;

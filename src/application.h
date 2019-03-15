@@ -35,6 +35,7 @@ class Application {
   virtual ~Application();
 
   void Run();
+  void Update(Context& ctx, double delta_time);
  private:
   std::unique_ptr<SDL_Renderer, sdl_deleter> ren;
   std::unique_ptr<SDL_Window, sdl_deleter> win;
