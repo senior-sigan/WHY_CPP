@@ -11,9 +11,8 @@
 #include "sdl_context.h"
 
 Application::Application(ApplicationListener* listener, const ApplicationConfig& config)
-    : listener(std::unique_ptr<ApplicationListener>(listener)) {
+    : listener(std::unique_ptr<ApplicationListener>(listener)), config(config) {
   vram = std::unique_ptr<VideoMemory>(new VideoMemory(config.width, config.height));
-  sdl_context = std::unique_ptr<SDLContext>(new SDLContext(config, vram.get()));
 }
 Application::~Application() {
   SDL_Quit();
@@ -33,7 +32,7 @@ void Application::Update(Context& ctx, double delta_time) {
   if (!ctx.IsPaused()) {
     ctx.Tick(delta_time);
     listener->OnRender(ctx);
-    sdl_context->Render();
+    RenderOrInit();
   }
 }
 void Application::HandleEvents(Context& ctx) {
@@ -72,4 +71,12 @@ void Application::HandleEvents(Context& ctx) {
       ctx.KeyDown(e.button.button + 256u);
     }
   }
+}
+void Application::RenderOrInit(){
+  if (!sdl_context) {
+    // YES. I know about class invariant, but we need this becasue of emscripten + sdl2 lifecycle problems.
+    // Also, this is pattern "lazy".
+    sdl_context = std::unique_ptr<SDLContext>(new SDLContext(config, vram.get()));
+  }
+  sdl_context->Render();
 }

@@ -33,10 +33,12 @@ class Application {
 
   void Run();
   void Update(Context& ctx, double delta_time);
+  void RenderOrInit(); // it's lazy call
  private:
   std::unique_ptr<SDLContext> sdl_context;
   std::unique_ptr<VideoMemory> vram;
   const std::unique_ptr<ApplicationListener> listener;
+  const ApplicationConfig& config;
 
   void HandleEvents(Context &ctx);
 };
