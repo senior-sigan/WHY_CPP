@@ -14,9 +14,6 @@ Application::Application(ApplicationListener* listener, const ApplicationConfig&
     : listener(std::unique_ptr<ApplicationListener>(listener)), config(config) {
   vram = std::unique_ptr<VideoMemory>(new VideoMemory(config.width, config.height));
 }
-Application::~Application() {
-  SDL_Quit();
-}
 void Application::Run() {
   auto font = BuildDefaultFont();
   Context ctx(*vram, font);
@@ -80,3 +77,4 @@ void Application::RenderOrInit(){
   }
   sdl_context->Render();
 }
+Application::~Application() = default;

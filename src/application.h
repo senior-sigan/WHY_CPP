@@ -3,10 +3,10 @@
 
 #include <string>
 #include <memory>
+#include <whycpp/application_config.h>
 
 class ApplicationListener;
 class VideoMemory;
-struct ApplicationConfig;
 class Context;
 class SDLContext;
 
@@ -38,7 +38,7 @@ class Application {
   std::unique_ptr<SDLContext> sdl_context;
   std::unique_ptr<VideoMemory> vram;
   const std::unique_ptr<ApplicationListener> listener;
-  const ApplicationConfig& config;
+  const ApplicationConfig config;
 
   void HandleEvents(Context &ctx);
 };

@@ -1,3 +1,5 @@
+web: reload-web compile-web serve
+
 reload-web:
 	rm -rf cmake-build-debug-web
 	mkdir cmake-build-debug-web
