@@ -3,15 +3,12 @@
 
 #include <string>
 #include <memory>
-#include "sdl_deleter.h"
 
 class ApplicationListener;
 class VideoMemory;
-class SDLTexture;
 struct ApplicationConfig;
 class Context;
-struct SDL_Renderer;
-struct SDL_Window;
+class SDLContext;
 
 /**
  * @defgroup Internals WHYCPP secret internal implementation details
@@ -37,13 +34,9 @@ class Application {
   void Run();
   void Update(Context& ctx, double delta_time);
  private:
-  std::unique_ptr<SDL_Renderer, sdl_deleter> ren;
-  std::unique_ptr<SDL_Window, sdl_deleter> win;
-  std::unique_ptr<SDLTexture> texture;
+  std::unique_ptr<SDLContext> sdl_context;
   std::unique_ptr<VideoMemory> vram;
   const std::unique_ptr<ApplicationListener> listener;
-
-  void Render();
 
   void HandleEvents(Context &ctx);
 };
