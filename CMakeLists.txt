@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.6)
 project(whycpp CXX)
 
 math(EXPR BITNESS "8*${CMAKE_SIZEOF_VOID_P}")
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 
 set(CMAKE_DIR "${PROJECT_SOURCE_DIR}/CMake")
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_DIR})

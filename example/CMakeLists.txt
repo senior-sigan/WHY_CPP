@@ -1,5 +1,7 @@
 project(example CXX)
 
+set(CMAKE_CXX_STANDARD 14)
+
 include_directories(${PROJECT_INCLUDES_DIR})
 
 if (EMSCRIPTEN)
