@@ -1,6 +1,6 @@
 #include "default_font.h"
 
-Font BuildDefaultFont() {
+Font* BuildDefaultFont() {
   std::vector<Glyph> glyphs = {
       {0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0},
@@ -260,5 +260,5 @@ Font BuildDefaultFont() {
       {0, 0, 0, 0, 0, 0, 0, 0}
   };
 
-  return Font(glyphs);
+  return new Font(glyphs);
 }

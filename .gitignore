@@ -1,4 +1,5 @@
 cmake-build-debug
+cmake-build-debug-web
 .idea
 *.pyc
 docs

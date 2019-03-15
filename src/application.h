@@ -3,15 +3,13 @@
 
 #include <string>
 #include <memory>
-#include "sdl_deleter.h"
+#include <whycpp/application_config.h>
 
 class ApplicationListener;
 class VideoMemory;
-class SDLTexture;
-struct ApplicationConfig;
 class Context;
-struct SDL_Renderer;
-struct SDL_Window;
+class SDLContext;
+class Loop;
 
 /**
  * @defgroup Internals WHYCPP secret internal implementation details
@@ -35,14 +33,14 @@ class Application {
   virtual ~Application();
 
   void Run();
+  void Update(Context& ctx, double delta_time);
+  void RenderOrInit(); // it's lazy call
  private:
-  std::unique_ptr<SDL_Renderer, sdl_deleter> ren;
-  std::unique_ptr<SDL_Window, sdl_deleter> win;
-  std::unique_ptr<SDLTexture> texture;
-  std::unique_ptr<VideoMemory> vram;
+  std::unique_ptr<Loop> loop;
+  std::unique_ptr<Context> context;
+  std::unique_ptr<SDLContext> sdl_context;
   const std::unique_ptr<ApplicationListener> listener;
-
-  void Render();
+  const ApplicationConfig config;
 
   void HandleEvents(Context &ctx);
 };

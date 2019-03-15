@@ -1,16 +1,14 @@
 #ifndef WHYCPP_CONTEXT_IMPL_H
 #define WHYCPP_CONTEXT_IMPL_H
 
-#include <SDL2/SDL_scancode.h>
-#include <whycpp/buttons.h>
 #include <map>
 #include <memory>
 #include <string>
 #include <vector>
-#include "video_memory.h"
 
-struct SDL_Keysym;
 class Font;
+class VideoMemory;
+enum Button: unsigned int;
 
 /**
  * @addtogroup ApplicationInternals
@@ -30,37 +28,26 @@ class Font;
  */
 class Context {
  public:
-  explicit Context(VideoMemory &vram, Font &font) : vram(vram), font(font) {
-    buttons.resize(Button::KEY_NUM_KEYS);
-    clicked.resize(Button::KEY_NUM_KEYS);
-  }
-  virtual ~Context() = default;
+  explicit Context(VideoMemory *vram, Font *font);
+  virtual ~Context();
 
-  VideoMemory &GetVRAM() const {
-    return vram;
-  }
+  VideoMemory *GetVRAM() const;
   double GetTime() const {
     return time;
   }
   double GetDelta() const {
     return current_delta;
   }
-  bool IsButtonPressed(const Button &btn) const {
-    if (btn >= buttons.size()) return false;
-    return buttons.at(btn);
-  }
-  bool IsButtonReleased(const Button &btn) const {
-    if (btn >= buttons.size()) return false;
-    return clicked.at(btn);
-  }
+  bool IsButtonPressed(const Button &btn) const;
+  bool IsButtonReleased(const Button &btn) const;
   bool IsQuit() const;
   void SetQuit(bool quit);
   bool IsPaused() const;
   void SetPaused(bool paused);
-  Font &GetFont() const;
-  void SetFont(const Font &font);
-  int AppendSprite(const VideoMemory &sprite);
-  const VideoMemory &GetSprite(int index) const;
+  Font *GetFont() const;
+  void SetFont(Font *font);
+  int AppendSprite(VideoMemory *sprite);
+  VideoMemory* GetSprite(int index) const;
 
   void Tick(double delta);
   void KeyUp(unsigned int code);
@@ -68,15 +55,15 @@ class Context {
   void ResetKeys();
 
  private:
-  VideoMemory &vram;
+  std::unique_ptr<VideoMemory> vram;
   double time = 0.0;
   double current_delta = 0.0;
   std::vector<bool> buttons;
   std::vector<bool> clicked;
   bool quit = false;
   bool paused = false;
-  Font &font;
-  std::vector<VideoMemory> sprites;
+  std::unique_ptr<Font> font;
+  std::vector<std::unique_ptr<VideoMemory>> sprites;
 
  public:
   int mousePosX = 0;

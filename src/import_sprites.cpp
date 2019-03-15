@@ -38,12 +38,11 @@ int ImportSprite(Context &context, const std::string &filename) {
     cout << "PNG '" << filename << "' width: " << w << " height: " << h << endl;
   }
 
-  VideoMemory sprite(static_cast<int>(w), static_cast<int>(h));
-  for (int y = 0; y < sprite.GetHeight(); y++) {
-    for (int x = 0; x < sprite.GetWidth(); x++) {
+  auto sprite = new VideoMemory(static_cast<int>(w), static_cast<int>(h));
+  for (int y = 0; y < sprite->GetHeight(); y++) {
+    for (int x = 0; x < sprite->GetWidth(); x++) {
       auto i = 4*(w * static_cast<unsigned long>(y) + static_cast<unsigned long>(x));
-      RGBA color{image[i], image[i + 1], image[i + 2], image[i + 3]};
-      sprite.Set(x, y, color);
+      sprite->Set(x, y, {image[i], image[i + 1], image[i + 2], image[i + 3]});
     }
   }
 

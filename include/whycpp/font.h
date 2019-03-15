@@ -22,7 +22,7 @@ struct Glyph {
  */
 class Font {
  public:
-  explicit Font(const std::vector<Glyph> &glyphs);
+  explicit Font(std::vector<Glyph> glyphs);
   uint8_t At(char ch, int row) const;
   int GetHeight() const;
   int GetWidth() const;

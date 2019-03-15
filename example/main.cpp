@@ -1,20 +1,20 @@
-#include <iostream>
-#include <whycpp/application_listener.h>
-#include <whycpp/whycpp.h>
-#include <whycpp/drawing.h>
-#include <whycpp/time.h>
-#include <cmath>
-#include <vector>
-#include <whycpp/color.h>
-#include <whycpp/buttons.h>
-#include <whycpp/input.h>
-#include <whycpp/palette.h>
-#include <whycpp/lifecycle.h>
-#include <whycpp/text.h>
-#include <whycpp/import_sprites.h>
 #include <whycpp/animation.h>
+#include <whycpp/application_listener.h>
+#include <whycpp/buttons.h>
+#include <whycpp/color.h>
+#include <whycpp/drawing.h>
+#include <whycpp/import_sprites.h>
+#include <whycpp/input.h>
+#include <whycpp/lifecycle.h>
+#include <whycpp/palette.h>
+#include <whycpp/text.h>
+#include <whycpp/time.h>
+#include <whycpp/whycpp.h>
+#include <cmath>
+#include <iostream>
+#include <vector>
 
-#define PI 3.14159265358979323846  /* pi */
+#define PI 3.14159265358979323846 /* pi */
 
 int rnd(int bound) {
   return rand() % bound;
@@ -53,7 +53,7 @@ class Prisma : public ApplicationListener {
       int y = static_cast<int>(base - i);
       DrawLine(ctx, x, 0, 0, y, red);
       DrawLine(ctx, x, base, base, y, green);
-      t += 0.005;
+      t += GetDelta(ctx);
     }
 
     for (double i = fmod(t / 16, pi8); i < pi2; i += pi8) {
@@ -125,9 +125,6 @@ class ButtonsTest : public ApplicationListener {
     if (IsPressed(ctx, Button::KEY_RIGHT)) {
       DrawClearScreen(ctx, PALETTE[4]);
     }
-    if (IsPressed(ctx, Button::KEY_SPACE)) {
-      ExitApp(ctx);
-    }
   }
 };
 
@@ -154,30 +151,15 @@ class Bubbles : public ApplicationListener {
 class PngTexture : public ApplicationListener {
   int id = -1;
   std::shared_ptr<Animation> anim;
+
  public:
   void OnCreate(Context &context) override {
     id = ImportSprite(context, "assets/atlas.png");
     std::vector<std::pair<int, int>> sprites = {
-        {20 * 16, 40 * 16},
-        {21 * 16, 40 * 16},
-        {22 * 16, 40 * 16},
-        {23 * 16, 40 * 16},
-        {24 * 16, 40 * 16},
-        {20 * 16, 42 * 16},
-        {21 * 16, 42 * 16},
-        {22 * 16, 42 * 16},
-        {26 * 16, 40 * 16},
-        {20 * 16, 38 * 16},
-        {21 * 16, 38 * 16},
-        {22 * 16, 38 * 16},
-        {23 * 16, 38 * 16},
-        {24 * 16, 38 * 16},
-        {24 * 16, 38 * 16},
-        {26 * 16, 38 * 16},
-        {27 * 16, 38 * 16},
-        {28 * 16, 38 * 16},
-        {29 * 16, 38 * 16},
-        {30 * 16, 38 * 16},
+        {20 * 16, 40 * 16}, {21 * 16, 40 * 16}, {22 * 16, 40 * 16}, {23 * 16, 40 * 16}, {24 * 16, 40 * 16},
+        {20 * 16, 42 * 16}, {21 * 16, 42 * 16}, {22 * 16, 42 * 16}, {26 * 16, 40 * 16}, {20 * 16, 38 * 16},
+        {21 * 16, 38 * 16}, {22 * 16, 38 * 16}, {23 * 16, 38 * 16}, {24 * 16, 38 * 16}, {24 * 16, 38 * 16},
+        {26 * 16, 38 * 16}, {27 * 16, 38 * 16}, {28 * 16, 38 * 16}, {29 * 16, 38 * 16}, {30 * 16, 38 * 16},
         {31 * 16, 38 * 16},
     };
     anim = std::make_shared<Animation>(16, 32, 8, sprites, id, true);
@@ -190,7 +172,7 @@ class PngTexture : public ApplicationListener {
   }
 };
 
-class MouseTest: public ApplicationListener {
+class MouseTest : public ApplicationListener {
  public:
   void OnRender(Context &ctx) override {
     int x = 0;
@@ -206,17 +188,53 @@ class MouseTest: public ApplicationListener {
   }
 };
 
-int main() {
-  RunApp<MouseTest>();
-  RunApp<Bubbles>();
-  RunApp<HelloText>();
-  RunApp<ButtonsTest>();
-  RunApp<PaletteShow>();
-  RunApp<Fade>();
-  RunApp<Prisma>();
-  RunApp<ChessBoard>();
-  RunApp<RandomLines>();
-  RunApp<PngTexture>();
+class Show : public ApplicationListener {
+  std::vector<std::unique_ptr<ApplicationListener>> apps{};
+  size_t current_app = 0;
+  size_t prev_app = 0;
 
+ public:
+  Show() {
+    apps.push_back(std::make_unique<MouseTest>());
+    apps.push_back(std::make_unique<Bubbles>());
+    apps.push_back(std::make_unique<HelloText>());
+    apps.push_back(std::make_unique<ButtonsTest>());
+    apps.push_back(std::make_unique<PaletteShow>());
+    apps.push_back(std::make_unique<Fade>());
+    apps.push_back(std::make_unique<Prisma>());
+    apps.push_back(std::make_unique<ChessBoard>());
+    apps.push_back(std::make_unique<RandomLines>());
+    apps.push_back(std::make_unique<PngTexture>());
+
+    prev_app = apps.size();
+    current_app = 0;
+  }
+
+  void OnRender(Context &ctx) override {
+    if (prev_app != current_app) {
+      if (prev_app != apps.size()) {
+        apps.at(prev_app)->OnDispose(ctx);
+      }
+      apps.at(current_app)->OnCreate(ctx);
+      prev_app = current_app;
+    }
+
+    apps.at(current_app)->OnRender(ctx);
+
+    if (IsClicked(ctx, Button::KEY_SPACE)) {
+      current_app = (current_app + 1) % apps.size();
+    }
+    if (IsClicked(ctx, Button::KEY_ESCAPE)) {
+      ExitApp(ctx);
+    }
+  }
+
+  ~Show() override {
+    apps.clear();
+  }
+};
+
+int main() {
+  RunApp<Show>();
   return 0;
 }
