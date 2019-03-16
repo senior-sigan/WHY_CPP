@@ -12,24 +12,26 @@ class Loop {
   typedef std::function<void(Context&, double)> Callback;
 
  private:
-  Uint64 now = 0;
-  Uint64 last = 0;
-  double delta_time = 0.0;
-  bool isRunning = true;
-
   Callback cb;
   Context& ctx;
   ApplicationListener* listener;
 
+  long now = 0;
+  long last = 0;
+  long delta_time = 0;
+  bool isRunning = true;
+  long ms_per_frame = 16;
+
   void RunLoop();
+  void UpdateWithDelay();
 
  public:
-  explicit Loop(Callback& callback, Context& ctx, ApplicationListener* listener);
+  explicit Loop(Callback& callback, Context& ctx, ApplicationListener* listener, long ms_per_frame = 16);
   virtual ~Loop();
 
   void Run();
 
-  void Update(); // DO NOT CALL IT
+  void Update();  // DO NOT CALL IT
 };
 
 #endif  // WHYCPP_LOOP_H

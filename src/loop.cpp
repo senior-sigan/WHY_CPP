@@ -1,5 +1,6 @@
 #include "loop.h"
 #include <whycpp/application_listener.h>
+#include "clamp.h"
 #if __EMSCRIPTEN__
 #include <emscripten.h>
 void emscripten_Update(void* loop) {
@@ -9,20 +10,33 @@ void emscripten_Update(void* loop) {
 #endif
 #include <iostream>
 
+long SDL_GetTicksL() {
+  return static_cast<long>(SDL_GetTicks());
+}
+
+void Loop::UpdateWithDelay() {
+  long start = SDL_GetTicksL();
+
+  cb(ctx, delta_time / 1000.0);
+
+  long dt = SDL_GetTicksL() - start;
+  auto lag = clamp(ms_per_frame - dt, 0L, ms_per_frame);
+  if (lag > 0) SDL_Delay(static_cast<Uint32>(lag));
+}
 void Loop::Run() {
-  now = SDL_GetPerformanceCounter();
+  now = SDL_GetTicksL();
   last = now;
-  delta_time = 0.0;
+  delta_time = 0;
   isRunning = true;
   RunLoop();
 }
 void Loop::Update() {
   last = now;
-  now = SDL_GetPerformanceCounter();
-  delta_time = ((now - last) * 1000) / static_cast<double>(SDL_GetPerformanceFrequency());
-  delta_time /= 1000.0;  // convert to seconds
+  now = SDL_GetTicksL();
+  delta_time = now - last;
 
-  cb(ctx, delta_time);
+  UpdateWithDelay();
+
   isRunning = !ctx.IsQuit();
   if (!isRunning) {
     listener->OnDispose(ctx);
@@ -43,9 +57,10 @@ void Loop::RunLoop() {
   }
 #endif
 }
-Loop::Loop(Loop::Callback & callback, Context& ctx, ApplicationListener* listener) : cb(callback), ctx(ctx), listener(listener) {
+Loop::Loop(Loop::Callback& callback, Context& ctx, ApplicationListener* listener, long ms_per_frame)
+    : cb(callback), ctx(ctx), listener(listener), ms_per_frame(ms_per_frame) {
   std::cout << "[DEBUG] Loop created" << std::endl;
 }
-Loop::~Loop(){
+Loop::~Loop() {
   std::cout << "[DEBUG] Loop destroyed" << std::endl;
 }

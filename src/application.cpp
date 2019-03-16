@@ -20,7 +20,7 @@ Application::Application(ApplicationListener* listener, const ApplicationConfig&
   context = std::unique_ptr<Context>(new Context(vram, font));
 
   Loop::Callback lambda = [=](Context& ctx, double delta_time) { Update(ctx, delta_time); };
-  loop = std::unique_ptr<Loop>(new Loop(lambda, *context, this->listener.get()));
+  loop = std::unique_ptr<Loop>(new Loop(lambda, *context, this->listener.get(), config.ms_per_frame));
 }
 void Application::Run() {
   loop->Run();  // this call is async in case of emscripten

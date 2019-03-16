@@ -1,8 +1,8 @@
 #ifndef WHYCPP_WHYCPP_H
 #define WHYCPP_WHYCPP_H
 
-#include "application_config.h"
 #include <memory>
+#include "application_config.h"
 
 class ApplicationListener;
 
@@ -25,7 +25,7 @@ class ApplicationListener;
  * @param config is the configuration of the application
  */
 template<typename Listener>
-void RunApp(const ApplicationConfig &config = ApplicationConfig(256, 144, "Application", false)) {
+void RunApp(const ApplicationConfig &config = ApplicationConfig(256, 144, "Application", false, 3, 16)) {
   Run(new Listener(), config);
 }
 
@@ -36,8 +36,9 @@ void RunApp(const ApplicationConfig &config = ApplicationConfig(256, 144, "Appli
  * @param listener is an ApplicationListener implementation
  * @param config is the configuration of the application
  */
-void Run(ApplicationListener* listener, const ApplicationConfig &config = ApplicationConfig(256, 144, "Application", false));
+void Run(ApplicationListener *listener,
+         const ApplicationConfig &config = ApplicationConfig(256, 144, "Application", false, 3, 16));
 
 /** @} */
 
-#endif //WHYCPP_WHYCPP_H
+#endif  // WHYCPP_WHYCPP_H

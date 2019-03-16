@@ -188,10 +188,29 @@ class MouseTest : public ApplicationListener {
   }
 };
 
+class FpsLogger {
+  const int timer = 1; // print each 1 second
+  double sum = 0;
+  int i = 0;
+
+ public:
+  void Log(double delta_time) {
+    sum += delta_time;
+    i++;
+    if (sum >= timer) {
+      auto avg_dt = sum / i;
+      std::cout << "FPS=" << int(1.0 / avg_dt) << "\r";
+      i = 0;
+      sum -= timer;
+    }
+  }
+};
+
 class Show : public ApplicationListener {
   std::vector<std::unique_ptr<ApplicationListener>> apps{};
   size_t current_app = 0;
   size_t prev_app = 0;
+  FpsLogger logger{};
 
  public:
   Show() {
@@ -211,6 +230,7 @@ class Show : public ApplicationListener {
   }
 
   void OnRender(Context &ctx) override {
+    logger.Log(GetDelta(ctx));
     if (prev_app != current_app) {
       if (prev_app != apps.size()) {
         apps.at(prev_app)->OnDispose(ctx);
@@ -235,6 +255,6 @@ class Show : public ApplicationListener {
 };
 
 int main() {
-  RunApp<Show>();
+  RunApp<Show>(ApplicationConfig(256, 144, "Application", false, 3, 16));
   return 0;
 }
