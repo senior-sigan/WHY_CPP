@@ -34,8 +34,12 @@ void Loop::Update() {
   last = now;
   now = SDL_GetTicksL();
   delta_time = now - last;
-
+#if __EMSCRIPTEN__
+  // In the browser it would be better to use requestAnimationFrame instead of SDL_DELAY
+  cb(ctx, delta_time / 1000.0);
+#else
   UpdateWithDelay();
+#endif
 
   isRunning = !ctx.IsQuit();
   if (!isRunning) {
