@@ -2,7 +2,8 @@
 #define WHYCPP_LOGGER_H
 
 #include <string>
+#include <whycpp/log.h>
 
-void logSDLError(const std::string &msg);
+void LogSDLError(const std::string &msg);
 
 #endif //WHYCPP_LOGGER_H

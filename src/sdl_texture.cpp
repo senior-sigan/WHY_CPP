@@ -3,7 +3,6 @@
 #include <whycpp/color.h>
 #include <algorithm>
 #include <cmath>
-#include <iostream>
 #include "logger.h"
 #include "video_memory.h"
 
@@ -17,7 +16,7 @@ SDLTexture::SDLTexture(SDL_Renderer* ren, VideoMemory *vram) : ren(ren), vram(vr
                                                                     vram->GetWidth(),
                                                                     vram->GetHeight()), sdl_deleter());
   if (!tex) {
-    logSDLError("SDL_CreateTexture");
+    LogSDLError("SDL_CreateTexture");
   }
 }
 SDLTexture::~SDLTexture() = default;

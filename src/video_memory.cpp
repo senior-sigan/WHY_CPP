@@ -1,18 +1,18 @@
 #include "video_memory.h"
 #include <whycpp/color.h>
 #include <algorithm>
-#include <iostream>
 #include "clamp.h"
+#include "logger.h"
 
 VideoMemory::VideoMemory(int width, int height)
     : width(width),
       height(height),
       texture(std::vector<std::vector<RGBA>>(static_cast<unsigned long>(width),
                                              std::vector<RGBA>(static_cast<unsigned long>(height), {0, 0, 0, 0}))) {
-  std::cout << "[DEBUG] VideoMemory[" << width << "," << height << "] created" << std::endl;
+  LogDebug("VideoMemory [%d, %d] created", width, height);
 }
 VideoMemory::~VideoMemory() {
-  std::cout << "[DEBUG] VideoMemory[" << width << "," << height << "] destroyed" << std::endl;
+  LogDebug("VideoMemory [%d, %d] destroyed", width, height);
 }
 void VideoMemory::Set(int x, int y, const RGBA &color) {
   texture.at(CheckX(x)).at(CheckY(y)) = color;
@@ -28,17 +28,14 @@ int VideoMemory::GetWidth() const {
 }
 size_t VideoMemory::CheckX(int x) const {
   if (x >= width || x < 0) {
-    // TODO: use logger with macros to disable logs
-    //    std::cout << "[WARN][VideoMemory]: X is out of bound, should be [0, " << width << "), but " << x << std::endl;
+    LogVerbose("VideoMemory:  X is out of bound, should be [0, %d) but %d", width, x);
     return static_cast<size_t>(clamp(x, 0, width - 1));
   }
   return static_cast<size_t>(x);
 }
 size_t VideoMemory::CheckY(int y) const {
   if (y >= height || y < 0) {
-    // TODO: use logger with macros to disable logs
-    //    std::cout << "[WARN][VideoMemory]: Y is out of bound, should be [0, " << height << "), but " << y <<
-    //    std::endl;
+    LogVerbose("VideoMemory:  Y is out of bound, should be [0, %d) but %d", height, y);
     return static_cast<size_t>(clamp(y, 0, height - 1));
   }
   return static_cast<size_t>(y);

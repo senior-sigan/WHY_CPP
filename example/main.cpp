@@ -6,6 +6,7 @@
 #include <whycpp/import_sprites.h>
 #include <whycpp/input.h>
 #include <whycpp/lifecycle.h>
+#include <whycpp/log.h>
 #include <whycpp/palette.h>
 #include <whycpp/text.h>
 #include <whycpp/time.h>
@@ -199,7 +200,8 @@ class FpsLogger {
     i++;
     if (sum >= timer) {
       auto avg_dt = sum / i;
-      std::cout << "FPS=" << int(1.0 / avg_dt) << "\r";
+      auto fps = int(1.0 / avg_dt);
+      // TODO: print somehow on the screen
       i = 0;
       sum -= timer;
     }
@@ -255,6 +257,7 @@ class Show : public ApplicationListener {
 };
 
 int main() {
+  SetLogLevel(LogLevel::DEBUG);
   RunApp<Show>(ApplicationConfig(256, 144, "Application", false, 3, 16));
   return 0;
 }

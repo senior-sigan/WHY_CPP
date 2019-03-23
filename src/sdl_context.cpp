@@ -1,16 +1,16 @@
 #include "sdl_context.h"
 #include <SDL2/SDL.h>
 #include <whycpp/application_config.h>
-#include <iostream>
 #include "logger.h"
 #include "sdl_deleter.h"
 #include "sdl_texture.h"
 #include "video_memory.h"
+#include "logger.h"
 
 SDLContext::SDLContext(const ApplicationConfig& config, VideoMemory* vram) {
-  std::cout << "[DEBUG] SDLContext created" << std::endl;
+  LogDebug("SDLContext created");
   if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-    logSDLError("SDL_Init");
+    LogSDLError("SDL_Init");
     return;  // TODO: what? throw exception?
   }
   Uint32 flags = SDL_WINDOW_SHOWN;
@@ -24,19 +24,19 @@ SDLContext::SDLContext(const ApplicationConfig& config, VideoMemory* vram) {
                        config.GetWindowHeight(), flags),
       sdl_deleter());
   if (!win) {
-    logSDLError("SDL_CreateWindow");
+    LogSDLError("SDL_CreateWindow");
     return;  // TODO: what? throw exception?
   }
   ren = std::unique_ptr<SDL_Renderer, sdl_deleter>(
       SDL_CreateRenderer(win.get(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC), sdl_deleter());
   if (!ren) {
-    logSDLError("SDL_CreateRenderer");
+    LogSDLError("SDL_CreateRenderer");
     return;  // TODO: what? throw exception?
   }
   texture = std::unique_ptr<SDLTexture>(new SDLTexture(ren.get(), vram));
 }
 SDLContext::~SDLContext() {
-  std::cout << "[DEBUG] SDLContext destroyed" << std::endl;
+  LogDebug("SDLContext destroyed");
   SDL_Quit();
 }
 void SDLContext::Render() {

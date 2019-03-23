@@ -1,11 +1,13 @@
+#include <memory>
+
 #include "application.h"
 #include <SDL2/SDL.h>
 #include <whycpp/application_config.h>
 #include <whycpp/application_listener.h>
 #include <functional>
-#include <iostream>
 #include "context.h"
 #include "default_font.h"
+#include "logger.h"
 #include "loop.h"
 #include "sdl_context.h"
 #include "sdl_texture.h"
@@ -13,14 +15,14 @@
 
 Application::Application(ApplicationListener* listener, const ApplicationConfig& config)
     : listener(std::unique_ptr<ApplicationListener>(listener)), config(config) {
-  std::cout << "[DEBUG] Application created" << std::endl;
+  LogDebug("Application Created");
 
   auto vram = new VideoMemory(config.width, config.height);
   auto font = BuildDefaultFont();
-  context = std::unique_ptr<Context>(new Context(vram, font));
+  context = std::make_unique<Context>(vram, font);
 
   Loop::Callback lambda = [=](Context& ctx, double delta_time) { Update(ctx, delta_time); };
-  loop = std::unique_ptr<Loop>(new Loop(lambda, *context, this->listener.get(), config.ms_per_frame));
+  loop = std::make_unique<Loop>(lambda, *context, this->listener.get(), config.ms_per_frame);
 }
 void Application::Run() {
   loop->Run();  // this call is async in case of emscripten
@@ -74,10 +76,10 @@ void Application::RenderOrInit() {
   if (!sdl_context) {
     // YES. I know about class invariant, but we need this becasue of emscripten + sdl2 lifecycle problems.
     // Also, this is pattern "lazy".
-    sdl_context = std::unique_ptr<SDLContext>(new SDLContext(config, context->GetVRAM()));
+    sdl_context = std::make_unique<SDLContext>(config, context->GetVRAM());
   }
   sdl_context->Render();
 }
 Application::~Application() {
-  std::cout << "[DEBUG] Application destroyed" << std::endl;
+  LogDebug("Application destroyed");
 }

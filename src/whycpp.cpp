@@ -1,5 +1,6 @@
 #include <whycpp/application_listener.h>
 #include "application.h"
+#include "logger.h"
 
 void Run(ApplicationListener* listener, const ApplicationConfig &config) {
 #if __EMSCRIPTEN__

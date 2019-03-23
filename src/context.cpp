@@ -1,11 +1,11 @@
 #include "context.h"
 #include <SDL2/SDL_keyboard.h>
 #include <SDL2/SDL_mouse.h>
-#include <whycpp/font.h>
-#include <iostream>
-#include <memory>
-#include "video_memory.h"
 #include <whycpp/buttons.h>
+#include <whycpp/font.h>
+#include <memory>
+#include "logger.h"
+#include "video_memory.h"
 
 void Context::KeyUp(const unsigned int code) {
   if (code >= KEY_NUM_KEYS) return;
@@ -52,12 +52,12 @@ VideoMemory* Context::GetSprite(int index) const {
   return sprites.at(static_cast<unsigned long>(index)).get();
 }
 Context::~Context() {
-  std::cout << "[DEBUG] Context destroyed" << std::endl;
+  LogDebug("Context destroyed");
 }
 Context::Context(VideoMemory* vram, Font* font) : vram(std::unique_ptr<VideoMemory>(vram)), font(std::unique_ptr<Font>(font)) {
   buttons.resize(Button::KEY_NUM_KEYS);
   clicked.resize(Button::KEY_NUM_KEYS);
-  std::cout << "[DEBUG] Context created" << std::endl;
+  LogDebug("Context created");
 }
 VideoMemory* Context::GetVRAM() const {
   return vram.get();

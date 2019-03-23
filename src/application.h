@@ -36,9 +36,12 @@ class Application {
   void Update(Context& ctx, double delta_time);
   void RenderOrInit(); // it's lazy call
  private:
-  std::unique_ptr<Loop> loop;
-  std::unique_ptr<Context> context;
+
+  // please, keep tis order, it's important for the object destruction order
+  // Destuction order: [listener, loop, context, sdl context]
   std::unique_ptr<SDLContext> sdl_context;
+  std::unique_ptr<Context> context;
+  std::unique_ptr<Loop> loop;
   const std::unique_ptr<ApplicationListener> listener;
   const ApplicationConfig config;
 

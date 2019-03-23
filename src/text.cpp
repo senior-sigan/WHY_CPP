@@ -1,6 +1,5 @@
 #include <whycpp/text.h>
 #include <whycpp/drawing.h>
-#include <iostream>
 #include "context.h"
 
 void Print(Context &ctx,

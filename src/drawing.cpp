@@ -3,7 +3,6 @@
 #include <algorithm>
 #include "video_memory.h"
 #include <whycpp/color.h>
-#include <iostream>
 
 int GetDisplayWidth(const Context &ctx) {
   return ctx.GetVRAM()->GetWidth();

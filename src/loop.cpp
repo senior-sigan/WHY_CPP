@@ -1,6 +1,7 @@
 #include "loop.h"
 #include <whycpp/application_listener.h>
 #include "clamp.h"
+#include "logger.h"
 #if __EMSCRIPTEN__
 #include <emscripten.h>
 void emscripten_Update(void* loop) {
@@ -8,7 +9,6 @@ void emscripten_Update(void* loop) {
   real_loop->Update();
 }
 #endif
-#include <iostream>
 
 long SDL_GetTicksL() {
   return static_cast<long>(SDL_GetTicks());
@@ -63,8 +63,8 @@ void Loop::RunLoop() {
 }
 Loop::Loop(Loop::Callback& callback, Context& ctx, ApplicationListener* listener, long ms_per_frame)
     : cb(callback), ctx(ctx), listener(listener), ms_per_frame(ms_per_frame) {
-  std::cout << "[DEBUG] Loop created" << std::endl;
+  LogDebug("Loop created");
 }
 Loop::~Loop() {
-  std::cout << "[DEBUG] Loop destroyed" << std::endl;
+  LogDebug("Loop destroyed");
 }
