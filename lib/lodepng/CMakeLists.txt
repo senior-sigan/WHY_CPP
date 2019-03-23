@@ -10,4 +10,4 @@ endif ()
 set(CMAKE_CXX_STANDARD 11)
 
 include_directories(include)
-add_library(lodepng picopng.cpp include/lodepng/picopng.h)
+add_library(lodepng SHARED STATIC picopng.cpp include/lodepng/picopng.h)
