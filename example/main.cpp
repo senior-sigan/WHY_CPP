@@ -14,20 +14,21 @@
 #include <cmath>
 #include <iostream>
 #include <vector>
-
-#define PI 3.14159265358979323846 /* pi */
-
-#include <chrono>
-#include <random>
+#include <ctime>
+#include <cstdlib>
 
 class TrueRandom {
  public:
+  TrueRandom() {
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+  }
+
   int NextInt(int min, int max) const {
     if (min == max) return min;
-    auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
-    std::mt19937 rng(seed);
-    std::uniform_int_distribution<std::mt19937::result_type> dist6(min, max - 1);
-    return dist6(rng);
+    // there is a problem in MinGW implementation of random. So use old school rand.
+    // A notable implementation where std::random_device is deterministic is MinGW (bug 338),
+    // although replacement implementations exist, such as mingw-std-random_device.
+    return std::rand() % (max - min) + min;
   }
 
   int Bound(int max) const {
@@ -51,6 +52,7 @@ class ChessBoard : public ApplicationListener {
 };
 
 class Prisma : public ApplicationListener {
+  const double PI = 3.14159265358979323846;
  public:
   void OnRender(Context &ctx) override {
     const int base = 143;
@@ -88,6 +90,10 @@ class Prisma : public ApplicationListener {
 class Fade : public ApplicationListener {
   TrueRandom rnd;
  public:
+  void OnCreate(Context &ctx) override {
+    DrawClearScreen(ctx, PALETTE[0]);
+  }
+
   void OnRender(Context &ctx) override {
     for (int i = 0; i < 2000; i++) {
       int x = rnd.Bound(GetDisplayWidth(ctx));
@@ -112,6 +118,9 @@ class PaletteShow : public ApplicationListener {
 class RandomLines : public ApplicationListener {
   TrueRandom rnd;
  public:
+  void OnCreate(Context &ctx) override {
+    DrawClearScreen(ctx, PALETTE[0]);
+  }
   void OnRender(Context &ctx) override {
     int x0 = rnd.Bound(GetDisplayWidth(ctx));
     int y0 = rnd.Bound(GetDisplayHeight(ctx));

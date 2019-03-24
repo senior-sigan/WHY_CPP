@@ -1,5 +1,5 @@
-cmake-build-debug
-cmake-build-debug-web
+.DS_store
+cmake-build-*
 .idea
 *.pyc
 docs
