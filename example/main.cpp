@@ -17,9 +17,23 @@
 
 #define PI 3.14159265358979323846 /* pi */
 
-int rnd(int bound) {
-  return rand() % bound;
-}
+#include <chrono>
+#include <random>
+
+class TrueRandom {
+ public:
+  int NextInt(int min, int max) const {
+    if (min == max) return min;
+    auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
+    std::mt19937 rng(seed);
+    std::uniform_int_distribution<std::mt19937::result_type> dist6(min, max - 1);
+    return dist6(rng);
+  }
+
+  int Bound(int max) const {
+    return NextInt(0, max);
+  }
+};
 
 class ChessBoard : public ApplicationListener {
  public:
@@ -72,11 +86,12 @@ class Prisma : public ApplicationListener {
 };
 
 class Fade : public ApplicationListener {
+  TrueRandom rnd;
  public:
   void OnRender(Context &ctx) override {
     for (int i = 0; i < 2000; i++) {
-      int x = rnd(GetDisplayWidth(ctx));
-      int y = rnd(GetDisplayHeight(ctx));
+      int x = rnd.Bound(GetDisplayWidth(ctx));
+      int y = rnd.Bound(GetDisplayHeight(ctx));
 
       const RGBA &color = PALETTE[static_cast<int>(GetTime(ctx)) % PALETTE_LEN];
       SetPixel(ctx, x, y, color);
@@ -95,13 +110,14 @@ class PaletteShow : public ApplicationListener {
 };
 
 class RandomLines : public ApplicationListener {
+  TrueRandom rnd;
  public:
   void OnRender(Context &ctx) override {
-    int x0 = rnd(GetDisplayWidth(ctx));
-    int y0 = rnd(GetDisplayHeight(ctx));
+    int x0 = rnd.Bound(GetDisplayWidth(ctx));
+    int y0 = rnd.Bound(GetDisplayHeight(ctx));
 
-    int x1 = rnd(GetDisplayWidth(ctx));
-    int y1 = rnd(GetDisplayHeight(ctx));
+    int x1 = rnd.Bound(GetDisplayWidth(ctx));
+    int y1 = rnd.Bound(GetDisplayHeight(ctx));
 
     const RGBA &color = PALETTE[static_cast<int>(GetTime(ctx)) % PALETTE_LEN];
 
@@ -190,7 +206,7 @@ class MouseTest : public ApplicationListener {
 };
 
 class FpsLogger {
-  const int timer = 1; // print each 1 second
+  const int timer = 1;  // print each 1 second
   double sum = 0;
   int i = 0;
 
