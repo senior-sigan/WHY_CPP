@@ -1,6 +1,6 @@
 file(GLOB examples_SRCS "*.cpp")
 
-include_directories(${PROJECT_INCLUDES_DIR})
+include_directories(${WHYCPP_INCLUDES_DIR})
 
 foreach(example_src ${examples_SRCS})
     get_filename_component(example ${example_src} NAME_WE)

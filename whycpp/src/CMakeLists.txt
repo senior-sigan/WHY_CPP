@@ -8,9 +8,9 @@ else()
 #    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Weverything")
 endif()
 
-include_directories(${PROJECT_INCLUDES_DIR})
+include_directories(${WHYCPP_INCLUDES_DIR})
 
-add_library(whycpp SHARED STATIC ${SOURCES} ${HEADERS} ${INCLUDES})
+add_library(whycpp SHARED STATIC ${WHYCPP_SOURCES} ${WHYCPP_HEADERS} ${WHYCPP_INCLUDES})
 
 target_include_directories(whycpp SYSTEM PRIVATE ${LODEPNG_HEADERS})
 target_link_libraries(whycpp lodepng)

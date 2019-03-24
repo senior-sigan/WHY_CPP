@@ -8,9 +8,9 @@ class ChessBoard : public ApplicationListener {
     for (int x = 0; x < GetDisplayWidth(ctx); x++) {
       for (int y = 0; y < GetDisplayHeight(ctx); y++) {
         if (x % 2 == 0 && y % 2 == 0) {
-          SetPixel(ctx, x, y, {0, 0, 0, 0});
+          SetPixel(ctx, x, y, {0, 0, 0, 255});
         } else {
-          SetPixel(ctx, x, y, {255, 255, 255, 0});
+          SetPixel(ctx, x, y, {255, 255, 255, 255});
         }
       }
     }

@@ -1,3 +1,5 @@
+desktop: reload compile run
+
 web: reload-web compile-web serve
 
 reload-web:
@@ -5,16 +7,19 @@ reload-web:
 	mkdir cmake-build-debug-web
 	cd cmake-build-debug-web;emcmake cmake ..
 
+compile-web:
+	cd cmake-build-debug-web/example;make -j4
+
+serve:
+	cd cmake-build-debug-web/example;python -m http.server
+
 reload:
 	rm -rf cmake-build-debug
 	mkdir cmake-build-debug
 	cd cmake-build-debug;cmake ..
 
-serve:
-	cd cmake-build-debug-web/example;python -m http.server
-
-compile-web:
-	cd cmake-build-debug-web/example;make -j4
+compile:
+	cd cmake-build-debug/example;make -j4
 
 run:
 	cd cmake-build-debug/example;./example
