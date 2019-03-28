@@ -23,7 +23,12 @@ void OnResume(Context_t* context) {
 void OnRender(Context_t* context) {
   printf("%s reporting! Width: %d, height: %d\n", __FUNCTION__, GetDisplayWidth_C(context),
          GetDisplayHeight_C(context));
-  SetPixel_C(context, 127, 72, PALETTE[2]);
+  const int wd = GetDisplayWidth_C(context);
+  const int w = wd / PALETTE_LEN;
+  int i = 0;
+  for (; i < PALETTE_LEN; i++) {
+    DrawRectFill_C(context, i * w, 0, w, GetDisplayHeight_C(context), PALETTE[i]);
+  }
 }
 
 void OnPause(Context_t* context) {
