@@ -8,6 +8,8 @@
 
 #include <whycpp_c/application_config.h>
 #include <whycpp_c/application_listener.h>
+#include <whycpp_c/drawing.h>
+#include <whycpp_c/palette.h>
 #include <whycpp_c/whycpp_c.h>
 
 void OnCreate(Context_t* context) {
@@ -19,7 +21,9 @@ void OnResume(Context_t* context) {
 }
 
 void OnRender(Context_t* context) {
-  printf("%s reporting!\n", __FUNCTION__);
+  printf("%s reporting! Width: %d, height: %d\n", __FUNCTION__, GetDisplayWidth_C(context),
+         GetDisplayHeight_C(context));
+  SetPixel_C(context, 127, 72, PALETTE[2]);
 }
 
 void OnPause(Context_t* context) {
@@ -31,8 +35,12 @@ void OnDispose(Context_t* context) {
 }
 
 int main() {
-  ApplicationConfig_t config = {
-      .width = 256, .height = 144, .name = "Test C API", .is_fullscreen = 0, .window_size_multiplier = 3, .ms_per_frame = 16};
+  ApplicationConfig_t config = {.width = 256,
+                                .height = 144,
+                                .name = "Test C API",
+                                .is_fullscreen = 0,
+                                .window_size_multiplier = 3,
+                                .ms_per_frame = 16};
 
   ApplicationListener_t listener = {
       .onCreate = OnCreate, .onResume = OnResume, .onRender = OnRender, .onPause = OnPause, .onDispose = OnDispose};

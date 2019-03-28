@@ -9,7 +9,7 @@
 #include "application_listener.h"
 #include "c_api.h"
 
-API_METHOD
+WHYCPP_C_API
 void Run(ApplicationListener_t* listener, ApplicationConfig_t* config);
 
 #endif  // WHYCPP_ROOT_WHYCPP_C_H

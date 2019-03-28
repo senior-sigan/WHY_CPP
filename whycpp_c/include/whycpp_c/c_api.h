@@ -6,10 +6,9 @@
 #define WHYCPP_ROOT_C_API_H
 
 #if __cplusplus
-#define API_METHOD extern "C"
+#define WHYCPP_C_API extern "C"
 #else
-#define API_METHOD
+#define WHYCPP_C_API
 #endif
 
-
-#endif //WHYCPP_ROOT_C_API_H
+#endif  // WHYCPP_ROOT_C_API_H
