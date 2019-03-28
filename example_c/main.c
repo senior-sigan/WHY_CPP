@@ -12,30 +12,29 @@
 #include <whycpp_c/palette.h>
 #include <whycpp_c/whycpp_c.h>
 
-void OnCreate(Context_t* context) {
+void OnCreate() {
   printf("%s reporting!\n", __FUNCTION__);
 }
 
-void OnResume(Context_t* context) {
+void OnResume() {
   printf("%s reporting!\n", __FUNCTION__);
 }
 
-void OnRender(Context_t* context) {
-  printf("%s reporting! Width: %d, height: %d\n", __FUNCTION__, GetDisplayWidth_C(context),
-         GetDisplayHeight_C(context));
-  const int wd = GetDisplayWidth_C(context);
+void OnRender() {
+  printf("%s reporting! Width: %d, height: %d\n", __FUNCTION__, GetDisplayWidth_C(), GetDisplayHeight_C());
+  const int wd = GetDisplayWidth_C();
   const int w = wd / PALETTE_LEN;
   int i = 0;
   for (; i < PALETTE_LEN; i++) {
-    DrawRectFill_C(context, i * w, 0, w, GetDisplayHeight_C(context), PALETTE[i]);
+    DrawRectFill_C(i * w, 0, w, GetDisplayHeight_C(), PALETTE[i]);
   }
 }
 
-void OnPause(Context_t* context) {
+void OnPause() {
   printf("%s reporting!\n", __FUNCTION__);
 }
 
-void OnDispose(Context_t* context) {
+void OnDispose() {
   printf("%s reporting!\n", __FUNCTION__);
 }
 

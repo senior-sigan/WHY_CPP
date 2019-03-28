@@ -6,9 +6,8 @@
 #define WHYCPP_ROOT_APPLICATION_LISTENER_H
 
 #include "c_api.h"
-#include "context.h"
 
-typedef void (*Callback)(struct Context_t_* context);
+typedef void (*Callback)();
 
 typedef struct ApplicationListener_t_ {
   Callback onCreate;
