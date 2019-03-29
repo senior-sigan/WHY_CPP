@@ -10,6 +10,7 @@
 #include <whycpp_c/application_listener.h>
 #include <whycpp_c/drawing.h>
 #include <whycpp_c/palette.h>
+#include <whycpp_c/text.h>
 #include <whycpp_c/whycpp_c.h>
 
 void OnCreate() {
@@ -28,6 +29,8 @@ void OnRender() {
   for (; i < PALETTE_LEN; i++) {
     DrawRectFill_C(i * w, 0, w, GetDisplayHeight_C(), PALETTE[i]);
   }
+
+  PrintStr_C("Hello there!", 20, 50, PALETTE[0], 3, 4);
 }
 
 void OnPause() {
