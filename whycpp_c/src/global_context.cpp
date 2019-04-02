@@ -10,7 +10,7 @@
 Context* GLOBAL_CONTEXT = nullptr;
 
 Context* GetContextInit() {
-  LogCritical("Context is requested before it was set!");
+  LOG_CRITICAL("Context is requested before it was set!");
   return nullptr;
 }
 
@@ -26,7 +26,7 @@ Context* GetContext_C() {
 
 void SetContext_C(Context* context) {
   if (GLOBAL_CONTEXT != nullptr) {
-    LogWarn("Redefinition of the context!");
+    LOG_WARN("Redefinition of the context!");
   }
   GLOBAL_CONTEXT = context;
   get_context_internal = GetContextNormal;

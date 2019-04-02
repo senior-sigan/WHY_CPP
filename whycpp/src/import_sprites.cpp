@@ -21,10 +21,10 @@ int ImportSprite(Context &context, const std::string &filename) {
   if (size > 0) {
     buffer.resize(static_cast<unsigned long>(size));
     file.read(reinterpret_cast<char *>(&buffer[0]), size);
-    LogInfo("Imported file '%s' of size=%d kB", filename.c_str(), size/1024);
+    LOG_INFO("Imported file '%s' of size=%d kB", filename.c_str(), size/1024);
   } else {
     buffer.clear();
-    LogError("Cannot import file '%s'", filename.c_str());
+    LOG_ERROR("Cannot import file '%s'", filename.c_str());
     return -1;
   }
 
@@ -32,10 +32,10 @@ int ImportSprite(Context &context, const std::string &filename) {
   unsigned long w, h;
   int error = decodePNG(image, w, h, buffer.empty() ? nullptr : &buffer[0], buffer.size());
   if (error != 0) {
-    LogError("Cannot decode png file '%s' error: %d", filename.c_str(), error);
+    LOG_ERROR("Cannot decode png file '%s' error: %d", filename.c_str(), error);
   }
   if (image.size() > 4) {
-    LogDebug("PNG '%s' width=%d height=%d", filename.c_str(), w, h);
+    LOG_DEBUG("PNG '%s' width=%d height=%d", filename.c_str(), w, h);
   }
 
   auto sprite = new VideoMemory(static_cast<int>(w), static_cast<int>(h));

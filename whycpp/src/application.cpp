@@ -15,7 +15,7 @@
 
 Application::Application(ApplicationListener* listener, const ApplicationConfig& config)
     : listener(std::unique_ptr<ApplicationListener>(listener)), config(config) {
-  LogDebug("Application Created");
+  LOG_DEBUG("Application Created");
 
   auto vram = new VideoMemory(config.width, config.height);
   auto font = BuildDefaultFont();
@@ -81,5 +81,5 @@ void Application::RenderOrInit() {
   sdl_context->Render();
 }
 Application::~Application() {
-  LogDebug("Application destroyed");
+  LOG_DEBUG("Application destroyed");
 }

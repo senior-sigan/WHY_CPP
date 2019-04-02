@@ -63,8 +63,8 @@ void Loop::RunLoop() {
 }
 Loop::Loop(Loop::Callback& callback, Context& ctx, ApplicationListener* listener, long ms_per_frame)
     : cb(callback), ctx(ctx), listener(listener), ms_per_frame(ms_per_frame) {
-  LogDebug("Loop created");
+  LOG_DEBUG("Loop created");
 }
 Loop::~Loop() {
-  LogDebug("Loop destroyed");
+  LOG_DEBUG("Loop destroyed");
 }

@@ -8,7 +8,7 @@
 #include "logger.h"
 
 SDLContext::SDLContext(const ApplicationConfig& config, VideoMemory* vram) {
-  LogDebug("SDLContext created");
+  LOG_DEBUG("SDLContext created");
   if (SDL_Init(SDL_INIT_VIDEO) != 0) {
     LogSDLError("SDL_Init");
     return;  // TODO: what? throw exception?
@@ -36,7 +36,7 @@ SDLContext::SDLContext(const ApplicationConfig& config, VideoMemory* vram) {
   texture = std::unique_ptr<SDLTexture>(new SDLTexture(ren.get(), vram));
 }
 SDLContext::~SDLContext() {
-  LogDebug("SDLContext destroyed");
+  LOG_DEBUG("SDLContext destroyed");
   SDL_Quit();
 }
 void SDLContext::Render() {

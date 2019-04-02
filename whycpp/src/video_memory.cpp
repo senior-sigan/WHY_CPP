@@ -9,10 +9,10 @@ VideoMemory::VideoMemory(int width, int height)
       height(height),
       texture(std::vector<std::vector<RGBA>>(static_cast<unsigned long>(width),
                                              std::vector<RGBA>(static_cast<unsigned long>(height), {0, 0, 0, 0}))) {
-  LogDebug("VideoMemory [%d, %d] created", width, height);
+  LOG_DEBUG("VideoMemory [%d, %d] created", width, height);
 }
 VideoMemory::~VideoMemory() {
-  LogDebug("VideoMemory [%d, %d] destroyed", width, height);
+  LOG_DEBUG("VideoMemory [%d, %d] destroyed", width, height);
 }
 void VideoMemory::Set(int x, int y, const RGBA &color) {
   texture.at(CheckX(x)).at(CheckY(y)) = color;
@@ -28,14 +28,14 @@ int VideoMemory::GetWidth() const {
 }
 size_t VideoMemory::CheckX(int x) const {
   if (x >= width || x < 0) {
-    LogVerbose("VideoMemory:  X is out of bound, should be [0, %d) but %d", width, x);
+    LOG_VERBOSE("VideoMemory:  X is out of bound, should be [0, %d) but %d", width, x);
     return static_cast<size_t>(clamp(x, 0, width - 1));
   }
   return static_cast<size_t>(x);
 }
 size_t VideoMemory::CheckY(int y) const {
   if (y >= height || y < 0) {
-    LogVerbose("VideoMemory:  Y is out of bound, should be [0, %d) but %d", height, y);
+    LOG_VERBOSE("VideoMemory:  Y is out of bound, should be [0, %d) but %d", height, y);
     return static_cast<size_t>(clamp(y, 0, height - 1));
   }
   return static_cast<size_t>(y);
