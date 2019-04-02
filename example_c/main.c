@@ -9,20 +9,21 @@
 #include <whycpp_c/application_config.h>
 #include <whycpp_c/application_listener.h>
 #include <whycpp_c/drawing.h>
+#include <whycpp_c/log.h>
 #include <whycpp_c/palette.h>
 #include <whycpp_c/text.h>
 #include <whycpp_c/whycpp_c.h>
 
 void OnCreate() {
-  printf("%s reporting!\n", __FUNCTION__);
+  LOG_DEBUG("%s reporting!\n", __FUNCTION__);
 }
 
 void OnResume() {
-  printf("%s reporting!\n", __FUNCTION__);
+  LOG_DEBUG("%s reporting!\n", __FUNCTION__);
 }
 
 void OnRender() {
-  printf("%s reporting! Width: %d, height: %d\n", __FUNCTION__, GetDisplayWidth_C(), GetDisplayHeight_C());
+  LOG_DEBUG("%s reporting! Width: %d, height: %d\n", __FUNCTION__, GetDisplayWidth_C(), GetDisplayHeight_C());
   const int wd = GetDisplayWidth_C();
   const int w = wd / PALETTE_LEN;
   int i = 0;
@@ -34,11 +35,11 @@ void OnRender() {
 }
 
 void OnPause() {
-  printf("%s reporting!\n", __FUNCTION__);
+  LOG_DEBUG("%s reporting!\n", __FUNCTION__);
 }
 
 void OnDispose() {
-  printf("%s reporting!\n", __FUNCTION__);
+  LOG_DEBUG("%s reporting!\n", __FUNCTION__);
 }
 
 int main() {
