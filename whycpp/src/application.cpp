@@ -1,7 +1,7 @@
 #include <memory>
 
 #include "application.h"
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <whycpp/application_config.h>
 #include <whycpp/application_listener.h>
 #include <functional>

@@ -1,6 +1,6 @@
 #include "logger.h"
-#include <SDL2/SDL_error.h>
-#include <SDL2/SDL_log.h>
+#include <SDL_error.h>
+#include <SDL_log.h>
 #include <cstdio>
 
 void LogSDLError(const std::string& msg) {

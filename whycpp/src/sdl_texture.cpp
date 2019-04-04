@@ -1,5 +1,5 @@
 #include "sdl_texture.h"
-#include <SDL2/SDL_render.h>
+#include <SDL_render.h>
 #include <whycpp/color.h>
 #include <algorithm>
 #include <cmath>

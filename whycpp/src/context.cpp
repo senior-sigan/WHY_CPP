@@ -1,6 +1,4 @@
 #include "context.h"
-#include <SDL2/SDL_keyboard.h>
-#include <SDL2/SDL_mouse.h>
 #include <whycpp/buttons.h>
 #include <whycpp/font.h>
 #include <memory>

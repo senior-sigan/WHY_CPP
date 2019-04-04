@@ -1,5 +1,5 @@
 #include "sdl_context.h"
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <whycpp/application_config.h>
 #include "logger.h"
 #include "sdl_deleter.h"
