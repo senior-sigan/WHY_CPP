@@ -5,7 +5,7 @@
 #ifndef WHYCPP_C_APPLICATION_CONFIG_H
 #define WHYCPP_C_APPLICATION_CONFIG_H
 
-#include "c_api.h"
+#include <whycpp/c_api.h>
 
 typedef struct ApplicationConfig_t_ {
   int width;

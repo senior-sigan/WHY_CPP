@@ -5,7 +5,7 @@
 #ifndef WHYCPP_ROOT_LIFECYCLE_H
 #define WHYCPP_ROOT_LIFECYCLE_H
 
-#include "c_api.h"
+#include <whycpp/c_api.h>
 
 /**
  * Pause the application rendering.

@@ -5,7 +5,7 @@
 #ifndef WHYCPP_ROOT_IMPORT_SPRITES_H
 #define WHYCPP_ROOT_IMPORT_SPRITES_H
 
-#include "c_api.h"
+#include <whycpp/c_api.h>
 
 /**
  * Loads sprite into memory and return sprite id

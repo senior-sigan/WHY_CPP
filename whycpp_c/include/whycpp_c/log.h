@@ -1,7 +1,7 @@
 #ifndef WHYCPP_C_LOG_H
 #define WHYCPP_C_LOG_H
 
-#include "c_api.h"
+#include <whycpp/log.h>
 
 typedef enum {
     VERBOSE = 1,

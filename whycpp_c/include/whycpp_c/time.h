@@ -5,7 +5,7 @@
 #ifndef WHYCPP_ROOT_TIME_H
 #define WHYCPP_ROOT_TIME_H
 
-#include "c_api.h"
+#include <whycpp/c_api.h>
 
 /**
  * @param context of the application

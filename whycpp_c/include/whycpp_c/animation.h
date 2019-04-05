@@ -5,7 +5,7 @@
 #ifndef WHYCPP_ROOT_ANIMATION_H
 #define WHYCPP_ROOT_ANIMATION_H
 
-#include "c_api.h"
+#include <whycpp/c_api.h>
 
 typedef struct {
   int first;

@@ -7,7 +7,7 @@
 
 #include "application_config.h"
 #include "application_listener.h"
-#include "c_api.h"
+#include <whycpp/c_api.h>
 
 WHYCPP_C_API
 void Run(ApplicationListener_t* listener, ApplicationConfig_t* config);

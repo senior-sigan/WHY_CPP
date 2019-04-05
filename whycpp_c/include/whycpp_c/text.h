@@ -5,7 +5,7 @@
 #ifndef WHYCPP_ROOT_TEXT_H
 #define WHYCPP_ROOT_TEXT_H
 
-#include "c_api.h"
+#include <whycpp/c_api.h>
 #include "color.h"
 
 /**
