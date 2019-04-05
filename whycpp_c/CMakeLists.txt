@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.6)
-project(whycpp_c C)
+project(whycpp_c CXX)
 
 set(WHYCPP_C_INCLUDES_DIR ${PROJECT_SOURCE_DIR}/include)
 set(WHYCPP_C_SOURCES_DIR ${PROJECT_SOURCE_DIR}/src)
