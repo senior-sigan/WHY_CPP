@@ -1,16 +1,19 @@
 #ifndef WHYCPP_LOG_H
 #define WHYCPP_LOG_H
 
-enum LogLevel {
+#include <whycpp/c_api.h>
+
+typedef enum LogLevel {
   VERBOSE = 1,
   DEBUG,
   INFO,
   WARN,
   ERROR,
   CRITICAL
-};
+} LogLevel_t;
 
-void LogMessage(LogLevel level, const char* fmt, ...);
+WHYCPP_C_API
+void LogMessage(LogLevel_t level, const char* fmt, ...);
 
 #define LOG_VERBOSE(FMT, ...) LogMessage(VERBOSE, FMT, ## __VA_ARGS__)
 #define LOG_DEBUG(FMT, ...) LogMessage(DEBUG, FMT, ## __VA_ARGS__)
@@ -19,6 +22,7 @@ void LogMessage(LogLevel level, const char* fmt, ...);
 #define LOG_ERROR(FMT, ...) LogMessage(ERROR, FMT, ## __VA_ARGS__)
 #define LOG_CRITICAL(FMT, ...) LogMessage(CRITICAL, FMT, ## __VA_ARGS__)
 
-void SetLogLevel(LogLevel priority);
+WHYCPP_C_API
+void SetLogLevel(LogLevel_t priority);
 
 #endif  // WHYCPP_LOG_H
