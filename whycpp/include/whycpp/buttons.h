@@ -10,7 +10,7 @@
 /**
  * Enumerates the list of buttons we could handle in the code.
  */
-enum Button: unsigned int {
+typedef enum Button {
   KEY_unknown = 0,
   KEY_A = 4,
   KEY_B = 5,
@@ -79,7 +79,7 @@ enum Button: unsigned int {
   MOUSE_BUTTON_MIDDLE = 258,
   MOUSE_BUTTON_RIGHT = 259,
   KEY_NUM_KEYS = 260, // not a key, just marks the number of scancodes for array bounds
-};
+} Button_t;
 
 /** @} */
 

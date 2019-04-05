@@ -1,7 +1,7 @@
 #ifndef WHYCPP_INPUTS_H
 #define WHYCPP_INPUTS_H
 
-enum Button: unsigned int;
+#include "buttons.h"
 
 class Context;
 

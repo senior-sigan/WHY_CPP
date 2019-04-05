@@ -6,9 +6,10 @@
 #include <string>
 #include <vector>
 
+#include <whycpp/buttons.h>
+
 class Font;
 class VideoMemory;
-enum Button: unsigned int;
 
 /**
  * @addtogroup ApplicationInternals

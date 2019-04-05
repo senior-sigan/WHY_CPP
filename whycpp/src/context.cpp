@@ -61,10 +61,10 @@ VideoMemory* Context::GetVRAM() const {
   return vram.get();
 }
 bool Context::IsButtonPressed(const Button& btn) const {
-  if (btn >= buttons.size()) return false;
+  if (static_cast<unsigned>(btn) >= buttons.size()) return false;
   return buttons.at(btn);
 }
 bool Context::IsButtonReleased(const Button& btn) const {
-  if (btn >= buttons.size()) return false;
+  if (static_cast<unsigned>(btn) >= buttons.size()) return false;
   return clicked.at(btn);
 }
