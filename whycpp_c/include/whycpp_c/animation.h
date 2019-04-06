@@ -1,7 +1,3 @@
-//
-// Created by k.leyfer on 29.03.2019.
-//
-
 #ifndef WHYCPP_ROOT_ANIMATION_H
 #define WHYCPP_ROOT_ANIMATION_H
 

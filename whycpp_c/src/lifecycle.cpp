@@ -1,7 +1,3 @@
-//
-// Created by k.leyfer on 29.03.2019.
-//
-
 #include <whycpp/lifecycle.h>
 #include <whycpp_c/lifecycle.h>
 

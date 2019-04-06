@@ -1,10 +1,6 @@
-//
-// Created by k.leyfer on 27.03.2019.
-//
-
-#include <malloc.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include <whycpp_c/application_config.h>
 #include <whycpp_c/application_listener.h>

@@ -1,7 +1,3 @@
-//
-// Created by kirill on 28.03.19.
-//
-
 #ifndef WHYCPP_ROOT_COLOR_H
 #define WHYCPP_ROOT_COLOR_H
 

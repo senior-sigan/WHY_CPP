@@ -1,7 +1,3 @@
-//
-// Created by kirill on 28.03.19.
-//
-
 #include <whycpp/drawing.h>
 #include <whycpp_c/drawing.h>
 #include "internal/drawing_int.h"

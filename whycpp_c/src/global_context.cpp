@@ -1,7 +1,3 @@
-//
-// Created by k.leyfer on 28.03.2019.
-//
-
 #include <whycpp/log.h>
 #include <cstdio>
 #include <cstdlib>

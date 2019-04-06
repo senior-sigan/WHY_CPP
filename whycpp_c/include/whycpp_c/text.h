@@ -1,7 +1,3 @@
-//
-// Created by k.leyfer on 29.03.2019.
-//
-
 #ifndef WHYCPP_ROOT_TEXT_H
 #define WHYCPP_ROOT_TEXT_H
 
@@ -33,5 +29,4 @@ void PrintChar_C(char ch, int x, int y, RGBA_t color, int size);
 WHYCPP_C_API
 void PrintStr_C(const char* str, int x, int y, RGBA_t color, int size, int spacing);
 
-
-#endif //WHYCPP_ROOT_TEXT_H
+#endif  // WHYCPP_ROOT_TEXT_H

@@ -11,7 +11,5 @@ endif()
 include_directories(${WHYCPP_C_INCLUDES_DIR})
 include_directories(${WHYCPP_INCLUDES_DIR})
 
-message(WHYCPP_INCLUDES_DIR: ${WHYCPP_INCLUDES_DIR})
-
 add_library(whycpp_c SHARED STATIC ${WHYCPP_C_SOURCES} ${WHYCPP_C_HEADERS} ${WHYCPP_C_INCLUDES})
 target_link_libraries(whycpp_c whycpp)

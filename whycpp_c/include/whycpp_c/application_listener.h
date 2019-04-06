@@ -1,7 +1,3 @@
-//
-// Created by k.leyfer on 27.03.2019.
-//
-
 #ifndef WHYCPP_ROOT_APPLICATION_LISTENER_H
 #define WHYCPP_ROOT_APPLICATION_LISTENER_H
 

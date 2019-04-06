@@ -1,7 +1,3 @@
-//
-// Created by k.leyfer on 27.03.2019.
-//
-
 #ifndef WHYCPP_C_APPLICATION_CONFIG_H
 #define WHYCPP_C_APPLICATION_CONFIG_H
 

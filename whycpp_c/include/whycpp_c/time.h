@@ -1,7 +1,3 @@
-//
-// Created by k.leyfer on 28.03.2019.
-//
-
 #ifndef WHYCPP_ROOT_TIME_H
 #define WHYCPP_ROOT_TIME_H
 

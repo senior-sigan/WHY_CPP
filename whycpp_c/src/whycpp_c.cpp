@@ -1,7 +1,3 @@
-//
-// Created by k.leyfer on 27.03.2019.
-//
-
 #include <whycpp/whycpp.h>
 #include <whycpp_c/whycpp_c.h>
 #include "internal/application_listener_int.h"

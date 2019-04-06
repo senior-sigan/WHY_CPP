@@ -1,7 +1,3 @@
-//
-// Created by k.leyfer on 29.03.2019.
-//
-
 #include <whycpp_c/color.h>
 #include <whycpp_c/text.h>
 

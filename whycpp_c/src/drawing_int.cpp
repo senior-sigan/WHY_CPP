@@ -1,9 +1,5 @@
-//
-// Created by k.leyfer on 29.03.2019.
-//
-
-#include <whycpp_c/drawing.h>
 #include "internal/drawing_int.h"
+#include <whycpp_c/drawing.h>
 
 RGBA_t to_C(const RGBA &color) {
   RGBA_conv conv;

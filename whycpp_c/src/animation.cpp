@@ -1,7 +1,3 @@
-//
-// Created by k.leyfer on 29.03.2019.
-//
-
 #include <whycpp/animation.h>
 #include <whycpp_c/animation.h>
 #include "internal/global_context_int.h"
