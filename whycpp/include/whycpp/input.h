@@ -1,7 +1,7 @@
 #ifndef WHYCPP_INPUTS_H
 #define WHYCPP_INPUTS_H
 
-#include <whycpp/buttons.h>
+#include "buttons.h"
 
 class Context;
 

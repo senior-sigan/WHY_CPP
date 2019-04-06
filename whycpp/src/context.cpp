@@ -50,21 +50,21 @@ VideoMemory* Context::GetSprite(int index) const {
   return sprites.at(static_cast<unsigned long>(index)).get();
 }
 Context::~Context() {
-  LogDebug("Context destroyed");
+  LOG_DEBUG("Context destroyed");
 }
 Context::Context(VideoMemory* vram, Font* font) : vram(std::unique_ptr<VideoMemory>(vram)), font(std::unique_ptr<Font>(font)) {
   buttons.resize(Button::KEY_NUM_KEYS);
   clicked.resize(Button::KEY_NUM_KEYS);
-  LogDebug("Context created");
+  LOG_DEBUG("Context created");
 }
 VideoMemory* Context::GetVRAM() const {
   return vram.get();
 }
 bool Context::IsButtonPressed(const Button& btn) const {
-  if (btn >= buttons.size()) return false;
+  if (static_cast<unsigned>(btn) >= buttons.size()) return false;
   return buttons.at(btn);
 }
 bool Context::IsButtonReleased(const Button& btn) const {
-  if (btn >= buttons.size()) return false;
+  if (static_cast<unsigned>(btn) >= buttons.size()) return false;
   return clicked.at(btn);
 }
