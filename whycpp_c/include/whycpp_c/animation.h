@@ -1,5 +1,5 @@
-#ifndef WHYCPP_ROOT_ANIMATION_H
-#define WHYCPP_ROOT_ANIMATION_H
+#ifndef WHYCPP_C_ANIMATION_H
+#define WHYCPP_C_ANIMATION_H
 
 #include <whycpp/c_api.h>
 
@@ -19,4 +19,4 @@ Animation_t* MakeAnimation_C(int width, int height, int speed, Pair_t* sprites, 
 WHYCPP_C_API
 void DrawAnimation_C(Animation_t* animation, int x, int y);
 
-#endif  // WHYCPP_ROOT_ANIMATION_H
+#endif  // WHYCPP_C_ANIMATION_H

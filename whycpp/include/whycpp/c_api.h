@@ -1,5 +1,5 @@
-#ifndef WHYCPP_ROOT_C_API_H
-#define WHYCPP_ROOT_C_API_H
+#ifndef WHYCPP_C_API_H
+#define WHYCPP_C_API_H
 
 #if __cplusplus
 #define WHYCPP_C_API extern "C"
@@ -7,4 +7,4 @@
 #define WHYCPP_C_API
 #endif
 
-#endif  // WHYCPP_ROOT_C_API_H
+#endif  // WHYCPP_C_API_H

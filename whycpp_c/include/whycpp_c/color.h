@@ -1,5 +1,5 @@
-#ifndef WHYCPP_ROOT_COLOR_H
-#define WHYCPP_ROOT_COLOR_H
+#ifndef WHYCPP_C_COLOR_H
+#define WHYCPP_C_COLOR_H
 
 #include <stdint.h>
 
@@ -15,4 +15,4 @@ typedef union {
   struct RGBA_t_ rgba;
 } RGBA_t;
 
-#endif  // WHYCPP_ROOT_COLOR_H
+#endif  // WHYCPP_C_COLOR_H

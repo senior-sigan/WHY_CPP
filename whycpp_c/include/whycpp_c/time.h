@@ -1,5 +1,5 @@
-#ifndef WHYCPP_ROOT_TIME_H
-#define WHYCPP_ROOT_TIME_H
+#ifndef WHYCPP_C_TIME_H
+#define WHYCPP_C_TIME_H
 
 #include <whycpp/c_api.h>
 
@@ -16,4 +16,4 @@ double GetTime_C();
 WHYCPP_C_API
 double GetDelta_C();
 
-#endif  // WHYCPP_ROOT_TIME_H
+#endif  // WHYCPP_C_TIME_H

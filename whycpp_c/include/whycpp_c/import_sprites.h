@@ -1,5 +1,5 @@
-#ifndef WHYCPP_ROOT_IMPORT_SPRITES_H
-#define WHYCPP_ROOT_IMPORT_SPRITES_H
+#ifndef WHYCPP_C_IMPORT_SPRITES_H
+#define WHYCPP_C_IMPORT_SPRITES_H
 
 #include <whycpp/c_api.h>
 
@@ -11,4 +11,4 @@
 WHYCPP_C_API
 int ImportSprite_C(const char* filename);
 
-#endif  // WHYCPP_ROOT_IMPORT_SPRITES_H
+#endif  // WHYCPP_C_IMPORT_SPRITES_H

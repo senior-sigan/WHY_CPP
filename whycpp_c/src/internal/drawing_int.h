@@ -1,5 +1,5 @@
-#ifndef WHYCPP_ROOT_DRAWING_INT_H
-#define WHYCPP_ROOT_DRAWING_INT_H
+#ifndef WHYCPP_C_DRAWING_INT_H
+#define WHYCPP_C_DRAWING_INT_H
 
 #include <whycpp/color.h>
 #include <whycpp_c/color.h>
@@ -13,4 +13,4 @@ RGBA_t to_C(const RGBA &color);
 
 RGBA to_Cpp(RGBA_t color);
 
-#endif //WHYCPP_ROOT_DRAWING_INT_H
+#endif //WHYCPP_C_DRAWING_INT_H

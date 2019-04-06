@@ -1,5 +1,5 @@
-#ifndef WHYCPP_ROOT_APPLICATION_LISTENER_H
-#define WHYCPP_ROOT_APPLICATION_LISTENER_H
+#ifndef WHYCPP_C_APPLICATION_LISTENER_H
+#define WHYCPP_C_APPLICATION_LISTENER_H
 
 #include <whycpp/c_api.h>
 
@@ -13,4 +13,4 @@ typedef struct ApplicationListener_t_ {
   Callback onRender;
 } ApplicationListener_t;
 
-#endif  // WHYCPP_ROOT_APPLICATION_LISTENER_H
+#endif  // WHYCPP_C_APPLICATION_LISTENER_H

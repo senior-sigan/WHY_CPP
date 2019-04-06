@@ -1,5 +1,5 @@
-#ifndef WHYCPP_ROOT_LIFECYCLE_H
-#define WHYCPP_ROOT_LIFECYCLE_H
+#ifndef WHYCPP_C_LIFECYCLE_H
+#define WHYCPP_C_LIFECYCLE_H
 
 #include <whycpp/c_api.h>
 
@@ -22,4 +22,4 @@ void ResumeApp_C();
 WHYCPP_C_API
 void ExitApp_C();
 
-#endif  // WHYCPP_ROOT_LIFECYCLE_H
+#endif  // WHYCPP_C_LIFECYCLE_H
