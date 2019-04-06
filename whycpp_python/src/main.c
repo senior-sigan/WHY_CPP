@@ -23,9 +23,11 @@ void RunWhycpp(void) {
 }
 
 int main(int argc, char* argv[]) {
+  char* root_path;
   if (argc < 2) {
-    fprintf(stderr, "Usage: python dir_path\n");
-    return 1;
+    root_path = ".";
+  } else {
+    root_path = argv[1];
   }
 
   char* name = "main";
@@ -33,8 +35,8 @@ int main(int argc, char* argv[]) {
   PyImport_AppendInittab("whycpp", &PyInit_whycpp);
 
   Py_Initialize();
-  char* code = malloc(sizeof(char) * (33 + strlen(argv[1])));
-  sprintf(code, "import sys\nsys.path.insert(0, \"%s\")", argv[1]);
+  char* code = malloc(sizeof(char) * (33 + strlen(root_path)));
+  sprintf(code, "import sys\nsys.path.insert(0, \"%s\")", root_path);
   PyRun_SimpleString(code);
 
   PyObject* pName = PyUnicode_DecodeFSDefault(name);
@@ -43,7 +45,7 @@ int main(int argc, char* argv[]) {
 
   if (pModule == NULL) {
     PyErr_Print();
-    fprintf(stderr, "Failed to load \"%s\"\n", argv[1]);
+    fprintf(stderr, "Failed to load \"%s\"\n", root_path);
     return 1;
   }
 
