@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include "buttons.h"
+#include <whycpp/c_api.h>
 
 WHYCPP_C_API
 bool IsPressed_C(Button_t btn);

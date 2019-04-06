@@ -5,6 +5,7 @@
 #include "py_text.h"
 #include "py_import_sprite.h"
 #include "py_log.h"
+#include "py_input.h"
 
 static PyMethodDef WhycppMethods[] = {
     {"get_display_width", py_GetDisplayWidth, METH_VARARGS, NULL},
@@ -26,6 +27,9 @@ static PyMethodDef WhycppMethods[] = {
     {"print", py_PrintStr, METH_VARARGS, NULL},
     {"import_sprite", py_ImportSprite, METH_VARARGS, NULL},
     {"log_info", py_LogInfo, METH_VARARGS, NULL},
+    {"is_pressed", py_IsPressed, METH_VARARGS, NULL},
+    {"is_clicked", py_IsClicked, METH_VARARGS, NULL},
+    {"get_mouse", py_GetMouse, METH_VARARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
 
