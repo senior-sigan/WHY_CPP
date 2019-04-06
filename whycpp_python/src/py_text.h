@@ -3,7 +3,6 @@
 
 #include <Python.h>
 
-PyObject* py_PrintChar(PyObject* self, PyObject* args);
 PyObject* py_PrintStr(PyObject* self, PyObject* args);
 
 #endif //WHYCPP_ROOT_WHYCPP_PYTHON_SRC_PY_TEXT_H_
