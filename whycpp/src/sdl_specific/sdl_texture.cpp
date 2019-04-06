@@ -3,8 +3,8 @@
 #include <whycpp/color.h>
 #include <algorithm>
 #include <cmath>
-#include "logger.h"
-#include "video_memory.h"
+#include "../logger.h"
+#include "../video_memory.h"
 
 SDLTexture::SDLTexture(SDL_Renderer* ren, VideoMemory *vram) : ren(ren), vram(vram) {
   auto buf_size = vram->GetWidth() * vram->GetHeight() * 4;

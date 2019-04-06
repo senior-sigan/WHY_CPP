@@ -10,6 +10,7 @@ class VideoMemory;
 class Context;
 class SDLContext;
 class Loop;
+class InputsHandler;
 
 /**
  * @defgroup Internals WHYCPP secret internal implementation details
@@ -42,10 +43,9 @@ class Application {
   std::unique_ptr<SDLContext> sdl_context;
   std::unique_ptr<Context> context;
   std::unique_ptr<Loop> loop;
+  std::unique_ptr<InputsHandler> input_handler_;
   const std::unique_ptr<ApplicationListener> listener;
   const ApplicationConfig config;
-
-  void HandleEvents(Context &ctx);
 };
 
 /** @} */

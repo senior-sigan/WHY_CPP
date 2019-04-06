@@ -2,6 +2,7 @@
 #define WHYCPP_ROOT_DRAWING_INT_H
 
 #include <whycpp/color.h>
+#include <whycpp_c/color.h>
 
 typedef union {
     struct RGBA rgba;

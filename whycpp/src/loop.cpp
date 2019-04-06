@@ -2,6 +2,7 @@
 #include <whycpp/application_listener.h>
 #include "clamp.h"
 #include "logger.h"
+#include "timing.h"
 #if __EMSCRIPTEN__
 #include <emscripten.h>
 void emscripten_Update(void* loop) {
@@ -10,21 +11,17 @@ void emscripten_Update(void* loop) {
 }
 #endif
 
-long SDL_GetTicksL() {
-  return static_cast<long>(SDL_GetTicks());
-}
-
 void Loop::UpdateWithDelay() {
-  long start = SDL_GetTicksL();
+  long start = GetTicks();
 
   cb(ctx, delta_time / 1000.0);
 
-  long dt = SDL_GetTicksL() - start;
+  long dt = GetTicks() - start;
   auto lag = clamp(ms_per_frame - dt, 0L, ms_per_frame);
-  if (lag > 0) SDL_Delay(static_cast<Uint32>(lag));
+  if (lag > 0) Delay(lag);
 }
 void Loop::Run() {
-  now = SDL_GetTicksL();
+  now = GetTicks();
   last = now;
   delta_time = 0;
   isRunning = true;
@@ -32,7 +29,7 @@ void Loop::Run() {
 }
 void Loop::Update() {
   last = now;
-  now = SDL_GetTicksL();
+  now = GetTicks();
   delta_time = now - last;
 #if __EMSCRIPTEN__
   // In the browser it would be better to use requestAnimationFrame instead of SDL_DELAY

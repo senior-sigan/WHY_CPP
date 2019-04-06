@@ -1,7 +1,6 @@
 #ifndef WHYCPP_LOOP_H
 #define WHYCPP_LOOP_H
 
-#include <SDL_timer.h>
 #include <functional>
 #include "context.h"
 

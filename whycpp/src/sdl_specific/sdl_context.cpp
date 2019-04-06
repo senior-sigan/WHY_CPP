@@ -1,11 +1,10 @@
 #include "sdl_context.h"
 #include <SDL.h>
 #include <whycpp/application_config.h>
-#include "logger.h"
+#include "../logger.h"
+#include "../video_memory.h"
 #include "sdl_deleter.h"
 #include "sdl_texture.h"
-#include "video_memory.h"
-#include "logger.h"
 
 SDLContext::SDLContext(const ApplicationConfig& config, VideoMemory* vram) {
   LOG_DEBUG("SDLContext created");
