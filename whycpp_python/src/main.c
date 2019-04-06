@@ -41,6 +41,12 @@ int main(int argc, char* argv[]) {
   PyObject* pModule = PyImport_Import(pName);
   Py_DECREF(pName);
 
+  if (pModule == NULL) {
+    PyErr_Print();
+    fprintf(stderr, "Failed to load \"%s\"\n", argv[1]);
+    return 1;
+  }
+
   RegisterWrappers(pModule);
 
   // TODO: get application config from the python
@@ -50,6 +56,8 @@ int main(int argc, char* argv[]) {
   UnregisterWrappers();
   Py_DECREF(pModule);
 
-  Py_Finalize();
+  if (Py_FinalizeEx() < 0) {
+    return 120;
+  }
   return 0;
 }
