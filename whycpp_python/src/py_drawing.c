@@ -63,8 +63,8 @@ PyObject* py_GetPixel(PyObject* self, PyObject* args) {
   return PyLong_FromLong(color.raw);
 }
 PyObject* py_DrawClearScreen(PyObject* self, PyObject* args) {
-  uint32_t color;
-  PyArg_ParseTuple(args, "I", &color);
+  uint32_t color = 0;
+  PyArg_ParseTuple(args, "|I", &color);
   RGBA_t rgba;
   rgba.raw = color;
   DrawClearScreen_C(rgba);
@@ -98,9 +98,21 @@ PyObject* py_DrawRect(PyObject* self, PyObject* args) {
   Py_RETURN_NONE;
 }
 PyObject* py_DrawCircle(PyObject* self, PyObject* args) {
+  float x, y, radius;
+  uint32_t color_code;
+  PyArg_ParseTuple(args, "fffI", &x, &y, &radius, &color_code);
+  RGBA_t color;
+  color.raw = color_code;
+  DrawCircle_C((int) x, (int) y, (int) radius, color);
   Py_RETURN_NONE;
 }
 PyObject* py_DrawCircleFill(PyObject* self, PyObject* args) {
+  float x, y, radius;
+  uint32_t color_code;
+  PyArg_ParseTuple(args, "fffI", &x, &y, &radius, &color_code);
+  RGBA_t color;
+  color.raw = color_code;
+  DrawCircleFill_C((int) x, (int) y, (int) radius, color);
   Py_RETURN_NONE;
 }
 PyObject* py_DrawSprite(PyObject* self, PyObject* args) {
