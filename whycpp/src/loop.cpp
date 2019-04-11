@@ -1,5 +1,6 @@
 #include "loop.h"
 #include <whycpp/application_listener.h>
+#include <cstdint>
 #include "clamp.h"
 #include "logger.h"
 #include "timing.h"
@@ -18,7 +19,9 @@ void Loop::UpdateWithDelay() {
 
   long dt = GetTicks() - start;
   auto lag = clamp(ms_per_frame - dt, 0L, ms_per_frame);
-  if (lag > 0) Delay(lag);
+  if (lag > 0) {
+    Delay(static_cast<uint32_t>(lag));
+  }
 }
 void Loop::Run() {
   now = GetTicks();

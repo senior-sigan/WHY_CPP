@@ -9,6 +9,10 @@ set(WHYCPP_PYTHON_SOURCES_DIR ${PROJECT_SOURCE_DIR}/src)
 file(GLOB_RECURSE WHYCPP_PYTHON_HEADERS ${WHYCPP_PYTHON_SOURCES_DIR}/*.h)
 file(GLOB_RECURSE WHYCPP_PYTHON_SOURCES ${WHYCPP_PYTHON_SOURCES_DIR}/*.c)
 
-add_subdirectory(src)
-
 file(COPY example/main.py DESTINATION ${CMAKE_BINARY_DIR}/whycpp_python/src)
+
+if (EMSCRIPTEN)
+    message(STATUS "Python for emscripten is not supported")
+else ()
+    add_subdirectory(src)
+endif ()
