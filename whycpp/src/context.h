@@ -7,6 +7,8 @@
 #include <vector>
 
 #include <whycpp/buttons.h>
+#include "../../whycpp_js/src/global_app_context.h"
+
 
 class Font;
 class VideoMemory;
