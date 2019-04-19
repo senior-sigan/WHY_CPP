@@ -9,13 +9,13 @@ if (EMSCRIPTEN)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s WASM=1")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s ASSERTIONS=1")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 --use-preload-plugins")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --embed-file main.js")
-    set(CMAKE_EXECUTABLE_SUFFIX ".html")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --embed-file example@/")
+    set(CMAKE_EXECUTABLE_SUFFIX ".js")
 endif()
 
 include_directories(${WHYCPP_INCLUDES_DIR})
 
 add_executable(whycpp_js ${WHYCPP_JS_SOURCES})
 
-target_link_libraries(whycpp_js whycpp duktape)
-target_include_directories(whycpp_js PRIVATE SYSTEM ${DUKTAPE_INCLUDE_DIR})
+target_link_libraries(whycpp_js whycpp duktape duktape_modules)
+target_include_directories(whycpp_js PRIVATE SYSTEM ${DUKTAPE_INCLUDE_DIR} ${DUKTAPE_MODULES_INCLUDE_DIR})

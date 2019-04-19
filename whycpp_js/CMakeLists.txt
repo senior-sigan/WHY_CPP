@@ -17,7 +17,7 @@ include(ConfigureDuktape)
 
 add_subdirectory(src)
 
-file(COPY example/main.js DESTINATION ${CMAKE_BINARY_DIR}/whycpp_js/src)
+file(COPY example DESTINATION ${CMAKE_BINARY_DIR}/whycpp_js/src)
 
 if (EMSCRIPTEN)
     file(COPY html/index.html DESTINATION ${CMAKE_BINARY_DIR}/whycpp_js/src)
