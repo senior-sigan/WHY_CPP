@@ -25,10 +25,16 @@ void PushFileAsString(duk_context* ctx, const char* filename) {
   }
 }
 void RunScript(duk_context* ctx, const char* filename) {
+  printf("Running script: %s\n", filename);
   PushFileAsString(ctx, filename);
   if (duk_peval(ctx) != 0) {
     printf("Error: %s\n", duk_safe_to_string(ctx, -1));
     return;
   }
   duk_pop(ctx);
+}
+
+void RegisterConstant(duk_context *ctx, const char *name, duk_double_t value) {
+  duk_push_number(ctx, value);
+  duk_put_global_string(ctx, name);
 }

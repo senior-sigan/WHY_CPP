@@ -11,4 +11,6 @@ void PushFileAsString(duk_context *ctx, const char *filename);
 
 void RunScript(duk_context *ctx, const char* filename);
 
+void RegisterConstant(duk_context *ctx, const char *name, duk_double_t value);
+
 #endif //WHYCPP_ROOT_WHYCPP_JS_SRC_DUK_HELPERS_H_
