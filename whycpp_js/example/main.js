@@ -13,6 +13,7 @@ function randint(min_, max_) {
 
 function IScene() {
 }
+
 IScene.prototype.onRender = function () {
     print("IScene.onRender")
 };
@@ -25,6 +26,7 @@ IScene.prototype.onDispose = function () {
 
 function PaletteScene() {
 }
+
 PaletteScene.prototype = new IScene();
 PaletteScene.prototype.onRender = function () {
     var w = get_display_width() / PALETTE_LEN;
@@ -34,10 +36,12 @@ PaletteScene.prototype.onRender = function () {
     }
 };
 
-function RandomLinesScene() {}
+function RandomLinesScene() {
+}
+
 RandomLinesScene.prototype = new IScene();
-RandomLinesScene.prototype.onCreate = function() {
-  draw_clear_screen(PALETTE[0]);
+RandomLinesScene.prototype.onCreate = function () {
+    draw_clear_screen(PALETTE[0]);
 };
 RandomLinesScene.prototype.onRender = function () {
     var w = get_display_width();
@@ -53,11 +57,43 @@ RandomLinesScene.prototype.onRender = function () {
     draw_line(x0, y0, x1, y1, PALETTE[i]);
 };
 
+function ButtonsScene() {
+}
+
+ButtonsScene.prototype = new IScene();
+ButtonsScene.prototype.onRender = function () {
+    draw_clear_screen(PALETTE[0]);
+    show_text("Press Arrows\nPress Space to exit", 1, 10, PALETTE[3], 2, 1);
+    if (is_pressed(KEY_UP)) draw_clear_screen(PALETTE[1]);
+
+    if (is_pressed(KEY_DOWN)) draw_clear_screen(PALETTE[2]);
+
+    if (is_pressed(KEY_LEFT)) draw_clear_screen(PALETTE[3]);
+
+    if (is_pressed(KEY_RIGHT)) draw_clear_screen(PALETTE[4]);
+};
+
+function MouseScene() {
+}
+
+MouseScene.prototype = new IScene();
+MouseScene.prototype.onRender = function () {
+    var p = get_mouse();
+    if (is_pressed(MOUSE_BUTTON_LEFT)) {
+        draw_circle_fill(p.x, p.y, 2, PALETTE[3]);
+    } else if (is_pressed(MOUSE_BUTTON_RIGHT)) {
+        draw_circle_fill(p.x, p.y, 2, PALETTE[4]);
+    } else {
+        draw_circle_fill(p.x, p.y, 2, PALETTE[5]);
+    }
+};
 
 function SceneManager() {
     this.scenes = [
         new PaletteScene(),
-        new RandomLinesScene()
+        new RandomLinesScene(),
+        new ButtonsScene(),
+        new MouseScene()
     ];
     this.currentScene = 0;
     this.prevScene = this.scenes.length;

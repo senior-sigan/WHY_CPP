@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
   SetupSTL(duk);
   SetupWhyCPP(duk);
   // TODO: to support web we should read file from a bytebuffer inserted directly into html page
-  char* root_path;
+  char const* root_path;
   if (argc < 2) {
     root_path = "main.js";
   } else {
