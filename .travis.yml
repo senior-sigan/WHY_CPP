@@ -1,22 +1,35 @@
 sudo: false
 
-branches:
-  only:
-    - master
+jobs:
+  include:
+    - stage: compile
+      branches:
+        except:
+          - gh-pages
+      language: cpp
+      matrix:
+        include:
+          - os: osx
+            osx_image: xcode10.2
+          - os: linux
+      script: make reload compile
+    - stage: documentation
+      branches:
+        only:
+          - master
+      addons:
+        apt:
+          packages:
+            - doxygen
 
-addons:
-  apt:
-    packages:
-      - doxygen
+      script:
+        - doxygen Doxyfile
+        - touch docs/html/.nojekyll
 
-script:
-  - doxygen Doxyfile
-  - touch docs/html/.nojekyll
-
-deploy:
-  provider: pages
-  skip_cleanup: true
-  local_dir: docs/html
-  github_token: $GH_REPO_TOKEN
-  on:
-    branch: master
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        local_dir: docs/html
+        github_token: $GH_REPO_TOKEN
+        on:
+          branch: master
