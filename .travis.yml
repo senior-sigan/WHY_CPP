@@ -9,7 +9,7 @@ jobs:
       language: cpp
       os: linux
       dist: xenial
-      script: make reload compile
+      script: make reload compile whycpp-js-compile
     - stage: compile with clang
       branches:
         except:
@@ -17,7 +17,7 @@ jobs:
       language: cpp
       os: osx
       osx_image: xcode10.2
-      script: make reload compile
+      script: make reload compile whycpp-js-compile
     - stage: documentation
       language: bash
       branches:
