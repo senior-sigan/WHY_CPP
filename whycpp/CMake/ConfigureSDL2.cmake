@@ -24,4 +24,5 @@ add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/sdl2-src
         ${CMAKE_CURRENT_BINARY_DIR}/sdl2-build
         EXCLUDE_FROM_ALL)
 
-set(SDL2_HEADERS ${CMAKE_CURRENT_BINARY_DIR}/sdl2-headers)
+set(SDL2_INCLUDE_DIRS ${CMAKE_CURRENT_BINARY_DIR}/sdl2-headers)
+set(SDL2_LIBRARIES SDL2main SDL2-static)
