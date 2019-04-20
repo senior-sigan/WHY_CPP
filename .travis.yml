@@ -2,16 +2,21 @@ sudo: false
 
 jobs:
   include:
-    - stage: compile
+    - stage: compile with gcc
       branches:
         except:
           - gh-pages
       language: cpp
-      matrix:
-        include:
-          - os: osx
-            osx_image: xcode10.2
-          - os: linux
+      os: linux
+      dist: xenial
+      script: make reload compile
+    - stage: compile with clang
+      branches:
+        except:
+          - gh-pages
+      language: cpp
+      os: osx
+      osx_image: xcode10.2
       script: make reload compile
     - stage: documentation
       language: bash
