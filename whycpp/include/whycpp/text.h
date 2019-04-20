@@ -1,8 +1,8 @@
 #ifndef WHYCPP_TEXT_H
 #define WHYCPP_TEXT_H
 
-#include <string>
 #include <whycpp/font.h>
+#include <string>
 
 class Context;
 struct RGBA;
@@ -25,7 +25,7 @@ struct RGBA;
  * @param size
  * @param font
  */
-void Print(Context& ctx, char ch, int x, int y, const RGBA &color, int size = 1);
+void Print(Context& ctx, char ch, int x, int y, const RGBA& color, int size = 1);
 
 /**
  * Prints a string at a position with color
@@ -38,10 +38,10 @@ void Print(Context& ctx, char ch, int x, int y, const RGBA &color, int size = 1)
  * @param spacing is a distance between chars in the string
  * @param font
  */
-void Print(Context& ctx, const std::string& str, int x, int y, const RGBA &color, int size = 1, int spacing = 0);
+void Print(Context& ctx, const std::string& str, int x, int y, const RGBA& color, int size = 1, int spacing = 0);
 
 /**
  * @}
  */
 
-#endif //WHYCPP_TEXT_H
+#endif  // WHYCPP_TEXT_H

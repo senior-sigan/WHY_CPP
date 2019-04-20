@@ -2,9 +2,9 @@
 #include "application.h"
 #include "logger.h"
 
-void Run(ApplicationListener* listener, const ApplicationConfig &config) {
+void Run(ApplicationListener* listener, const ApplicationConfig& config) {
 #if __EMSCRIPTEN__
-  auto app =  new Application(listener, config);
+  auto app = new Application(listener, config);
   app->Run();
   // do not destroy this object
 #else

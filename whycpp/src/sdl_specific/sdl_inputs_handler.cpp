@@ -1,7 +1,7 @@
-#include "../inputs_handler.h"
 #include <SDL_events.h>
 #include <whycpp/application_listener.h>
 #include "../context.h"
+#include "../inputs_handler.h"
 #include "../video_memory.h"
 
 void InputsHandler::HandleEvents(Context& ctx) {

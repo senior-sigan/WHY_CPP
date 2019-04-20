@@ -48,7 +48,7 @@ class Context {
   Font *GetFont() const;
   void SetFont(Font *font);
   int AppendSprite(VideoMemory *sprite);
-  VideoMemory* GetSprite(int index) const;
+  VideoMemory *GetSprite(int index) const;
 
   void Tick(double delta);
   void KeyUp(unsigned int code);

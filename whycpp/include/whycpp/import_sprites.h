@@ -13,4 +13,4 @@ class Context;
  */
 int ImportSprite(Context &context, const std::string &filename);
 
-#endif //WHYCPP_IMPORT_SPRITES_H
+#endif  // WHYCPP_IMPORT_SPRITES_H

@@ -15,4 +15,4 @@ int Font::GetWidth() const {
 int Font::GetSpacing() const {
   return spacing;
 }
-Font::Font(std::vector<Glyph> glyphs): glyphs(std::move(glyphs)) {}
+Font::Font(std::vector<Glyph> glyphs) : glyphs(std::move(glyphs)) {}

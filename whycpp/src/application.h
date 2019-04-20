@@ -1,9 +1,9 @@
 #ifndef WHYCPP_APPLICATION_H
 #define WHYCPP_APPLICATION_H
 
-#include <string>
-#include <memory>
 #include <whycpp/application_config.h>
+#include <memory>
+#include <string>
 
 class ApplicationListener;
 class VideoMemory;
@@ -30,14 +30,13 @@ class InputsHandler;
  */
 class Application {
  public:
-  explicit Application(ApplicationListener* listener, const ApplicationConfig &congig);
+  explicit Application(ApplicationListener* listener, const ApplicationConfig& congig);
   virtual ~Application();
 
   void Run();
   void Update(Context& ctx, double delta_time);
-  void RenderOrInit(); // it's lazy call
+  void RenderOrInit();  // it's lazy call
  private:
-
   // please, keep tis order, it's important for the object destruction order
   // Destuction order: [listener, loop, context, sdl context]
   std::unique_ptr<SDLContext> sdl_context;
@@ -50,4 +49,4 @@ class Application {
 
 /** @} */
 
-#endif //WHYCPP_APPLICATION_H
+#endif  // WHYCPP_APPLICATION_H

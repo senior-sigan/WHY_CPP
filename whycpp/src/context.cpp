@@ -52,7 +52,8 @@ VideoMemory* Context::GetSprite(int index) const {
 Context::~Context() {
   LOG_DEBUG("Context destroyed");
 }
-Context::Context(VideoMemory* vram, Font* font) : vram(std::unique_ptr<VideoMemory>(vram)), font(std::unique_ptr<Font>(font)) {
+Context::Context(VideoMemory* vram, Font* font)
+    : vram(std::unique_ptr<VideoMemory>(vram)), font(std::unique_ptr<Font>(font)) {
   buttons.resize(Button::KEY_NUM_KEYS);
   clicked.resize(Button::KEY_NUM_KEYS);
   LOG_DEBUG("Context created");

@@ -2,15 +2,9 @@
 #include <whycpp/drawing.h>
 #include <whycpp/time.h>
 
-Animation::Animation(int width,
-                     int height,
-                     int speed,
-                     std::vector<std::pair<int, int>> sprites,
-                     int sprite_id,
-                     bool cycle
-) : width(width), height(height), sprite_id(sprite_id), speed(speed), cycle(cycle), sprites(std::move(sprites)) {
-
-}
+Animation::Animation(int width, int height, int speed, std::vector<std::pair<int, int>> sprites, int sprite_id,
+                     bool cycle)
+    : width(width), height(height), sprite_id(sprite_id), speed(speed), cycle(cycle), sprites(std::move(sprites)) {}
 void Animation::Draw(Context &ctx, int x, int y) {
   time += GetDelta(ctx);
   if (sprites.empty()) {

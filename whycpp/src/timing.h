@@ -6,4 +6,4 @@
 long GetTicks();
 void Delay(uint32_t time);
 
-#endif //WHYCPP_TIMING_H_
+#endif  // WHYCPP_TIMING_H_

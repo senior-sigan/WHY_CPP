@@ -34,4 +34,4 @@ void ExitApp(Context &context);
  * @}
  */
 
-#endif //WHYCPP_LIFECYCLE_H
+#endif  // WHYCPP_LIFECYCLE_H

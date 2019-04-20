@@ -1,9 +1,9 @@
 #ifndef WHYCPP_VIDEO_MEMORY_H
 #define WHYCPP_VIDEO_MEMORY_H
 
+#include <whycpp/color.h>
 #include <memory>
 #include <vector>
-#include <whycpp/color.h>
 
 /**
  * @defgroup DrawingInternals Drawing
@@ -29,6 +29,7 @@ class VideoMemory {
   void Set(int x, int y, const RGBA &color);
   explicit VideoMemory(int width, int height);
   virtual ~VideoMemory();
+
  private:
   int width;
   int height;
@@ -42,4 +43,4 @@ class VideoMemory {
 
 /** @} */
 
-#endif //WHYCPP_VIDEO_MEMORY_H
+#endif  // WHYCPP_VIDEO_MEMORY_H

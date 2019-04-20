@@ -24,4 +24,4 @@ double GetDelta(const Context &context);
 
 /** @} */
 
-#endif //WHYCPP_TIME_H
+#endif  // WHYCPP_TIME_H

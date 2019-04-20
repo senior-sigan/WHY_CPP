@@ -18,13 +18,14 @@ struct ApplicationConfig {
   const int window_size_multiplier;
   const long ms_per_frame;
 
-  explicit ApplicationConfig(const int width = 256,
-                    const int height = 144,
-                    std::string name = "Application",
-                    const bool is_fullscreen = false,
-                    int window_size_multiplier = 3,
-                    long ms_per_frame = 16)
-      : width(width), height(height), name(std::move(name)), is_fullscreen(is_fullscreen), window_size_multiplier(window_size_multiplier), ms_per_frame(ms_per_frame) {}
+  explicit ApplicationConfig(const int width = 256, const int height = 144, std::string name = "Application",
+                             const bool is_fullscreen = false, int window_size_multiplier = 3, long ms_per_frame = 16)
+      : width(width),
+        height(height),
+        name(std::move(name)),
+        is_fullscreen(is_fullscreen),
+        window_size_multiplier(window_size_multiplier),
+        ms_per_frame(ms_per_frame) {}
 
   int GetWindowWidth() const {
     return width * window_size_multiplier;
@@ -36,4 +37,4 @@ struct ApplicationConfig {
 
 /** @} */
 
-#endif //WHYCPP_CONFIG_H
+#endif  // WHYCPP_CONFIG_H

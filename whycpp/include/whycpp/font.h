@@ -1,8 +1,8 @@
 #ifndef WHYCPP_FONT_H
 #define WHYCPP_FONT_H
 
-#include <vector>
 #include <cstdint>
+#include <vector>
 
 /**
  * @addtogroup Text
@@ -27,6 +27,7 @@ class Font {
   int GetHeight() const;
   int GetWidth() const;
   int GetSpacing() const;
+
  private:
   int spacing = 1;
   int width = 5;
@@ -38,4 +39,4 @@ class Font {
  * @}
  */
 
-#endif //WHYCPP_FONT_H
+#endif  // WHYCPP_FONT_H

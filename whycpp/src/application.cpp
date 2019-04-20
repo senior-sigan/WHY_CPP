@@ -1,17 +1,17 @@
 #include <memory>
 
-#include "application.h"
 #include <whycpp/application_config.h>
 #include <whycpp/application_listener.h>
 #include <functional>
+#include "application.h"
 #include "context.h"
 #include "default_font.h"
+#include "inputs_handler.h"
 #include "logger.h"
 #include "loop.h"
 #include "sdl_specific/sdl_context.h"
 #include "sdl_specific/sdl_texture.h"
 #include "video_memory.h"
-#include "inputs_handler.h"
 
 Application::Application(ApplicationListener* listener, const ApplicationConfig& config)
     : listener(std::unique_ptr<ApplicationListener>(listener)), config(config) {

@@ -19,7 +19,7 @@ class Context;
  * @param btn to check
  * @return true if the button is pressed and false otherwise
  */
-bool IsPressed(const Context &context, const Button& btn);
+bool IsPressed(const Context& context, const Button& btn);
 /**
  * Check whether the button was being pressed but know is released.
  * So it could be counted as button is clicked.
@@ -27,7 +27,7 @@ bool IsPressed(const Context &context, const Button& btn);
  * @param btn to check
  * @return true if the button is clicked and false otherwise
  */
-bool IsClicked(const Context &context, const Button& btn);
+bool IsClicked(const Context& context, const Button& btn);
 
 /**
  * Get current mouse (x,y) coordinates and writes them by reference to the arguments.
@@ -36,8 +36,8 @@ bool IsClicked(const Context &context, const Button& btn);
  * @param x [out] horizontal coordinate reference
  * @param y [out] vertical coordinate reference
  */
-void GetMouse(const Context &context, int& x, int& y);
+void GetMouse(const Context& context, int& x, int& y);
 
 /** @} */
 
-#endif //WHYCPP_INPUTS_H
+#endif  // WHYCPP_INPUTS_H

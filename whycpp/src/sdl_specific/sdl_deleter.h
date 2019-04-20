@@ -11,4 +11,4 @@ struct sdl_deleter {
   void operator()(SDL_Texture *) const;
 };
 
-#endif //WHYCPP_SDL_DELETER_H
+#endif  // WHYCPP_SDL_DELETER_H

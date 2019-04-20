@@ -1,7 +1,7 @@
-#include "../logger.h"
 #include <SDL_error.h>
 #include <SDL_log.h>
 #include <cstdio>
+#include "../logger.h"
 
 void LogSDLError(const std::string& msg) {
   LOG_ERROR("%s error: %s", msg.c_str(), SDL_GetError());

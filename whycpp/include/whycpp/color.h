@@ -18,4 +18,4 @@ struct RGBA {
 
 /** @} */
 
-#endif //WHYCPP_COLOR_H
+#endif  // WHYCPP_COLOR_H

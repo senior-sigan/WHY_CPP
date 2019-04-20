@@ -36,4 +36,4 @@ class ApplicationListener {
 
 /** @} */
 
-#endif //WHYCPP_APPLICATION_LISTENER_H
+#endif  // WHYCPP_APPLICATION_LISTENER_H

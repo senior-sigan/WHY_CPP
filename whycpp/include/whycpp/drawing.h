@@ -96,7 +96,7 @@ void DrawRect(Context &context, int x, int y, int w, int h, const RGBA &color);
  *
  * @see DrawCircleFill()
  */
-void DrawCircle(Context &context, int x, int y, int radius, const RGBA& color);
+void DrawCircle(Context &context, int x, int y, int radius, const RGBA &color);
 /**
  * Draw a circle border with the color.
  * Circle body is filled with the same color as the border.
@@ -110,9 +110,10 @@ void DrawCircle(Context &context, int x, int y, int radius, const RGBA& color);
  *
  * @see DrawCircle()
  */
-void DrawCircleFill(Context &context, int x, int y, int radius, const RGBA& color);
+void DrawCircleFill(Context &context, int x, int y, int radius, const RGBA &color);
 
-void DrawSprite(Context& context, int sprite_id, int screen_x, int screen_y, int sheet_x, int sheet_y, int width, int height);
+void DrawSprite(Context &context, int sprite_id, int screen_x, int screen_y, int sheet_x, int sheet_y, int width,
+                int height);
 /** @} */
 
-#endif //WHYCPP_DRAWING_H
+#endif  // WHYCPP_DRAWING_H

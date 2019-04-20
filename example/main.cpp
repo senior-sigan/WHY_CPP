@@ -12,10 +12,10 @@
 #include <whycpp/time.h>
 #include <whycpp/whycpp.h>
 #include <cmath>
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 #include <vector>
-#include <ctime>
-#include <cstdlib>
 
 class TrueRandom {
  public:
@@ -53,6 +53,7 @@ class ChessBoard : public ApplicationListener {
 
 class Prisma : public ApplicationListener {
   const double PI = 3.14159265358979323846;
+
  public:
   void OnRender(Context &ctx) override {
     const int base = 143;
@@ -89,6 +90,7 @@ class Prisma : public ApplicationListener {
 
 class Fade : public ApplicationListener {
   TrueRandom rnd;
+
  public:
   void OnCreate(Context &ctx) override {
     DrawClearScreen(ctx, PALETTE[0]);
@@ -117,6 +119,7 @@ class PaletteShow : public ApplicationListener {
 
 class RandomLines : public ApplicationListener {
   TrueRandom rnd;
+
  public:
   void OnCreate(Context &ctx) override {
     DrawClearScreen(ctx, PALETTE[0]);
