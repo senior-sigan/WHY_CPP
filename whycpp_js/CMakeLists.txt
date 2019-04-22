@@ -1,0 +1,24 @@
+cmake_minimum_required(VERSION 3.6)
+project(whycpp_js CXX)
+
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
+
+set(CMAKE_DIR "${PROJECT_SOURCE_DIR}/CMake")
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_DIR})
+
+set(WHYCPP_JS_INCLUDES_DIR ${PROJECT_SOURCE_DIR}/src)
+set(WHYCPP_JS_SOURCES_DIR ${PROJECT_SOURCE_DIR}/src)
+
+file(GLOB_RECURSE WHYCPP_JS_HEADERS ${WHYCPP_JS_SOURCES_DIR}/*.h)
+file(GLOB_RECURSE WHYCPP_JS_SOURCES ${WHYCPP_JS_SOURCES_DIR}/*.cpp)
+
+include(ConfigureDuktape)
+
+add_subdirectory(src)
+
+file(COPY example DESTINATION ${CMAKE_BINARY_DIR}/whycpp_js/src)
+
+if (EMSCRIPTEN)
+    file(COPY html/index.html DESTINATION ${CMAKE_BINARY_DIR}/whycpp_js/src)
+endif ()
