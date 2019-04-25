@@ -1,6 +1,11 @@
-#include "../audio.h"
-#include <whycpp/log.h>
+#include <SDL.h>
+#if __EMSCRIPTEN__
+#include <SDL2/SDL_mixer.h>
+#else
 #include <SDL_mixer.h>
+#endif
+#include <whycpp/log.h>
+#include "../audio.h"
 
 void Music::Play(int loops) {
   if (Mix_PlayMusic(sound_, loops) != 0) {
@@ -17,8 +22,8 @@ Music::Music(const std::string& path) : path_(path) {
 Music::~Music() {
   Mix_FreeMusic(sound_);
 }
-void SFX::Play(int loops, int channel) {
-  if (Mix_PlayChannel(channel, sound_, loops) != 0) {
+void SFX::Play(int loops, int ticks, int channel) {
+  if (Mix_PlayChannelTimed(channel, sound_, loops, ticks) != 0) {
     LOG_WARN("Cannot play effect %s: %s", path_.c_str(), SDL_GetError());
   }
 }

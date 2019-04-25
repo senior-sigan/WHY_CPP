@@ -31,6 +31,10 @@ void Loop::Run() {
   RunLoop();
 }
 void Loop::Update() {
+  if (first_start_) {
+    listener->OnCreate(ctx);
+    first_start_ = false;
+  }
   last = now;
   now = GetTicks();
   delta_time = now - last;
@@ -43,6 +47,7 @@ void Loop::Update() {
 
   isRunning = !ctx.IsQuit();
   if (!isRunning) {
+    first_start_ = true;
     listener->OnDispose(ctx);
 #if __EMSCRIPTEN__
     emscripten_force_exit(0);
@@ -51,7 +56,6 @@ void Loop::Update() {
 }
 
 void Loop::RunLoop() {
-  listener->OnCreate(ctx);
 #if __EMSCRIPTEN__
   // TODO: SDL2 has a bug so the SDL2 should be intialized inside loop
   emscripten_set_main_loop_arg(emscripten_Update, this, 0, 0);

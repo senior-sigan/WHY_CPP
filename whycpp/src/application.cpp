@@ -10,6 +10,7 @@
 #include "logger.h"
 #include "loop.h"
 #include "sdl_specific/sdl_context.h"
+#include "sdl_specific/sdl_render_context.h"
 #include "sdl_specific/sdl_texture.h"
 #include "video_memory.h"
 
@@ -27,6 +28,7 @@ Application::Application(ApplicationListener* listener, const ApplicationConfig&
   input_handler_ = std::make_unique<InputsHandler>(this->listener.get());
 }
 void Application::Run() {
+  sdl_context = std::make_unique<SDLContext>(config, context->GetVRAM());
   loop->Run();  // this call is async in case of emscripten
 }
 void Application::Update(Context& ctx, double delta_time) {
@@ -34,7 +36,8 @@ void Application::Update(Context& ctx, double delta_time) {
   if (!ctx.IsPaused()) {
     ctx.Tick(delta_time);
     listener->OnRender(ctx);
-    RenderOrInit();
+    //    RenderOrInit();
+    sdl_context->GetRenderer()->Render();
   }
 }
 void Application::RenderOrInit() {
@@ -43,7 +46,7 @@ void Application::RenderOrInit() {
     // Also, this is pattern "lazy".
     sdl_context = std::make_unique<SDLContext>(config, context->GetVRAM());
   }
-  sdl_context->Render();
+  sdl_context->GetRenderer()->Render();
 }
 Application::~Application() {
   LOG_DEBUG("Application destroyed");

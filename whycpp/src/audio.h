@@ -22,7 +22,7 @@ class SFX {
 
  public:
   explicit SFX(const std::string& path);
-  void Play(int loops, int channel);
+  void Play(int loops, int ticks, int channel);
   virtual ~SFX();
 };
 

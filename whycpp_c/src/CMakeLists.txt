@@ -5,7 +5,7 @@ if(MSVC)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /WX ")
 else()
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror -Wextra -Wzero-as-null-pointer-constant -Winit-self -Wfloat-equal -Wunused-parameter -Wsign-conversion")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O2")
+#    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O2")
 endif()
 
 include_directories(${WHYCPP_C_INCLUDES_DIR})

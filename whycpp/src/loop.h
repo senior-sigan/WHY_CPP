@@ -20,6 +20,7 @@ class Loop {
   long delta_time = 0;
   bool isRunning = true;
   long ms_per_frame = 16;
+  bool first_start_ = true;
 
   void RunLoop();
   void UpdateWithDelay();

@@ -1,25 +1,21 @@
-#ifndef WHYCPP_SDL_CONTEXT_H
-#define WHYCPP_SDL_CONTEXT_H
+#ifndef WHYCPP_ROOT_WHYCPP_SRC_SDL_SPECIFIC_SDL_CONTEXT_H_
+#define WHYCPP_ROOT_WHYCPP_SRC_SDL_SPECIFIC_SDL_CONTEXT_H_
 
 #include <memory>
-#include "sdl_deleter.h"
 
+class SDLAudioContext;
+class SDLRenderContext;
 struct ApplicationConfig;
 class VideoMemory;
-class SDLTexture;
-struct SDL_Window;
-struct SDL_Renderer;
 
 class SDLContext {
-  std::unique_ptr<SDL_Renderer, sdl_deleter> ren;
-  std::unique_ptr<SDL_Window, sdl_deleter> win;
-  std::unique_ptr<SDLTexture> texture;
+  std::unique_ptr<SDLRenderContext> render_;
+  std::unique_ptr<SDLAudioContext> audio_;
 
  public:
-  explicit SDLContext(const ApplicationConfig& config, VideoMemory* vram);
+  SDLContext(const ApplicationConfig& config, VideoMemory* vram);
   virtual ~SDLContext();
-
-  void Render();
+  SDLRenderContext* GetRenderer() const;
 };
 
-#endif  // WHYCPP_SDL_CONTEXT_H
+#endif  // WHYCPP_ROOT_WHYCPP_SRC_SDL_SPECIFIC_SDL_CONTEXT_H_

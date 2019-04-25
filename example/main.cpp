@@ -16,6 +16,7 @@
 #include <ctime>
 #include <iostream>
 #include <vector>
+#include <whycpp/sound.h>
 
 class TrueRandom {
  public:
@@ -217,6 +218,20 @@ class MouseTest : public ApplicationListener {
   }
 };
 
+class SoundTest: public ApplicationListener {
+ public:
+  void OnCreate(Context &ctx) override {
+    ImportSFX(ctx, "assets/bonus.wav", "bonus.wav");
+    DrawClearScreen(ctx, PALETTE[0]);
+    Print(ctx, "Press S\nto hear sound\nPress Space to exit", 1, 10, PALETTE[3], 1);
+  }
+  void OnRender(Context &ctx) override {
+    if (IsClicked(ctx, Button::KEY_S)) {
+      PlaySFX(ctx, "bonus.wav");
+    }
+  }
+};
+
 class FpsLogger {
   const int timer = 1;  // print each 1 second
   double sum = 0;
@@ -244,6 +259,7 @@ class Show : public ApplicationListener {
 
  public:
   Show() {
+    apps.push_back(std::make_unique<SoundTest>());
     apps.push_back(std::make_unique<MouseTest>());
     apps.push_back(std::make_unique<Bubbles>());
     apps.push_back(std::make_unique<HelloText>());
