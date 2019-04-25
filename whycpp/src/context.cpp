@@ -71,6 +71,7 @@ bool Context::IsButtonReleased(const Button& btn) const {
   return clicked_.at(btn);
 }
 void Context::RegisterMusic(const std::string& path, const std::string& name) {
+  LOG_DEBUG("Registered music %s : %s", path.c_str(), name.c_str());
   musics_[name] = std::make_unique<Music>(path);
 }
 Music* Context::GetMusic(const std::string& name) const {
@@ -81,6 +82,7 @@ Music* Context::GetMusic(const std::string& name) const {
   return musics_.at(name).get();
 }
 void Context::RegisterSFX(const std::string& path, const std::string& name) {
+  LOG_DEBUG("Registered SFX %s : %s", path.c_str(), name.c_str());
   sfxs_[name] = std::make_unique<SFX>(path);
 }
 SFX* Context::GetSFX(const std::string& name) const {

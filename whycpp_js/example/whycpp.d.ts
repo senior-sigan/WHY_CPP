@@ -38,6 +38,14 @@ declare function get_mouse(): { x: number, y: number };
 
 declare function exit(): void;
 
+declare function importMusic(path: string, name: string): void;
+
+declare function importSFX(path: string, name: string): void;
+
+declare function playMusic(name: string, loop: number): void;
+
+declare function playSFX(name: string, loop: number, ticks: number): void;
+
 declare const PALETTE_LEN: number;
 declare const PALETTE: number[][];
 

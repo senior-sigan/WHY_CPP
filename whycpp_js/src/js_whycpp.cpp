@@ -5,6 +5,7 @@
 #include "js_drawing.h"
 #include "js_input.h"
 #include "js_lifecycle.h"
+#include "js_sound.h"
 #include "js_text.h"
 #include "js_time.h"
 
@@ -29,8 +30,11 @@ static const struct {
                {js_IsPressed, 1, "is_pressed"},
                {js_GetMouse, 0, "get_mouse"},
                {js_ShowText, DUK_VARARGS, "show_text"},
-               {js_ExitApp, 0, "exit"}
-};
+               {js_ExitApp, 0, "exit"},
+               {js_ImportMusic, 2, "importMusic"},
+               {js_ImportSFX, 2, "importSFX"},
+               {js_PlayMusic, 2, "playMusic"},
+               {js_PlaySFX, 3, "playSFX"}};
 
 void SetupPaletteConst(duk_context *ctx) {
   RegisterConstant(ctx, "PALETTE_LEN", PALETTE_LEN);

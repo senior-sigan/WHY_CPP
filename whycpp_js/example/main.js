@@ -3,6 +3,7 @@ var PaletteScene = require('palette');
 var RandomLinesScene = require('random_lines');
 var ButtonsScene = require('buttons');
 var MouseScene = require('mouse');
+var SoundScene = require('sound');
 var SceneManager = require('scene_manager');
 
 var CONFIG = {
@@ -15,6 +16,7 @@ var CONFIG = {
 };
 
 var sceneManager = new SceneManager([
+    new SoundScene(),
     new PaletteScene(),
     new RandomLinesScene(),
     new ButtonsScene(),
