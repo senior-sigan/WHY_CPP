@@ -9,9 +9,10 @@
 #include <whycpp/buttons.h>
 #include "../../whycpp_js/src/global_app_context.h"
 
-
 class Font;
 class VideoMemory;
+class SFX;
+class Music;
 
 /**
  * @addtogroup ApplicationInternals
@@ -52,6 +53,11 @@ class Context {
   int AppendSprite(VideoMemory *sprite);
   VideoMemory *GetSprite(int index) const;
 
+  void RegisterMusic(const std::string &path, const std::string &name);
+  Music *GetMusic(const std::string &name) const;
+  void RegisterSFX(const std::string &path, const std::string &name);
+  SFX *GetSFX(const std::string &name) const;
+
   void Tick(double delta);
   void KeyUp(unsigned int code);
   void KeyDown(unsigned int code);
@@ -67,6 +73,8 @@ class Context {
   bool paused = false;
   std::unique_ptr<Font> font;
   std::vector<std::unique_ptr<VideoMemory>> sprites;
+  std::map<std::string, std::unique_ptr<Music>> musics;
+  std::map<std::string, std::unique_ptr<SFX>> sfxs;
 
  public:
   int mousePosX = 0;

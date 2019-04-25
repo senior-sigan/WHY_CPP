@@ -2,6 +2,7 @@
 #include <whycpp/buttons.h>
 #include <whycpp/font.h>
 #include <memory>
+#include "audio.h"
 #include "logger.h"
 #include "video_memory.h"
 
@@ -68,4 +69,24 @@ bool Context::IsButtonPressed(const Button& btn) const {
 bool Context::IsButtonReleased(const Button& btn) const {
   if (static_cast<unsigned>(btn) >= buttons.size()) return false;
   return clicked.at(btn);
+}
+void Context::RegisterMusic(const std::string& path, const std::string& name) {
+  musics[name] = std::make_unique<Music>(path);
+}
+Music* Context::GetMusic(const std::string& name) const {
+  if (musics.count(name) == 0) {
+    LOG_WARN("There is no music for '%s'", name.c_str());
+    return nullptr;
+  }
+  return musics.at(name).get();
+}
+void Context::RegisterSFX(const std::string& path, const std::string& name) {
+  sfxs[name] = std::make_unique<SFX>(path);
+}
+SFX* Context::GetSFX(const std::string& name) const {
+  if (sfxs.count(name) == 0) {
+    LOG_WARN("There is no sfx for '%s'", name.c_str());
+    return nullptr;
+  }
+  return sfxs.at(name).get();
 }
