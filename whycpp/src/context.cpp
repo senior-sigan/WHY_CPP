@@ -8,85 +8,85 @@
 
 void Context::KeyUp(const unsigned int code) {
   if (code >= KEY_NUM_KEYS) return;
-  buttons[code] = false;
-  clicked[code] = true;
+  buttons_[code] = false;
+  clicked_[code] = true;
 }
 void Context::KeyDown(const unsigned int code) {
   if (code >= KEY_NUM_KEYS) return;
-  buttons[code] = true;
-  clicked[code] = false;
+  buttons_[code] = true;
+  clicked_[code] = false;
 }
 void Context::ResetKeys() {
   for (unsigned int i = 0; i < KEY_NUM_KEYS; i++) {
-    clicked[i] = false;
+    clicked_[i] = false;
   }
 }
 void Context::Tick(double delta) {
-  current_delta = delta;
-  time += delta;
+  current_delta_ = delta;
+  time_ += delta;
 }
 bool Context::IsQuit() const {
-  return quit;
+  return quit_;
 }
 void Context::SetQuit(bool quit) {
-  Context::quit = quit;
+  quit_ = quit;
 }
 bool Context::IsPaused() const {
-  return paused;
+  return paused_;
 }
 void Context::SetPaused(bool paused) {
-  Context::paused = paused;
+  paused_ = paused;
 }
 Font* Context::GetFont() const {
-  return font.get();
+  return font_.get();
 }
 void Context::SetFont(Font* font) {
-  Context::font = std::unique_ptr<Font>(font);
+  Context::font_ = std::unique_ptr<Font>(font);
 }
 int Context::AppendSprite(VideoMemory* sprite) {
-  sprites.push_back(std::unique_ptr<VideoMemory>(sprite));
-  return static_cast<int>(sprites.size() - 1);
+  sprites_.push_back(std::unique_ptr<VideoMemory>(sprite));
+  return static_cast<int>(sprites_.size() - 1);
 }
 VideoMemory* Context::GetSprite(int index) const {
-  return sprites.at(static_cast<unsigned long>(index)).get();
+  return sprites_.at(static_cast<unsigned long>(index)).get();
 }
 Context::~Context() {
   LOG_DEBUG("Context destroyed");
 }
 Context::Context(VideoMemory* vram, Font* font)
-    : vram(std::unique_ptr<VideoMemory>(vram)), font(std::unique_ptr<Font>(font)) {
-  buttons.resize(Button::KEY_NUM_KEYS);
-  clicked.resize(Button::KEY_NUM_KEYS);
+    : vram_(std::unique_ptr<VideoMemory>(vram)), font_(std::unique_ptr<Font>(font)) {
+  buttons_.resize(Button::KEY_NUM_KEYS);
+  clicked_.resize(Button::KEY_NUM_KEYS);
   LOG_DEBUG("Context created");
 }
 VideoMemory* Context::GetVRAM() const {
-  return vram.get();
+  return vram_.get();
 }
 bool Context::IsButtonPressed(const Button& btn) const {
-  if (static_cast<unsigned>(btn) >= buttons.size()) return false;
-  return buttons.at(btn);
+  if (static_cast<unsigned>(btn) >= buttons_.size()) return false;
+  return buttons_.at(btn);
 }
 bool Context::IsButtonReleased(const Button& btn) const {
-  if (static_cast<unsigned>(btn) >= buttons.size()) return false;
-  return clicked.at(btn);
+  if (static_cast<unsigned>(btn) >= buttons_.size()) return false;
+  return clicked_.at(btn);
 }
 void Context::RegisterMusic(const std::string& path, const std::string& name) {
-  musics[name] = std::make_unique<Music>(path);
+  musics_[name] = std::make_unique<Music>(path);
 }
 Music* Context::GetMusic(const std::string& name) const {
-  if (musics.count(name) == 0) {
+  if (musics_.count(name) == 0) {
     LOG_WARN("There is no music for '%s'", name.c_str());
     return nullptr;
   }
-  return musics.at(name).get();
+  return musics_.at(name).get();
 }
 void Context::RegisterSFX(const std::string& path, const std::string& name) {
-  sfxs[name] = std::make_unique<SFX>(path);
+  sfxs_[name] = std::make_unique<SFX>(path);
 }
 SFX* Context::GetSFX(const std::string& name) const {
-  if (sfxs.count(name) == 0) {
+  if (sfxs_.count(name) == 0) {
     LOG_WARN("There is no sfx for '%s'", name.c_str());
     return nullptr;
   }
-  return sfxs.at(name).get();
+  return sfxs_.at(name).get();
 }

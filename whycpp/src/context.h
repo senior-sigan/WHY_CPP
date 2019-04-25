@@ -7,7 +7,6 @@
 #include <vector>
 
 #include <whycpp/buttons.h>
-#include "../../whycpp_js/src/global_app_context.h"
 
 class Font;
 class VideoMemory;
@@ -37,10 +36,10 @@ class Context {
 
   VideoMemory *GetVRAM() const;
   double GetTime() const {
-    return time;
+    return time_;
   }
   double GetDelta() const {
-    return current_delta;
+    return current_delta_;
   }
   bool IsButtonPressed(const Button &btn) const;
   bool IsButtonReleased(const Button &btn) const;
@@ -64,17 +63,17 @@ class Context {
   void ResetKeys();
 
  private:
-  std::unique_ptr<VideoMemory> vram;
-  double time = 0.0;
-  double current_delta = 0.0;
-  std::vector<bool> buttons;
-  std::vector<bool> clicked;
-  bool quit = false;
-  bool paused = false;
-  std::unique_ptr<Font> font;
-  std::vector<std::unique_ptr<VideoMemory>> sprites;
-  std::map<std::string, std::unique_ptr<Music>> musics;
-  std::map<std::string, std::unique_ptr<SFX>> sfxs;
+  std::unique_ptr<VideoMemory> vram_;
+  double time_ = 0.0;
+  double current_delta_ = 0.0;
+  std::vector<bool> buttons_;
+  std::vector<bool> clicked_;
+  bool quit_ = false;
+  bool paused_ = false;
+  std::unique_ptr<Font> font_;
+  std::vector<std::unique_ptr<VideoMemory>> sprites_;
+  std::map<std::string, std::unique_ptr<Music>> musics_;
+  std::map<std::string, std::unique_ptr<SFX>> sfxs_;
 
  public:
   int mousePosX = 0;
