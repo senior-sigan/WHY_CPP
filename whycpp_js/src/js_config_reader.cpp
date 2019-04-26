@@ -1,11 +1,6 @@
+#include "js_config_reader.h"
 #include <duktape.h>
-#include <whycpp/application_config.h>
-#include <whycpp/log.h>
-#include <whycpp/whycpp.h>
 #include "duk_helpers.h"
-#include "js_application.h"
-#include "js_stl.h"
-#include "js_whycpp.h"
 
 ApplicationConfig GetConfig(duk_context *ctx) {
   duk_get_prop_string(ctx, -1, "CONFIG");
@@ -24,23 +19,4 @@ ApplicationConfig GetConfig(duk_context *ctx) {
   duk_pop_n(ctx, 7);
 
   return ApplicationConfig(width, height, name, is_fullscreen, window_size_multiplier, ms_per_frame);
-}
-
-int main(int argc, char *argv[]) {
-  SetLogLevel(LogLevel::DEBUG);
-
-  duk_context *duk = duk_create_heap_default();
-  duk_push_global_object(duk);
-  SetupSTL(duk);
-  SetupWhyCPP(duk);
-  // TODO: to support web we should read file from a bytebuffer inserted directly into html page
-  char const* root_path;
-  if (argc < 2) {
-    root_path = "main.js";
-  } else {
-    root_path = argv[1];
-  }
-  RunScript(duk, root_path);
-  auto config = GetConfig(duk);
-  Run(new JsApplication(duk), config);
 }

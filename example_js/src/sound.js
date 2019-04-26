@@ -3,7 +3,7 @@ function SoundScene() {
 
 SoundScene.prototype.onRender = function () {
     if (is_clicked(KEY_S)) {
-        playSFX("bonus",1);
+        playSFX("bonus", 1);
     }
 };
 SoundScene.prototype.onCreate = function () {

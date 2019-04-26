@@ -30,8 +30,8 @@ doxygen:
 	rm -rf docs
 	doxygen Doxyfile
 
-whycpp-js-compile:
-	cd cmake-build-debug/whycpp_js;make -j4
+example-js-compile:
+	cd cmake-build-debug/example_js;make -j4
 
-whycpp-js-run:
-	cd cmake-build-debug/whycpp_js/src/example;../whycpp_js
+example-js-run:
+	cd cmake-build-debug/example_js/;./example_js

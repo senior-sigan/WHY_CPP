@@ -1,0 +1,28 @@
+cmake_minimum_required(VERSION 3.6)
+project(js_example CXX)
+set(CMAKE_CXX_STANDARD 17)
+
+include_directories(${WHYCPP_JS_INCLUDES_DIR})
+include_directories(${WHYCPP_INCLUDES_DIR})
+
+if (EMSCRIPTEN)
+    add_definitions(-DEMSCRIPTEN)
+    add_definitions(-DUSE_WASM)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --bind --memory-init-file 0 -s TOTAL_MEMORY=64*1024*1024 -s SAFE_HEAP=1")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_WEBGL2=1 -s USE_SDL=2 -s FORCE_FILESYSTEM=1")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s WASM=1")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s ASSERTIONS=1")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --use-preload-plugins")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --embed-file src@/")
+    set(CMAKE_EXECUTABLE_SUFFIX ".js")
+
+    file(COPY index.html DESTINATION ${CMAKE_BINARY_DIR}/example_js)
+    file(COPY src DESTINATION ${CMAKE_BINARY_DIR}/example_js)
+    file(COPY assets DESTINATION ${CMAKE_BINARY_DIR}/example_js/src)
+else ()
+    file(COPY src/ DESTINATION ${CMAKE_BINARY_DIR}/example_js)
+    file(COPY assets DESTINATION ${CMAKE_BINARY_DIR}/example_js)
+endif ()
+
+add_executable(example_js main.cpp)
+target_link_libraries(example_js whycpp_js)
