@@ -1,11 +1,13 @@
+#include "../audio.h"
+#include <whycpp/log.h>
+
+#if SDL_MIXER
 #include <SDL.h>
 #if __EMSCRIPTEN__
 #include <SDL2/SDL_mixer.h>
 #else
 #include <SDL_mixer.h>
 #endif
-#include <whycpp/log.h>
-#include "../audio.h"
 
 void Music::Play(int loops) {
   if (Mix_PlayMusic(sound_, loops) != 0) {
@@ -37,3 +39,23 @@ SFX::SFX(const std::string& path) : path_(path) {
 SFX::~SFX() {
   Mix_FreeChunk(sound_);
 }
+#else
+void Music::Play(int) {
+  LOG_WARN("Cannot play music %s: NO SDL_MIXER", path_.c_str());
+}
+Music::Music(const std::string& path) : path_(path) {
+  // noting to do
+}
+Music::~Music() {
+  // noting to do
+}
+void SFX::Play(int, int, int) {
+  LOG_WARN("Cannot play effect %s: NO SDL_MIXER", path_.c_str());
+}
+SFX::SFX(const std::string& path) : path_(path) {
+  // noting to do
+}
+SFX::~SFX() {
+  // noting to do
+}
+#endif
