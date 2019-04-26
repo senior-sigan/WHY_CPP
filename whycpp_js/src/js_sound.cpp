@@ -18,7 +18,7 @@ duk_ret_t js_ImportSFX(duk_context* ctx) {
 }
 duk_ret_t js_PlayMusic(duk_context* ctx) {
   auto name = duk_to_string(ctx, 0);
-  auto loops = GetDukInt(ctx, 1, 0);
+  auto loops = GetDukInt(ctx, 1, -1);
   PlayMusic(GetGlobalContext(), name, loops);
   return 0;
 }

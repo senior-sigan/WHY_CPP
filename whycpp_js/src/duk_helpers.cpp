@@ -12,14 +12,17 @@ bool GetDukBool(duk_context* ctx, int idx, bool null_case) {
 }
 void PushFileAsString(duk_context* ctx, const char* filename) {
   FILE *f;
-  size_t len;
-  char buf[16384];
-
   f = fopen(filename, "rb");
+  fseek(f, 0L, SEEK_END);
+  size_t len = ftell(f);
+  printf("File size %s is %ld\n", filename, len);
+  rewind(f);
+  char* buf = new char[len];
+
   if (f) {
-    len = fread((void *) buf, 1, sizeof(buf), f);
+    auto read_bytes = fread((void *) buf, 1, len, f);
     fclose(f);
-    duk_push_lstring(ctx, (const char *) buf, (duk_size_t) len);
+    duk_push_lstring(ctx, (const char *) buf, (duk_size_t) read_bytes);
   } else {
     duk_push_undefined(ctx);
   }
