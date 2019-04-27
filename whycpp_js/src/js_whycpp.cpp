@@ -1,3 +1,4 @@
+#include "js_whycpp.h"
 #include <duktape.h>
 #include <whycpp/palette.h>
 #include "color_helpers.h"
@@ -48,7 +49,7 @@ void SetupPaletteConst(duk_context *ctx) {
   duk_put_global_string(ctx, "PALETTE");
 }
 
-void SetupWhyCPP(duk_context *ctx) {
+void WhycppRegistrator::Register(duk_context *ctx) {
   for (const auto &i : ApiFunc) {
     duk_push_c_function(ctx, i.func, i.params);
     duk_put_global_string(ctx, i.name);

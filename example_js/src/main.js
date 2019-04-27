@@ -5,6 +5,7 @@ var ButtonsScene = require('buttons');
 var MouseScene = require('mouse');
 var SoundScene = require('sound');
 var SceneManager = require('scene_manager');
+var NativeHelloWorld = require('native_hello_world');
 
 var CONFIG = {
     'width': 256,
@@ -16,6 +17,7 @@ var CONFIG = {
 };
 
 var sceneManager = new SceneManager([
+    new NativeHelloWorld(),
     new SoundScene(),
     new PaletteScene(),
     new RandomLinesScene(),

@@ -1,9 +1,8 @@
 #ifndef WHYCPP_ROOT_WHYCPP_JS_SRC_GLOBAL_APP_CONTEXT_H_
 #define WHYCPP_ROOT_WHYCPP_JS_SRC_GLOBAL_APP_CONTEXT_H_
 
-class Context;
+#include <whycpp_js/get_global_context.h>
 
-Context& GetGlobalContext();
 Context* GetGlobalContextPtr();
 void SetGlobalContext(Context* ctx);
 

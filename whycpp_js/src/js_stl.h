@@ -1,8 +1,11 @@
 #ifndef WHYCPP_ROOT_WHYCPP_JS_SRC_JS_STL_H_
 #define WHYCPP_ROOT_WHYCPP_JS_SRC_JS_STL_H_
 
-#include <duktape.h>
+#include <whycpp_js/js_registrator.h>
 
-void SetupSTL(duk_context *ctx);
+class STLRegistrator: public JsRegistrator {
+ public:
+  void Register(duk_context* ctx) override;
+};
 
 #endif //WHYCPP_ROOT_WHYCPP_JS_SRC_JS_STL_H_
