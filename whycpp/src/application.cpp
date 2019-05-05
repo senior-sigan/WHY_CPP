@@ -20,7 +20,7 @@ Application::Application(ApplicationListener* listener, const ApplicationConfig&
 
   auto vram = new VideoMemory(config.width, config.height);
   auto font = BuildDefaultFont();
-  context = std::make_unique<Context>(vram, font);
+  context = std::make_unique<Context>(vram, font, config);
 
   Loop::Callback update = [=](Context& ctx, double delta_time) {
     if (!ctx.IsPaused()) {

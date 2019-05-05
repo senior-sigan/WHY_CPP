@@ -36,6 +36,9 @@ void Loop::Update() {
   now = GetTicks();
   delta_time = now - last;
   lag += delta_time;
+  if (delta_time > 0) {
+    ctx.SetRealDeltaTime(1000.0 / delta_time);
+  }
 
   UpdateWithDelay();
 

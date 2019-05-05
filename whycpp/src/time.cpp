@@ -8,3 +8,7 @@ double GetTime(const Context& ctx) {
 double GetDelta(const Context& ctx) {
   return ctx.GetDelta();
 }
+
+int GetFPS(const Context& ctx) {
+  return ctx.GetFPS();
+}

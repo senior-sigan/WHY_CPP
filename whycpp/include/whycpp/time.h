@@ -22,6 +22,8 @@ double GetTime(const Context &context);
  */
 double GetDelta(const Context &context);
 
+int GetFPS(const Context& context);
+
 /** @} */
 
 #endif  // WHYCPP_TIME_H

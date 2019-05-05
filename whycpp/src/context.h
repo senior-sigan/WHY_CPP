@@ -5,7 +5,9 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include "average_window.h"
 
+#include <whycpp/application_config.h>
 #include <whycpp/buttons.h>
 
 class Font;
@@ -32,7 +34,7 @@ class Music;
  */
 class Context {
  public:
-  explicit Context(VideoMemory *vram, Font *font);
+  explicit Context(VideoMemory *vram, Font *font, const ApplicationConfig& config);
   virtual ~Context();
 
   VideoMemory *GetVRAM() const;
@@ -59,12 +61,15 @@ class Context {
   SFX *GetSFX(const std::string &name) const;
 
   void Tick(double delta);
+  void SetRealDeltaTime(double delta);
   void KeyUp(unsigned int code);
   void KeyDown(unsigned int code);
   void ResetKeys();
+  int GetFPS() const;
 
  private:
   std::unique_ptr<VideoMemory> vram_;
+  const ApplicationConfig config_;
   double time_ = 0.0;
   double current_delta_ = 0.0;
   std::vector<bool> buttons_;
@@ -75,6 +80,7 @@ class Context {
   std::vector<std::unique_ptr<Sprite>> sprites_;
   std::map<std::string, std::unique_ptr<Music>> musics_;
   std::map<std::string, std::unique_ptr<SFX>> sfxs_;
+  AverageWindow<double> deltasHistory_;
 
  public:
   int mousePosX = 0;

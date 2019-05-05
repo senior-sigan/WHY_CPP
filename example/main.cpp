@@ -234,21 +234,9 @@ class SoundTest : public ApplicationListener {
 };
 
 class FpsLogger {
-  const int timer = 1;  // print each 1 second
-  double sum = 0;
-  int i = 0;
-  int fps;
-
  public:
   void Log(Context &ctx) {
-    sum += GetDelta(ctx);
-    i++;
-    if (sum >= timer) {
-      auto avg_dt = sum / i;
-      fps = int(1.0 / avg_dt);
-      i = 0;
-      sum -= timer;
-    }
+    auto fps = GetFPS(ctx);
     std::stringstream ss;
     ss << "FPS=" << fps << "\nTime=" << static_cast<int>(GetTime(ctx));
     DrawRectFill(ctx, GetDisplayWidth(ctx)-50, 0, 50, 20, PALETTE[0]);

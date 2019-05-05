@@ -1,11 +1,12 @@
 #include "context.h"
+#include <whycpp/application_config.h>
 #include <whycpp/buttons.h>
 #include <whycpp/font.h>
 #include <memory>
 #include "audio.h"
 #include "logger.h"
-#include "video_memory.h"
 #include "sprite.h"
+#include "video_memory.h"
 
 void Context::KeyUp(const unsigned int code) {
   if (code >= KEY_NUM_KEYS) return;
@@ -56,8 +57,8 @@ Sprite* Context::GetSprite(int index) const {
 Context::~Context() {
   LOG_DEBUG("Context destroyed");
 }
-Context::Context(VideoMemory* vram, Font* font)
-    : vram_(std::unique_ptr<VideoMemory>(vram)), font_(std::unique_ptr<Font>(font)) {
+Context::Context(VideoMemory* vram, Font* font, const ApplicationConfig& config)
+    : vram_(std::unique_ptr<VideoMemory>(vram)), config_(config), font_(std::unique_ptr<Font>(font)), deltasHistory_(static_cast<size_t >(500.0 / config.ms_per_frame)) {
   buttons_.resize(Button::KEY_NUM_KEYS);
   clicked_.resize(Button::KEY_NUM_KEYS);
   LOG_DEBUG("Context created");
@@ -94,4 +95,10 @@ SFX* Context::GetSFX(const std::string& name) const {
     return nullptr;
   }
   return sfxs_.at(name).get();
+}
+int Context::GetFPS() const {
+  return static_cast<int>(deltasHistory_.Get());
+}
+void Context::SetRealDeltaTime(double delta) {
+  deltasHistory_.Add(delta);
 }
