@@ -8,6 +8,7 @@
 #include <whycpp/lifecycle.h>
 #include <whycpp/log.h>
 #include <whycpp/palette.h>
+#include <whycpp/sound.h>
 #include <whycpp/text.h>
 #include <whycpp/time.h>
 #include <whycpp/whycpp.h>
@@ -15,8 +16,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+#include <sstream>
 #include <vector>
-#include <whycpp/sound.h>
 
 class TrueRandom {
  public:
@@ -218,7 +219,7 @@ class MouseTest : public ApplicationListener {
   }
 };
 
-class SoundTest: public ApplicationListener {
+class SoundTest : public ApplicationListener {
  public:
   void OnCreate(Context &ctx) override {
     ImportSFX(ctx, "assets/bonus.wav", "bonus.wav");
@@ -236,19 +237,22 @@ class FpsLogger {
   const int timer = 1;  // print each 1 second
   double sum = 0;
   int i = 0;
+  int fps;
 
  public:
-  void Log(double delta_time) {
-    sum += delta_time;
+  void Log(Context &ctx) {
+    sum += GetDelta(ctx);
     i++;
     if (sum >= timer) {
       auto avg_dt = sum / i;
-      auto fps = int(1.0 / avg_dt);
-      // TODO: print somehow on the screen
-      LOG_INFO("FPS: %d", fps);
+      fps = int(1.0 / avg_dt);
       i = 0;
       sum -= timer;
     }
+    std::stringstream ss;
+    ss << "FPS=" << fps << "\nTime=" << static_cast<int>(GetTime(ctx));
+    DrawRectFill(ctx, GetDisplayWidth(ctx)-50, 0, 50, 20, PALETTE[0]);
+    Print(ctx, ss.str(), GetDisplayWidth(ctx)-50,0, PALETTE[7]);
   }
 };
 
@@ -260,6 +264,7 @@ class Show : public ApplicationListener {
 
  public:
   Show() {
+    apps.push_back(std::make_unique<MouseTest>());
     apps.push_back(std::make_unique<Prisma>());
     apps.push_back(std::make_unique<Fade>());
     apps.push_back(std::make_unique<PaletteShow>());
@@ -269,7 +274,6 @@ class Show : public ApplicationListener {
     apps.push_back(std::make_unique<ChessBoard>());
     apps.push_back(std::make_unique<RandomLines>());
     apps.push_back(std::make_unique<PngTexture>());
-    apps.push_back(std::make_unique<MouseTest>());
     apps.push_back(std::make_unique<SoundTest>());
 
     prev_app = apps.size();
@@ -277,7 +281,6 @@ class Show : public ApplicationListener {
   }
 
   void OnRender(Context &ctx) override {
-    logger.Log(GetDelta(ctx));
     if (prev_app != current_app) {
       if (prev_app != apps.size()) {
         apps.at(prev_app)->OnDispose(ctx);
@@ -287,6 +290,7 @@ class Show : public ApplicationListener {
     }
 
     apps.at(current_app)->OnRender(ctx);
+    logger.Log(ctx);
 
     if (IsClicked(ctx, Button::KEY_SPACE)) {
       current_app = (current_app + 1) % apps.size();
@@ -303,6 +307,6 @@ class Show : public ApplicationListener {
 
 int main() {
   SetLogLevel(LogLevel::DEBUG);
-  RunApp<Show>(ApplicationConfig(256, 144, "Application", false, 3, 0, false));
+  RunApp<Show>(ApplicationConfig(256, 144, "Application", false, 3, 16, true));
   return 0;
 }

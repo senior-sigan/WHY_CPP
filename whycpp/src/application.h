@@ -34,8 +34,6 @@ class Application {
   virtual ~Application();
 
   void Run();
-  void Update(Context& ctx, double delta_time);
-  void RenderOrInit();  // it's lazy call
  private:
   // please, keep tis order, it's important for the object destruction order
   // Destuction order: [listener, loop, context, sdl context]

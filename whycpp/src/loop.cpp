@@ -13,17 +13,12 @@ void emscripten_Update(void* loop) {
 #endif
 
 void Loop::UpdateWithDelay() {
-  long start = GetTicks();
-
-  cb(ctx, delta_time / 1000.0);
-  if (ms_per_frame == 0)
-    return;
-
-  long dt = GetTicks() - start;
-  auto lag = clamp(ms_per_frame - dt, 0L, ms_per_frame);
-  if (lag > 0) {
-    Delay(static_cast<uint32_t>(lag));
+  while (lag >= ms_per_frame) {
+    inputs(ctx, 0);
+    update(ctx, ms_per_frame / 1000.0);
+    lag -= ms_per_frame;
   }
+  render(ctx, static_cast<double>(lag) / ms_per_frame);
 }
 void Loop::Run() {
   now = GetTicks();
@@ -40,12 +35,9 @@ void Loop::Update() {
   last = now;
   now = GetTicks();
   delta_time = now - last;
-#if __EMSCRIPTEN__
-  // In the browser it would be better to use requestAnimationFrame instead of SDL_DELAY
-  cb(ctx, delta_time / 1000.0);
-#else
+  lag += delta_time;
+
   UpdateWithDelay();
-#endif
 
   isRunning = !ctx.IsQuit();
   if (!isRunning) {
@@ -67,8 +59,8 @@ void Loop::RunLoop() {
   }
 #endif
 }
-Loop::Loop(Loop::Callback& callback, Context& ctx, ApplicationListener* listener, long ms_per_frame)
-    : cb(callback), ctx(ctx), listener(listener), ms_per_frame(ms_per_frame) {
+Loop::Loop(Callback& update, Callback& render, Callback& inputs, Context& ctx, ApplicationListener* listener, long ms_per_frame)
+    : update(update), render(render), inputs(inputs), ctx(ctx), listener(listener), ms_per_frame(ms_per_frame) {
   LOG_DEBUG("Loop created");
 }
 Loop::~Loop() {

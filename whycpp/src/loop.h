@@ -11,7 +11,9 @@ class Loop {
   typedef std::function<void(Context&, double)> Callback;
 
  private:
-  Callback cb;
+  Callback update;
+  Callback render;
+  Callback inputs;
   Context& ctx;
   ApplicationListener* listener;
 
@@ -21,12 +23,13 @@ class Loop {
   bool isRunning = true;
   long ms_per_frame = 16;
   bool first_start_ = true;
+  long lag = 0;
 
   void RunLoop();
   void UpdateWithDelay();
 
  public:
-  explicit Loop(Callback& callback, Context& ctx, ApplicationListener* listener, long ms_per_frame = 16);
+  explicit Loop(Callback& update, Callback& render, Callback& inputs, Context& ctx, ApplicationListener* listener, long ms_per_frame = 16);
   virtual ~Loop();
 
   void Run();

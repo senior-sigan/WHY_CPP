@@ -22,31 +22,25 @@ Application::Application(ApplicationListener* listener, const ApplicationConfig&
   auto font = BuildDefaultFont();
   context = std::make_unique<Context>(vram, font);
 
-  Loop::Callback lambda = [=](Context& ctx, double delta_time) { Update(ctx, delta_time); };
-  loop = std::make_unique<Loop>(lambda, *context, this->listener.get(), config.ms_per_frame);
+  Loop::Callback update = [=](Context& ctx, double delta_time) {
+    if (!ctx.IsPaused()) {
+      ctx.Tick(delta_time);
+      listener->OnRender(ctx);
+    }
+  };
+  Loop::Callback render = [=](Context& ctx, double delta_time) {
+    sdl_context->GetRenderer()->Render();
+  };
+  Loop::Callback inputs = [=](Context& ctx, double delta_time) {
+    input_handler_->HandleEvents(ctx);
+  };
+  loop = std::make_unique<Loop>(update, render, inputs, *context, this->listener.get(), config.ms_per_frame);
 
   input_handler_ = std::make_unique<InputsHandler>(this->listener.get());
 }
 void Application::Run() {
   sdl_context = std::make_unique<SDLContext>(config, context->GetVRAM());
   loop->Run();  // this call is async in case of emscripten
-}
-void Application::Update(Context& ctx, double delta_time) {
-  input_handler_->HandleEvents(ctx);
-  if (!ctx.IsPaused()) {
-    ctx.Tick(delta_time);
-    listener->OnRender(ctx);
-    //    RenderOrInit();
-    sdl_context->GetRenderer()->Render();
-  }
-}
-void Application::RenderOrInit() {
-  if (!sdl_context) {
-    // YES. I know about class invariant, but we need this becasue of emscripten + sdl2 lifecycle problems.
-    // Also, this is pattern "lazy".
-    sdl_context = std::make_unique<SDLContext>(config, context->GetVRAM());
-  }
-  sdl_context->GetRenderer()->Render();
 }
 Application::~Application() {
   LOG_DEBUG("Application destroyed");

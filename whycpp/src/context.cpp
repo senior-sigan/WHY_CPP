@@ -11,11 +11,13 @@ void Context::KeyUp(const unsigned int code) {
   if (code >= KEY_NUM_KEYS) return;
   buttons_[code] = false;
   clicked_[code] = true;
+  LOG_INFO("KeyUp=%d", code);
 }
 void Context::KeyDown(const unsigned int code) {
   if (code >= KEY_NUM_KEYS) return;
   buttons_[code] = true;
   clicked_[code] = false;
+  LOG_INFO("KeyDown=%d", code);
 }
 void Context::ResetKeys() {
   for (unsigned int i = 0; i < KEY_NUM_KEYS; i++) {
