@@ -18,7 +18,7 @@ serve:
 reload:
 	rm -rf cmake-build-debug
 	mkdir cmake-build-debug
-	cd cmake-build-debug;cmake ..
+	cd cmake-build-debug;cmake .. -DUSE_PYTHON=ON -DUSE_JS=ON
 
 compile:
 	cd cmake-build-debug/example;make -j4
