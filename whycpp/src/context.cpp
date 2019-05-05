@@ -5,6 +5,7 @@
 #include "audio.h"
 #include "logger.h"
 #include "video_memory.h"
+#include "sprite.h"
 
 void Context::KeyUp(const unsigned int code) {
   if (code >= KEY_NUM_KEYS) return;
@@ -43,11 +44,11 @@ Font* Context::GetFont() const {
 void Context::SetFont(Font* font) {
   Context::font_ = std::unique_ptr<Font>(font);
 }
-int Context::AppendSprite(VideoMemory* sprite) {
-  sprites_.push_back(std::unique_ptr<VideoMemory>(sprite));
+int Context::AppendSprite(Sprite* sprite) {
+  sprites_.push_back(std::unique_ptr<Sprite>(sprite));
   return static_cast<int>(sprites_.size() - 1);
 }
-VideoMemory* Context::GetSprite(int index) const {
+Sprite* Context::GetSprite(int index) const {
   return sprites_.at(static_cast<unsigned long>(index)).get();
 }
 Context::~Context() {

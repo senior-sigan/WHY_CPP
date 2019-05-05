@@ -3,6 +3,7 @@
 #include <algorithm>
 #include "context.h"
 #include "video_memory.h"
+#include "sprite.h"
 
 int GetDisplayWidth(const Context &ctx) {
   return ctx.GetVRAM()->GetWidth();
@@ -18,11 +19,7 @@ const RGBA GetPixel(const Context &ctx, int x, int y) {
   return ctx.GetVRAM()->Get(x, y);
 }
 void DrawClearScreen(Context &ctx, const RGBA &color) {
-  for (int x = 0; x < GetDisplayWidth(ctx); x++) {
-    for (int y = 0; y < GetDisplayHeight(ctx); y++) {
-      SetPixel(ctx, x, y, color);
-    }
-  }
+  ctx.GetVRAM()->Fill(color);
 }
 void DrawLine(Context &ctx, int x0, int y0, int x1, int y1, const RGBA &color) {
   int dx = std::abs(x1 - x0), sx = x0 < x1 ? 1 : -1;

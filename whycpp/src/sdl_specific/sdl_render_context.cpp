@@ -1,3 +1,5 @@
+#include <memory>
+
 #include "sdl_render_context.h"
 #include <SDL.h>
 #include <whycpp/application_config.h>
@@ -26,13 +28,20 @@ SDLRenderContext::SDLRenderContext(const ApplicationConfig& config, VideoMemory*
     LogSDLError("SDL_CreateWindow");
     return;  // TODO: what? throw exception?
   }
+  auto vsync = 0u;
+  if (config.vsync) {
+    vsync = SDL_RENDERER_PRESENTVSYNC;
+  }
   ren = std::unique_ptr<SDL_Renderer, sdl_deleter>(
-      SDL_CreateRenderer(win.get(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC), sdl_deleter());
+      SDL_CreateRenderer(win.get(), -1, SDL_RENDERER_ACCELERATED | vsync), sdl_deleter());
   if (!ren) {
     LogSDLError("SDL_CreateRenderer");
     return;  // TODO: what? throw exception?
   }
-  texture = std::unique_ptr<SDLTexture>(new SDLTexture(ren.get(), vram));
+  auto info = std::make_unique<SDL_RendererInfo>();
+  SDL_GetRendererInfo(ren.get(), info.get());
+  LOG_INFO("Renderer info: name=%s", info->name);
+  texture = std::make_unique<SDLTexture>(ren.get(), vram);
 }
 SDLRenderContext::~SDLRenderContext() {
   LOG_DEBUG("SDLRenderContext destroyed");

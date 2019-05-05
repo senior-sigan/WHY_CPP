@@ -245,6 +245,7 @@ class FpsLogger {
       auto avg_dt = sum / i;
       auto fps = int(1.0 / avg_dt);
       // TODO: print somehow on the screen
+      LOG_INFO("FPS: %d", fps);
       i = 0;
       sum -= timer;
     }
@@ -259,17 +260,17 @@ class Show : public ApplicationListener {
 
  public:
   Show() {
-    apps.push_back(std::make_unique<SoundTest>());
-    apps.push_back(std::make_unique<MouseTest>());
+    apps.push_back(std::make_unique<Prisma>());
+    apps.push_back(std::make_unique<Fade>());
+    apps.push_back(std::make_unique<PaletteShow>());
     apps.push_back(std::make_unique<Bubbles>());
     apps.push_back(std::make_unique<HelloText>());
     apps.push_back(std::make_unique<ButtonsTest>());
-    apps.push_back(std::make_unique<PaletteShow>());
-    apps.push_back(std::make_unique<Fade>());
-    apps.push_back(std::make_unique<Prisma>());
     apps.push_back(std::make_unique<ChessBoard>());
     apps.push_back(std::make_unique<RandomLines>());
     apps.push_back(std::make_unique<PngTexture>());
+    apps.push_back(std::make_unique<MouseTest>());
+    apps.push_back(std::make_unique<SoundTest>());
 
     prev_app = apps.size();
     current_app = 0;
@@ -302,6 +303,6 @@ class Show : public ApplicationListener {
 
 int main() {
   SetLogLevel(LogLevel::DEBUG);
-  RunApp<Show>(ApplicationConfig(256, 144, "Application", false, 3, 16));
+  RunApp<Show>(ApplicationConfig(256, 144, "Application", false, 3, 0, false));
   return 0;
 }

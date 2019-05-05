@@ -25,20 +25,22 @@ class VideoMemory {
   void SetScreenHeight(int screen_height);
   int GetWidth() const;
   int GetHeight() const;
-  const RGBA &Get(int x, int y) const;
-  void Set(int x, int y, const RGBA &color);
+  const RGBA Get(int x, int y) const;
+  void Set(int x, int y, const RGBA& color);
+  void Fill(const RGBA& color);
   explicit VideoMemory(int width, int height);
   virtual ~VideoMemory();
+  const uint8_t* GetBuffer() const;
 
  private:
   int width;
   int height;
   int screen_width = 0;
   int screen_height = 0;
-  std::vector<std::vector<RGBA>> texture;
+  std::unique_ptr<uint32_t[]> buffer;
 
-  size_t CheckX(int x) const;
-  size_t CheckY(int y) const;
+  inline size_t CheckX(int x) const;
+  inline size_t CheckY(int y) const;
 };
 
 /** @} */

@@ -6,7 +6,7 @@
 #include <vector>
 #include "context.h"
 #include "logger.h"
-#include "video_memory.h"
+#include "sprite.h"
 
 using namespace std;
 
@@ -38,7 +38,7 @@ int ImportSprite(Context &context, const std::string &filename) {
     LOG_DEBUG("PNG '%s' width=%d height=%d", filename.c_str(), w, h);
   }
 
-  auto sprite = new VideoMemory(static_cast<int>(w), static_cast<int>(h));
+  auto sprite = new Sprite(static_cast<int>(w), static_cast<int>(h));
   for (int y = 0; y < sprite->GetHeight(); y++) {
     for (int x = 0; x < sprite->GetWidth(); x++) {
       auto i = 4 * (w * static_cast<unsigned long>(y) + static_cast<unsigned long>(x));

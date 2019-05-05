@@ -10,6 +10,7 @@
 
 class Font;
 class VideoMemory;
+class Sprite;
 class SFX;
 class Music;
 
@@ -49,8 +50,8 @@ class Context {
   void SetPaused(bool paused);
   Font *GetFont() const;
   void SetFont(Font *font);
-  int AppendSprite(VideoMemory *sprite);
-  VideoMemory *GetSprite(int index) const;
+  int AppendSprite(Sprite *sprite);
+  Sprite *GetSprite(int index) const;
 
   void RegisterMusic(const std::string &path, const std::string &name);
   Music *GetMusic(const std::string &name) const;
@@ -71,7 +72,7 @@ class Context {
   bool quit_ = false;
   bool paused_ = false;
   std::unique_ptr<Font> font_;
-  std::vector<std::unique_ptr<VideoMemory>> sprites_;
+  std::vector<std::unique_ptr<Sprite>> sprites_;
   std::map<std::string, std::unique_ptr<Music>> musics_;
   std::map<std::string, std::unique_ptr<SFX>> sfxs_;
 

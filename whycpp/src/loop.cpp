@@ -1,7 +1,7 @@
 #include "loop.h"
 #include <whycpp/application_listener.h>
 #include <cstdint>
-#include "clamp.h"
+#include "int_utils.h"
 #include "logger.h"
 #include "timing.h"
 #if __EMSCRIPTEN__
@@ -16,6 +16,8 @@ void Loop::UpdateWithDelay() {
   long start = GetTicks();
 
   cb(ctx, delta_time / 1000.0);
+  if (ms_per_frame == 0)
+    return;
 
   long dt = GetTicks() - start;
   auto lag = clamp(ms_per_frame - dt, 0L, ms_per_frame);

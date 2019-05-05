@@ -26,10 +26,8 @@ class SDLTexture {
  private:
   SDL_Renderer* ren;
   VideoMemory* vram;
-  std::unique_ptr<uint8_t[]> buffer;
   std::unique_ptr<SDL_Texture, sdl_deleter> tex;
 
-  void Draw();
   SDL_Rect CalcSizes();
 };
 
