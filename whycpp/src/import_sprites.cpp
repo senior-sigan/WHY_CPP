@@ -21,7 +21,7 @@ int ImportSprite(Context &context, const std::string &filename) {
   if (size > 0) {
     buffer.resize(static_cast<unsigned long>(size));
     file.read(reinterpret_cast<char *>(&buffer[0]), size);
-    LOG_INFO("Imported file '%s' of size=%d kB", filename.c_str(), size / 1024);
+    LOG_DEBUG("Imported file '%s' of size=%d kB", filename.c_str(), size / 1024);
   } else {
     buffer.clear();
     LOG_ERROR("Cannot import file '%s'", filename.c_str());

@@ -40,7 +40,7 @@ SDLRenderContext::SDLRenderContext(const ApplicationConfig& config, VideoMemory*
   }
   auto info = std::make_unique<SDL_RendererInfo>();
   SDL_GetRendererInfo(ren.get(), info.get());
-  LOG_INFO("Renderer info: name=%s", info->name);
+  LOG_DEBUG("Renderer info: name=%s", info->name);
   texture = std::make_unique<SDLTexture>(ren.get(), vram);
 }
 SDLRenderContext::~SDLRenderContext() {
