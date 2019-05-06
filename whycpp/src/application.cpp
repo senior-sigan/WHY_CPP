@@ -28,10 +28,10 @@ Application::Application(ApplicationListener* listener, const ApplicationConfig&
       listener->OnRender(ctx);
     }
   };
-  Loop::Callback render = [=](Context& ctx, double delta_time) {
+  Loop::Callback render = [=](Context&, double) {
     sdl_context->GetRenderer()->Render();
   };
-  Loop::Callback inputs = [=](Context& ctx, double delta_time) {
+  Loop::Callback inputs = [=](Context& ctx, double) {
     input_handler_->HandleEvents(ctx);
   };
   loop = std::make_unique<Loop>(update, render, inputs, *context, this->listener.get(), config.ms_per_frame);
