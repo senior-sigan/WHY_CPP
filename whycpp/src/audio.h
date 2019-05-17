@@ -13,16 +13,19 @@ class Music {
  public:
   explicit Music(const std::string& path);
   void Play(int loops);
+  void Stop();
   virtual ~Music();
 };
 
 class SFX {
   std::string path_;
   Mix_Chunk* sound_;
+  int channel_ = -1;
 
  public:
   explicit SFX(const std::string& path);
   void Play(int loops, int ticks, int channel);
+  void Stop();
   virtual ~SFX();
 };
 

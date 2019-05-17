@@ -230,6 +230,9 @@ class SoundTest : public ApplicationListener {
     if (IsClicked(ctx, Button::KEY_S)) {
       PlaySFX(ctx, "bonus.wav");
     }
+    if (IsClicked(ctx, Button::KEY_W)) {
+      StopSFX(ctx, "bonus.wav");
+    }
   }
 };
 

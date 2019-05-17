@@ -32,4 +32,7 @@ void PlayMusic(const Context &context, const std::string &name, int loops = -1);
  */
 void PlaySFX(const Context &context, const std::string &name, int loops = 0, int ticks = -1);
 
+void StopMusic(const Context &context, const std::string &name);
+void StopSFX(const Context &context, const std::string &name);
+
 #endif  // WHYCPP_SOUND_H_
