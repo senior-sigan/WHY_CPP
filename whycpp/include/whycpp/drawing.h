@@ -3,8 +3,6 @@
 
 #include <whycpp/color.h>
 
-class Context;
-
 /**
  * @defgroup Drawing
  * @ingroup WHYCPP_PublicAPI
@@ -15,52 +13,45 @@ class Context;
 
 /**
  *
- * @param context
  * @return display width in pixels
  */
-int GetDisplayWidth(const Context &context);
+int GetDisplayWidth();
 /**
  *
- * @param context
  * @return display height in pixels
  */
-int GetDisplayHeight(const Context &context);
+int GetDisplayHeight();
 /**
  * Set the pixel color at the [x,y] position
- * @param context of the application
  * @param x coordinate of the pixel on the screen
  * @param y coordinate of the pixel on the screen
  * @param color of the pixel
  */
-void SetPixel(Context &context, int x, int y, const RGBA &color);
+void SetPixel(int x, int y, const RGBA &color);
 /**
  * Get the pixel color at the [x,y] position
- * @param context  of the application
  * @param x coordinate of the pixel on the screen
  * @param y coordinate of the pixel on the screen
  * @return color of the pixel
  */
-const RGBA GetPixel(const Context &context, int x, int y);
+const RGBA GetPixel(int x, int y);
 /**
  * Fill the screen with a solid color
- * @param context
  * @param color to fill the screen
  */
-void DrawClearScreen(Context &context, const RGBA &color = {0, 0, 0, 255});
+void DrawClearScreen(const RGBA &color = {0, 0, 0, 255});
 /**
  * Draw line on the screen from the [x0,y0] to the [x1,y1] with a color.
- * @param context
  * @param x0 coordinate of the first point
  * @param y0 coordinate of the first point
  * @param x1 coordinate of the second point
  * @param y1 coordinate of the second point
  * @param color of the line
  */
-void DrawLine(Context &context, int x0, int y0, int x1, int y1, const RGBA &color);
+void DrawLine(int x0, int y0, int x1, int y1, const RGBA &color);
 /**
  * Draw a rectangle and fill it with color.
  * To draw it you need a left-upper corner coordinates [x,y] and rectangle width and height.
- * @param context
  * @param x coordinate of the left-upper corner
  * @param y coordinate of the left-upper corner
  * @param w width of the rectangle to draw
@@ -68,13 +59,12 @@ void DrawLine(Context &context, int x0, int y0, int x1, int y1, const RGBA &colo
  * @param color of the borders and filler
  * @see DrawRect()
  */
-void DrawRectFill(Context &context, int x, int y, int w, int h, const RGBA &color);
+void DrawRectFill(int x, int y, int w, int h, const RGBA &color);
 /**
  * Draw a rectangle borders with the color.
  * Rectangle body is transparent.
  *
  * To draw it you need a left-upper corner coordinates [x,y] and rectangle width and height.
- * @param context
  * @param x coordinate of the left-upper corner
  * @param y coordinate of the left-upper corner
  * @param w width of the rectangle to draw
@@ -83,12 +73,10 @@ void DrawRectFill(Context &context, int x, int y, int w, int h, const RGBA &colo
  *
  * @see DrawRectFill()
  */
-void DrawRect(Context &context, int x, int y, int w, int h, const RGBA &color);
+void DrawRect(int x, int y, int w, int h, const RGBA &color);
 /**
  * Draw a circle border with the color.
  * Circle body is transparent
- *
- * @param context
  * @param x coordinate of the circle's center
  * @param y coordinate of the circle's center
  * @param radius
@@ -96,13 +84,10 @@ void DrawRect(Context &context, int x, int y, int w, int h, const RGBA &color);
  *
  * @see DrawCircleFill()
  */
-void DrawCircle(Context &context, int x, int y, int radius, const RGBA &color);
+void DrawCircle(int x, int y, int radius, const RGBA &color);
 /**
  * Draw a circle border with the color.
  * Circle body is filled with the same color as the border.
- *
- *
- * @param context
  * @param x coordinate of the circle's center
  * @param y coordinate of the circle's center
  * @param radius
@@ -110,10 +95,9 @@ void DrawCircle(Context &context, int x, int y, int radius, const RGBA &color);
  *
  * @see DrawCircle()
  */
-void DrawCircleFill(Context &context, int x, int y, int radius, const RGBA &color);
+void DrawCircleFill(int x, int y, int radius, const RGBA &color);
 
-void DrawSprite(Context &context, int sprite_id, int screen_x, int screen_y, int sheet_x, int sheet_y, int width,
-                int height);
+void DrawSprite(int sprite_id, int screen_x, int screen_y, int sheet_x, int sheet_y, int width, int height);
 /** @} */
 
 #endif  // WHYCPP_DRAWING_H

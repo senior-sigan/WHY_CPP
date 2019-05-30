@@ -4,8 +4,6 @@
 #include <utility>
 #include <vector>
 
-class Context;
-
 class Animation {
  private:
   const int width;
@@ -20,7 +18,7 @@ class Animation {
  public:
   explicit Animation(int width, int height, int speed, std::vector<std::pair<int, int>> sprites, int sprite_id,
                      bool cycle);
-  void Draw(Context& ctx, int x, int y);
+  void Draw(int x, int y);
 };
 
 #endif  // WHYCPP_ANIMATION_H

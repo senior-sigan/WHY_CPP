@@ -5,12 +5,13 @@
 #include <memory>
 #include <vector>
 #include "context.h"
+#include "global_app_context.h"
 #include "logger.h"
 #include "sprite.h"
 
 using namespace std;
 
-int ImportSprite(Context &context, const std::string &filename) {
+int ImportSprite(const std::string &filename) {
   ifstream file(filename.c_str(), ios::in | ios::binary | ios::ate);
 
   std::streamsize size = 0;
@@ -46,5 +47,5 @@ int ImportSprite(Context &context, const std::string &filename) {
     }
   }
 
-  return context.AppendSprite(sprite);
+  return GetContext().AppendSprite(sprite);
 }

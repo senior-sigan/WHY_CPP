@@ -1,8 +1,6 @@
 #ifndef WHYCPP_LIFECYCLE_H
 #define WHYCPP_LIFECYCLE_H
 
-class Context;
-
 /**
  * @defgroup LifeCycle
  * @ingroup WHYCPP_PublicAPI
@@ -13,22 +11,19 @@ class Context;
 
 /**
  * Pause the application rendering.
- * @param context of the application
  */
-void PauseApp(Context &context);
+void PauseApp();
 
 /**
  * Resume the application rendering.
- * @param context of the application
  */
-void ResumeApp(Context &context);
+void ResumeApp();
 
 /**
  * Completely stop the application.
  * After this the OnDispose of the ApplicationListener will be called.
- * @param context of the application
  */
-void ExitApp(Context &context);
+void ExitApp();
 
 /**
  * @}

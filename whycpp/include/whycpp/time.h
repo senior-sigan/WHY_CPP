@@ -1,8 +1,6 @@
 #ifndef WHYCPP_TIME_H
 #define WHYCPP_TIME_H
 
-class Context;
-
 /**
  * @defgroup Time
  * @ingroup WHYCPP_PublicAPI
@@ -12,17 +10,15 @@ class Context;
  */
 
 /**
- * @param context of the application
  * @return time since application was started
  */
-double GetTime(const Context &context);
+double GetTime();
 /**
- * @param context of the application
  * @return time since the last display render event
  */
-double GetDelta(const Context &context);
+double GetDelta();
 
-int GetFPS(const Context& context);
+int GetFPS();
 
 /** @} */
 

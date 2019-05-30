@@ -5,8 +5,8 @@
 Animation::Animation(int width, int height, int speed, std::vector<std::pair<int, int>> sprites, int sprite_id,
                      bool cycle)
     : width(width), height(height), sprite_id(sprite_id), speed(speed), cycle(cycle), sprites(std::move(sprites)) {}
-void Animation::Draw(Context &ctx, int x, int y) {
-  time += GetDelta(ctx);
+void Animation::Draw(int x, int y) {
+  time += GetDelta();
   if (sprites.empty()) {
     return;
   }
@@ -18,5 +18,5 @@ void Animation::Draw(Context &ctx, int x, int y) {
     }
   }
   auto spr = sprites.at(index);
-  DrawSprite(ctx, sprite_id, x, y, spr.first, spr.second, width, height);
+  DrawSprite(sprite_id, x, y, spr.first, spr.second, width, height);
 }

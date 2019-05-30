@@ -2,19 +2,17 @@
 #define WHYCPP_LOOP_H
 
 #include <functional>
-#include "context.h"
 
 class ApplicationListener;
 
 class Loop {
  public:
-  typedef std::function<void(Context&, double)> Callback;
+  typedef std::function<void(double)> Callback;
 
  private:
   Callback update;
   Callback render;
   Callback inputs;
-  Context& ctx;
   ApplicationListener* listener;
 
   long now = 0;
@@ -29,7 +27,7 @@ class Loop {
   void UpdateWithDelay();
 
  public:
-  explicit Loop(Callback& update, Callback& render, Callback& inputs, Context& ctx, ApplicationListener* listener, long ms_per_frame = 16);
+  explicit Loop(Callback& update, Callback& render, Callback& inputs, ApplicationListener* listener, long ms_per_frame = 16);
   virtual ~Loop();
 
   void Run();

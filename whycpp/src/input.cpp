@@ -1,14 +1,15 @@
 #include "context.h"
+#include "global_app_context.h"
 
-bool IsPressed(const Context& ctx, const Button& btn) {
-  return ctx.IsButtonPressed(btn);
+bool IsPressed(const Button& btn) {
+  return GetContext().IsButtonPressed(btn);
 }
 
-bool IsClicked(const Context& ctx, const Button& btn) {
-  return ctx.IsButtonReleased(btn);
+bool IsClicked(const Button& btn) {
+  return GetContext().IsButtonReleased(btn);
 }
 
-void GetMouse(const Context& ctx, int& x, int& y) {
-  x = ctx.mousePosX;
-  y = ctx.mousePosY;
+void GetMouse(int& x, int& y) {
+  x = GetContext().mousePosX;
+  y = GetContext().mousePosY;
 }

@@ -6,6 +6,7 @@
 #include "application.h"
 #include "context.h"
 #include "default_font.h"
+#include "global_app_context.h"
 #include "inputs_handler.h"
 #include "logger.h"
 #include "loop.h"
@@ -18,28 +19,21 @@ Application::Application(ApplicationListener* listener, const ApplicationConfig&
     : listener(std::unique_ptr<ApplicationListener>(listener)), config(config) {
   LOG_DEBUG("Application Created");
 
-  auto vram = new VideoMemory(config.width, config.height);
-  auto font = BuildDefaultFont();
-  context = std::make_unique<Context>(vram, font, config);
+  context = std::make_unique<Context>(config);
+  SetContext(context.get());  // TODO: it's ugly, more elegnt way should be found!
 
-  Loop::Callback update = [=](Context& ctx, double delta_time) {
-    if (!ctx.IsPaused()) {
-      ctx.Tick(delta_time);
-      listener->OnRender(ctx);
+  Loop::Callback update = [=](double delta_time) {
+    if (!GetContext().IsPaused()) {
+      GetContext().Tick(delta_time);
+      listener->OnRender();
     }
   };
-  Loop::Callback render = [=](Context&, double) {
-    sdl_context->GetRenderer()->Render();
-  };
-  Loop::Callback inputs = [=](Context& ctx, double) {
-    input_handler_->HandleEvents(ctx);
-  };
-  loop = std::make_unique<Loop>(update, render, inputs, *context, this->listener.get(), config.ms_per_frame);
-
-  input_handler_ = std::make_unique<InputsHandler>(this->listener.get());
+  Loop::Callback render = [=](double) { GetContext().GetSDLContext()->GetRenderer()->Render(); };
+  Loop::Callback inputs = [=](double) { GetContext().GetInputsHandler()->HandleEvents(); };
+  loop = std::make_unique<Loop>(update, render, inputs, this->listener.get(), config.ms_per_frame);
 }
 void Application::Run() {
-  sdl_context = std::make_unique<SDLContext>(config, context->GetVRAM());
+  context->InitSDL();
   loop->Run();  // this call is async in case of emscripten
 }
 Application::~Application() {

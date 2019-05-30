@@ -4,6 +4,7 @@
 #include <whycpp/font.h>
 #include <memory>
 #include "audio.h"
+#include "default_font.h"
 #include "logger.h"
 #include "sprite.h"
 #include "video_memory.h"
@@ -39,11 +40,11 @@ bool Context::IsPaused() const {
 void Context::SetPaused(bool paused) {
   paused_ = paused;
 }
-Font* Context::GetFont() const {
-  return font_.get();
+Font Context::GetFont() const {
+  return font_;
 }
-void Context::SetFont(Font* font) {
-  Context::font_ = std::unique_ptr<Font>(font);
+void Context::SetFont(const Font& font) {
+  font_ = font;
 }
 int Context::AppendSprite(Sprite* sprite) {
   sprites_.push_back(std::unique_ptr<Sprite>(sprite));
@@ -55,8 +56,13 @@ Sprite* Context::GetSprite(int index) const {
 Context::~Context() {
   LOG_DEBUG("Context destroyed");
 }
-Context::Context(VideoMemory* vram, Font* font, const ApplicationConfig& config)
-    : vram_(std::unique_ptr<VideoMemory>(vram)), config_(config), font_(std::unique_ptr<Font>(font)), deltasHistory_(static_cast<size_t >(500.0 / config.ms_per_frame)) {
+Context::Context(const ApplicationConfig& config)
+    : vram_(std::make_unique<VideoMemory>(config.width, config.height)),
+    config_(config),
+    font_(BuildDefaultFont()),
+    deltasHistory_(static_cast<size_t >(500.0 / config.ms_per_frame)),
+    input_handler_(std::make_unique<InputsHandler>())
+{
   buttons_.resize(Button::KEY_NUM_KEYS);
   clicked_.resize(Button::KEY_NUM_KEYS);
   LOG_DEBUG("Context created");

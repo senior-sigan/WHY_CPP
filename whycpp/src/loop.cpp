@@ -1,6 +1,7 @@
 #include "loop.h"
 #include <whycpp/application_listener.h>
 #include <cstdint>
+#include "global_app_context.h"
 #include "int_utils.h"
 #include "logger.h"
 #include "timing.h"
@@ -14,11 +15,11 @@ void emscripten_Update(void* loop) {
 
 void Loop::UpdateWithDelay() {
   while (lag >= ms_per_frame) {
-    inputs(ctx, 0);
-    update(ctx, ms_per_frame / 1000.0);
+    inputs(0);
+    update(ms_per_frame / 1000.0);
     lag -= ms_per_frame;
   }
-  render(ctx, static_cast<double>(lag) / ms_per_frame);
+  render(static_cast<double>(lag) / ms_per_frame);
 }
 void Loop::Run() {
   now = GetTicks();
@@ -29,7 +30,7 @@ void Loop::Run() {
 }
 void Loop::Update() {
   if (first_start_) {
-    listener->OnCreate(ctx);
+    listener->OnCreate();
     first_start_ = false;
   }
   last = now;
@@ -37,15 +38,15 @@ void Loop::Update() {
   delta_time = now - last;
   lag += delta_time;
   if (delta_time > 0) {
-    ctx.SetRealDeltaTime(1000.0 / delta_time);
+    GetContext().SetRealDeltaTime(1000.0 / delta_time);
   }
 
   UpdateWithDelay();
 
-  isRunning = !ctx.IsQuit();
+  isRunning = !GetContext().IsQuit();
   if (!isRunning) {
     first_start_ = true;
-    listener->OnDispose(ctx);
+    listener->OnDispose();
 #if __EMSCRIPTEN__
     emscripten_force_exit(0);
 #endif
@@ -62,8 +63,8 @@ void Loop::RunLoop() {
   }
 #endif
 }
-Loop::Loop(Callback& update, Callback& render, Callback& inputs, Context& ctx, ApplicationListener* listener, long ms_per_frame)
-    : update(update), render(render), inputs(inputs), ctx(ctx), listener(listener), ms_per_frame(ms_per_frame) {
+Loop::Loop(Callback& update, Callback& render, Callback& inputs, ApplicationListener* listener, long ms_per_frame)
+    : update(update), render(render), inputs(inputs), listener(listener), ms_per_frame(ms_per_frame) {
   LOG_DEBUG("Loop created");
 }
 Loop::~Loop() {

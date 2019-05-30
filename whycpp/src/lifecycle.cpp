@@ -1,14 +1,15 @@
 #include <whycpp/lifecycle.h>
 #include "context.h"
+#include "global_app_context.h"
 
-void PauseApp(Context &context) {
-  context.SetPaused(false);
+void PauseApp() {
+  GetContext().SetPaused(false);
 }
 
-void ResumeApp(Context &context) {
-  context.SetPaused(true);
+void ResumeApp() {
+  GetContext().SetPaused(true);
 }
 
-void ExitApp(Context &context) {
-  context.SetQuit(true);
+void ExitApp() {
+  GetContext().SetQuit(true);
 }

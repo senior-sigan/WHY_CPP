@@ -1,14 +1,14 @@
 #include <whycpp/time.h>
-#include "context.h"
+#include "global_app_context.h"
 
-double GetTime(const Context& ctx) {
-  return ctx.GetTime();
+double GetTime() {
+  return GetContext().GetTime();
 }
 
-double GetDelta(const Context& ctx) {
-  return ctx.GetDelta();
+double GetDelta() {
+  return GetContext().GetDelta();
 }
 
-int GetFPS(const Context& ctx) {
-  return ctx.GetFPS();
+int GetFPS() {
+  return GetContext().GetFPS();
 }

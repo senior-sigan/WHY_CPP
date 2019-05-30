@@ -6,11 +6,13 @@
 #include <string>
 #include <vector>
 #include "average_window.h"
+#include "inputs_handler.h"
+#include "sdl_specific/sdl_context.h"
 
 #include <whycpp/application_config.h>
 #include <whycpp/buttons.h>
+#include <whycpp/font.h>
 
-class Font;
 class VideoMemory;
 class Sprite;
 class SFX;
@@ -34,8 +36,18 @@ class Music;
  */
 class Context {
  public:
-  explicit Context(VideoMemory *vram, Font *font, const ApplicationConfig& config);
+  explicit Context(const ApplicationConfig &config);
   virtual ~Context();
+
+  void InitSDL() {
+    sdl_context = std::make_unique<SDLContext>(config_, vram_.get());
+  }
+  SDLContext *GetSDLContext() const {
+    return sdl_context.get();
+  }
+  InputsHandler *GetInputsHandler() const {
+    return input_handler_.get();
+  }
 
   VideoMemory *GetVRAM() const;
   double GetTime() const {
@@ -50,8 +62,8 @@ class Context {
   void SetQuit(bool quit);
   bool IsPaused() const;
   void SetPaused(bool paused);
-  Font *GetFont() const;
-  void SetFont(Font *font);
+  Font GetFont() const;
+  void SetFont(const Font &font);
   int AppendSprite(Sprite *sprite);
   Sprite *GetSprite(int index) const;
 
@@ -76,11 +88,13 @@ class Context {
   std::vector<bool> clicked_;
   bool quit_ = false;
   bool paused_ = false;
-  std::unique_ptr<Font> font_;
+  Font font_;
   std::vector<std::unique_ptr<Sprite>> sprites_;
   std::map<std::string, std::unique_ptr<Music>> musics_;
   std::map<std::string, std::unique_ptr<SFX>> sfxs_;
   AverageWindow<double> deltasHistory_;
+  std::unique_ptr<InputsHandler> input_handler_;
+  std::unique_ptr<SDLContext> sdl_context;
 
  public:
   int mousePosX = 0;
