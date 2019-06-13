@@ -1,9 +1,8 @@
-#include <utility>
-
 #ifndef WHYCPP_CONFIG_H
 #define WHYCPP_CONFIG_H
 
 #include <string>
+#include <utility>
 
 /**
  * @addtogroup Application
