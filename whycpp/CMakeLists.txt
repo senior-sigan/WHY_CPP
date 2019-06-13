@@ -21,9 +21,10 @@ endif()
 
 if (SDL2_FROM_SOURCE AND NOT EMSCRIPTEN)
     include(ConfigureSDL2)
-#    include(ConfigureSDL2Mixer)
 endif ()
 
 set(LODEPNG_HEADERS ${PROJECT_SOURCE_DIR}/lib/lodepng/include)
+set(SDL2MIXER_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/lib/sdl2_mixer/include)
 add_subdirectory(lib/lodepng)
+add_subdirectory(lib/sdl2_mixer)
 add_subdirectory(src)

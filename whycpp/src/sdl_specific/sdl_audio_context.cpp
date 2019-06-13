@@ -2,7 +2,6 @@
 #include <SDL.h>
 #include <whycpp/log.h>
 
-#if SDL_MIXER
 #if __EMSCRIPTEN__
 #include <SDL2/SDL_mixer.h>
 #else
@@ -25,11 +24,3 @@ SDLAudioContext::~SDLAudioContext(){
   LOG_DEBUG("SDLAudioContext destroyed");
   Mix_CloseAudio();
 }
-#else
-SDLAudioContext::SDLAudioContext() {
-  LOG_DEBUG("DUMMY SDLAudioContext created");
-}
-SDLAudioContext::~SDLAudioContext(){
-  LOG_DEBUG("DUMMY SDLAudioContext destroyed");
-}
-#endif
