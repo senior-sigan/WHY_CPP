@@ -1,5 +1,4 @@
-#ifndef WHYCPP_C_IMPORT_SPRITES_H
-#define WHYCPP_C_IMPORT_SPRITES_H
+#pragma once
 
 #include <whycpp/c_api.h>
 
@@ -10,5 +9,3 @@
  */
 WHYCPP_C_API
 int ImportSprite_C(const char* filename);
-
-#endif  // WHYCPP_C_IMPORT_SPRITES_H

@@ -1,6 +1,7 @@
 #include "sdl_texture.h"
 #include <SDL_render.h>
 #include <whycpp/color.h>
+#include <whycpp/types.h>
 #include <algorithm>
 #include <cmath>
 #include "../logger.h"
@@ -27,12 +28,12 @@ SDL_Rect SDLTexture::CalcSizes() {
   SDL_Rect dst = {0, 0, 0, 0};
   SDL_QueryTexture(tex.get(), nullptr, nullptr, &dst.w, &dst.h);
 
-  int sw, sh;
+  i32 sw, sh;
   SDL_GetRendererOutputSize(ren, &sw, &sh);
 
   float rw = static_cast<float>(sw) / dst.w;
   float rh = static_cast<float>(sh) / dst.h;
-  int r = static_cast<int>(std::floor(std::min(rw, rh)));
+  i32 r = static_cast<int>(std::floor(std::min(rw, rh)));
 
   dst.w *= r;
   dst.h *= r;

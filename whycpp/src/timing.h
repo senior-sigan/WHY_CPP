@@ -1,9 +1,6 @@
-#ifndef WHYCPP_TIMING_H_
-#define WHYCPP_TIMING_H_
+#pragma once
 
-#include <cstdint>
+#include <whycpp/types.h>
 
-long GetTicks();
-void Delay(uint32_t time);
-
-#endif  // WHYCPP_TIMING_H_
+i64 GetTicks();
+void Delay(u32 time);

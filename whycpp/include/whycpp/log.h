@@ -1,5 +1,4 @@
-#ifndef WHYCPP_LOG_H
-#define WHYCPP_LOG_H
+#pragma once
 
 #include <whycpp/c_api.h>
 
@@ -21,7 +20,7 @@ typedef enum LogLevel {
 } LogLevel_t;
 
 /**
- * Print a message to the console.
+ * Pri32 a message to the console.
  * It works like printf.
  * @param level
  * @param fmt printf-style format string
@@ -46,5 +45,3 @@ WHYCPP_C_API
 void SetLogLevel(LogLevel_t priority);
 
 /** @} */
-
-#endif  // WHYCPP_LOG_H

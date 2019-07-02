@@ -1,5 +1,6 @@
 #include "video_memory.h"
 #include <whycpp/color.h>
+#include <whycpp/types.h>
 #include <algorithm>
 #include "int_utils.h"
 #include "logger.h"
@@ -18,52 +19,52 @@ uint32_t FlattenRGBA(const RGBA& rgba) {
   return RGBA_flatten{rgba}.value;
 }
 
-VideoMemory::VideoMemory(int width, int height)
+VideoMemory::VideoMemory(i32 width, i32 height)
     : width(width), height(height), buffer(std::make_unique<uint32_t[]>(AsSize(width * height))) {
   LOG_DEBUG("VideoMemory [%d, %d] created", width, height);
 }
 VideoMemory::~VideoMemory() {
   LOG_DEBUG("VideoMemory [%d, %d] destroyed", width, height);
 }
-void VideoMemory::Set(int x, int y, const RGBA& color) {
+void VideoMemory::Set(i32 x, i32 y, const RGBA& color) {
   auto index = CheckY(y) * AsSize(width) + CheckX(x);
   buffer[index] = RGBA_flatten{color}.value;
 }
-const RGBA VideoMemory::Get(int x, int y) const {
+const RGBA VideoMemory::Get(i32 x, i32 y) const {
   auto index = CheckY(y) * AsSize(width) + CheckX(x);
   return RGBA_unflatten{buffer[index]}.rgba_;
 }
-int VideoMemory::GetHeight() const {
+i32 VideoMemory::GetHeight() const {
   return height;
 }
-int VideoMemory::GetWidth() const {
+i32 VideoMemory::GetWidth() const {
   return width;
 }
-size_t VideoMemory::CheckX(int x) const {
+size_t VideoMemory::CheckX(i32 x) const {
   if (x >= width || x < 0) {
     LOG_VERBOSE("VideoMemory:  X is out of bound, should be [0, %d) but %d", width, x);
     return AsSize(clamp(x, 0, width - 1));
   }
   return AsSize(x);
 }
-size_t VideoMemory::CheckY(int y) const {
+size_t VideoMemory::CheckY(i32 y) const {
   if (y >= height || y < 0) {
     LOG_VERBOSE("VideoMemory:  Y is out of bound, should be [0, %d) but %d", height, y);
     return AsSize(clamp(y, 0, height - 1));
   }
   return AsSize(y);
 }
-int VideoMemory::GetScreenWidth() const {
+i32 VideoMemory::GetScreenWidth() const {
   return screen_width;
 }
-void VideoMemory::SetScreenWidth(int screen_width_) {
+void VideoMemory::SetScreenWidth(i32 screen_width_) {
   if (screen_width_ < 1) return;
   screen_width = screen_width_;
 }
-int VideoMemory::GetScreenHeight() const {
+i32 VideoMemory::GetScreenHeight() const {
   return screen_height;
 }
-void VideoMemory::SetScreenHeight(int screen_height_) {
+void VideoMemory::SetScreenHeight(i32 screen_height_) {
   if (screen_height_ < 1) return;
   screen_height = screen_height_;
 }

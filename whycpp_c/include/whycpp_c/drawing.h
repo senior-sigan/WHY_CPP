@@ -1,8 +1,7 @@
-#ifndef WHYCPP_C_DRAWING_H
-#define WHYCPP_C_DRAWING_H
+#pragma once
 
 #include <whycpp/c_api.h>
-#include "color.h"
+#include <whycpp_c/color.h>
 
 /**
  *
@@ -107,5 +106,3 @@ void DrawCircleFill_C(int x, int y, int radius, RGBA_t color);
 
 WHYCPP_C_API
 void DrawSprite_C(int sprite_id, int screen_x, int screen_y, int sheet_x, int sheet_y, int width, int height);
-
-#endif  // WHYCPP_C_DRAWING_H

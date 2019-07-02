@@ -1,7 +1,7 @@
-#ifndef WHYCPP_VIDEO_MEMORY_H
-#define WHYCPP_VIDEO_MEMORY_H
+#pragma once
 
 #include <whycpp/color.h>
+#include <whycpp/types.h>
 #include <memory>
 #include <vector>
 
@@ -19,30 +19,28 @@
  */
 class VideoMemory {
  public:
-  int GetScreenWidth() const;
-  void SetScreenWidth(int screen_width);
-  int GetScreenHeight() const;
-  void SetScreenHeight(int screen_height);
-  int GetWidth() const;
-  int GetHeight() const;
-  const RGBA Get(int x, int y) const;
-  void Set(int x, int y, const RGBA& color);
+  i32 GetScreenWidth() const;
+  void SetScreenWidth(i32 screen_width);
+  i32 GetScreenHeight() const;
+  void SetScreenHeight(i32 screen_height);
+  i32 GetWidth() const;
+  i32 GetHeight() const;
+  const RGBA Get(i32 x, i32 y) const;
+  void Set(i32 x, i32 y, const RGBA& color);
   void Fill(const RGBA& color);
-  explicit VideoMemory(int width, int height);
+  explicit VideoMemory(i32 width, i32 height);
   virtual ~VideoMemory();
   const uint8_t* GetBuffer() const;
 
  private:
-  int width;
-  int height;
-  int screen_width = 0;
-  int screen_height = 0;
+  i32 width;
+  i32 height;
+  i32 screen_width = 0;
+  i32 screen_height = 0;
   std::unique_ptr<uint32_t[]> buffer;
 
-  inline size_t CheckX(int x) const;
-  inline size_t CheckY(int y) const;
+  inline size_t CheckX(i32 x) const;
+  inline size_t CheckY(i32 y) const;
 };
 
 /** @} */
-
-#endif  // WHYCPP_VIDEO_MEMORY_H

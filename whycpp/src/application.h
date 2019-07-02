@@ -1,5 +1,4 @@
-#ifndef WHYCPP_APPLICATION_H
-#define WHYCPP_APPLICATION_H
+#pragma once
 
 #include <whycpp/application_config.h>
 #include <memory>
@@ -46,5 +45,3 @@ class Application {
 };
 
 /** @} */
-
-#endif  // WHYCPP_APPLICATION_H

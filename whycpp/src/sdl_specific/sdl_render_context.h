@@ -1,5 +1,4 @@
-#ifndef WHYCPP_SDL_CONTEXT_H
-#define WHYCPP_SDL_CONTEXT_H
+#pragma once
 
 #include <memory>
 #include "sdl_deleter.h"
@@ -21,5 +20,3 @@ class SDLRenderContext {
 
   void Render();
 };
-
-#endif  // WHYCPP_SDL_CONTEXT_H

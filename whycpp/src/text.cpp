@@ -1,14 +1,15 @@
 #include <whycpp/drawing.h>
 #include <whycpp/text.h>
+#include <whycpp/types.h>
 #include "context.h"
 
-void Print(Context &ctx, char ch, int x, int y, const RGBA &color, int size) {
+void Print(Context &ctx, char ch, i32 x, i32 y, const RGBA &color, i32 size) {
   auto font = ctx.GetFont();
   for (uint8_t row = 0; row < Glyph::SIZE; row++) {
     for (uint8_t col = 0; col < 8; col++) {
       if (((font->At(ch, row) >> col) & 0x1) == 1) {
-        for (int i = 0; i < size; i++) {
-          for (int j = 0; j < size; j++) {
+        for (i32 i = 0; i < size; i++) {
+          for (i32 j = 0; j < size; j++) {
             SetPixel(ctx, x + col * size + i, y + row * size + j, color);
           }
         }
@@ -17,11 +18,11 @@ void Print(Context &ctx, char ch, int x, int y, const RGBA &color, int size) {
   }
 }
 
-void Print(Context &ctx, const std::string &str, int x, int y, const RGBA &color, int size, int spacing) {
+void Print(Context &ctx, const std::string &str, i32 x, i32 y, const RGBA &color, i32 size, i32 spacing) {
   auto font = ctx.GetFont();
   // TODO: add \n, \t, \r and other escape symbols support
-  int x_ = x;
-  int y_ = y;
+  i32 x_ = x;
+  i32 y_ = y;
 
   for (char ch : str) {
     // TODO: it should be state machine, but .....

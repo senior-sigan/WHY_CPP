@@ -62,7 +62,8 @@ void Loop::RunLoop() {
   }
 #endif
 }
-Loop::Loop(Callback& update, Callback& render, Callback& inputs, Context& ctx, ApplicationListener* listener, long ms_per_frame)
+Loop::Loop(Callback& update, Callback& render, Callback& inputs, Context& ctx, ApplicationListener* listener,
+           i64 ms_per_frame)
     : update(update), render(render), inputs(inputs), ctx(ctx), listener(listener), ms_per_frame(ms_per_frame) {
   LOG_DEBUG("Loop created");
 }

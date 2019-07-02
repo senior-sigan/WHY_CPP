@@ -1,5 +1,4 @@
-#ifndef WHYCPP_APPLICATION_LISTENER_H
-#define WHYCPP_APPLICATION_LISTENER_H
+#pragma once
 
 class Context;
 
@@ -11,7 +10,7 @@ class Context;
 /**
  * @class ApplicationListener
  *
- * ApplicationListener is the entry point into the WHYCPP application.
+ * ApplicationListener is the entry poi32 into the WHYCPP application.
  * Usually you need only one implementation of this interface,
  * but in case you would like to have many different applications in a single binary file,
  * you could create more implementations.
@@ -35,5 +34,3 @@ class ApplicationListener {
 };
 
 /** @} */
-
-#endif  // WHYCPP_APPLICATION_LISTENER_H

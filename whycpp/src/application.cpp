@@ -1,9 +1,8 @@
-#include <memory>
-
+#include "application.h"
 #include <whycpp/application_config.h>
 #include <whycpp/application_listener.h>
 #include <functional>
-#include "application.h"
+#include <memory>
 #include "context.h"
 #include "default_font.h"
 #include "inputs_handler.h"
@@ -28,12 +27,8 @@ Application::Application(ApplicationListener* listener, const ApplicationConfig&
       listener->OnRender(ctx);
     }
   };
-  Loop::Callback render = [=](Context&, double) {
-    sdl_context->GetRenderer()->Render();
-  };
-  Loop::Callback inputs = [=](Context& ctx, double) {
-    input_handler_->HandleEvents(ctx);
-  };
+  Loop::Callback render = [=](Context&, double) { sdl_context->GetRenderer()->Render(); };
+  Loop::Callback inputs = [=](Context& ctx, double) { input_handler_->HandleEvents(ctx); };
   loop = std::make_unique<Loop>(update, render, inputs, *context, this->listener.get(), config.ms_per_frame);
 
   input_handler_ = std::make_unique<InputsHandler>(this->listener.get());

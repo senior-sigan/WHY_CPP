@@ -1,7 +1,7 @@
-#ifndef WHYCPP_DRAWING_H
-#define WHYCPP_DRAWING_H
+#pragma once
 
 #include <whycpp/color.h>
+#include <whycpp/types.h>
 
 class Context;
 
@@ -18,13 +18,13 @@ class Context;
  * @param context
  * @return display width in pixels
  */
-int GetDisplayWidth(const Context &context);
+i32 GetDisplayWidth(const Context &context);
 /**
  *
  * @param context
  * @return display height in pixels
  */
-int GetDisplayHeight(const Context &context);
+i32 GetDisplayHeight(const Context &context);
 /**
  * Set the pixel color at the [x,y] position
  * @param context of the application
@@ -32,7 +32,7 @@ int GetDisplayHeight(const Context &context);
  * @param y coordinate of the pixel on the screen
  * @param color of the pixel
  */
-void SetPixel(Context &context, int x, int y, const RGBA &color);
+void SetPixel(Context &context, i32 x, i32 y, const RGBA &color);
 /**
  * Get the pixel color at the [x,y] position
  * @param context  of the application
@@ -40,7 +40,7 @@ void SetPixel(Context &context, int x, int y, const RGBA &color);
  * @param y coordinate of the pixel on the screen
  * @return color of the pixel
  */
-const RGBA GetPixel(const Context &context, int x, int y);
+const RGBA GetPixel(const Context &context, i32 x, i32 y);
 /**
  * Fill the screen with a solid color
  * @param context
@@ -56,7 +56,7 @@ void DrawClearScreen(Context &context, const RGBA &color = {0, 0, 0, 255});
  * @param y1 coordinate of the second point
  * @param color of the line
  */
-void DrawLine(Context &context, int x0, int y0, int x1, int y1, const RGBA &color);
+void DrawLine(Context &context, i32 x0, i32 y0, i32 x1, i32 y1, const RGBA &color);
 /**
  * Draw a rectangle and fill it with color.
  * To draw it you need a left-upper corner coordinates [x,y] and rectangle width and height.
@@ -68,7 +68,7 @@ void DrawLine(Context &context, int x0, int y0, int x1, int y1, const RGBA &colo
  * @param color of the borders and filler
  * @see DrawRect()
  */
-void DrawRectFill(Context &context, int x, int y, int w, int h, const RGBA &color);
+void DrawRectFill(Context &context, i32 x, i32 y, i32 w, i32 h, const RGBA &color);
 /**
  * Draw a rectangle borders with the color.
  * Rectangle body is transparent.
@@ -83,7 +83,7 @@ void DrawRectFill(Context &context, int x, int y, int w, int h, const RGBA &colo
  *
  * @see DrawRectFill()
  */
-void DrawRect(Context &context, int x, int y, int w, int h, const RGBA &color);
+void DrawRect(Context &context, i32 x, i32 y, i32 w, i32 h, const RGBA &color);
 /**
  * Draw a circle border with the color.
  * Circle body is transparent
@@ -96,7 +96,7 @@ void DrawRect(Context &context, int x, int y, int w, int h, const RGBA &color);
  *
  * @see DrawCircleFill()
  */
-void DrawCircle(Context &context, int x, int y, int radius, const RGBA &color);
+void DrawCircle(Context &context, i32 x, i32 y, i32 radius, const RGBA &color);
 /**
  * Draw a circle border with the color.
  * Circle body is filled with the same color as the border.
@@ -110,10 +110,8 @@ void DrawCircle(Context &context, int x, int y, int radius, const RGBA &color);
  *
  * @see DrawCircle()
  */
-void DrawCircleFill(Context &context, int x, int y, int radius, const RGBA &color);
+void DrawCircleFill(Context &context, i32 x, i32 y, i32 radius, const RGBA &color);
 
-void DrawSprite(Context &context, int sprite_id, int screen_x, int screen_y, int sheet_x, int sheet_y, int width,
-                int height);
+void DrawSprite(Context &context, i32 sprite_id, i32 screen_x, i32 screen_y, i32 sheet_x, i32 sheet_y, i32 width,
+                i32 height);
 /** @} */
-
-#endif  // WHYCPP_DRAWING_H

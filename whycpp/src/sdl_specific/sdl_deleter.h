@@ -1,5 +1,4 @@
-#ifndef WHYCPP_SDL_DELETER_H
-#define WHYCPP_SDL_DELETER_H
+#pragma once
 
 struct SDL_Renderer;
 struct SDL_Window;
@@ -10,5 +9,3 @@ struct sdl_deleter {
   void operator()(SDL_Renderer *) const;
   void operator()(SDL_Texture *) const;
 };
-
-#endif  // WHYCPP_SDL_DELETER_H

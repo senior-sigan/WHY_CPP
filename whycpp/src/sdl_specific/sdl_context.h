@@ -1,5 +1,4 @@
-#ifndef WHYCPP_ROOT_WHYCPP_SRC_SDL_SPECIFIC_SDL_CONTEXT_H_
-#define WHYCPP_ROOT_WHYCPP_SRC_SDL_SPECIFIC_SDL_CONTEXT_H_
+#pragma once
 
 #include <memory>
 
@@ -17,5 +16,3 @@ class SDLContext {
   virtual ~SDLContext();
   SDLRenderContext* GetRenderer() const;
 };
-
-#endif  // WHYCPP_ROOT_WHYCPP_SRC_SDL_SPECIFIC_SDL_CONTEXT_H_

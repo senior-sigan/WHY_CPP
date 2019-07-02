@@ -1,8 +1,6 @@
+#include <whycpp/text.h>
 #include <whycpp_c/color.h>
 #include <whycpp_c/text.h>
-
-#include <whycpp/text.h>
-
 #include "internal/drawing_int.h"
 #include "internal/global_context_int.h"
 

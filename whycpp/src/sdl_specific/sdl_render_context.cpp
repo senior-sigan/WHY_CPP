@@ -1,8 +1,7 @@
-#include <memory>
-
 #include "sdl_render_context.h"
 #include <SDL.h>
 #include <whycpp/application_config.h>
+#include <memory>
 #include "../logger.h"
 #include "../video_memory.h"
 #include "sdl_deleter.h"
@@ -32,8 +31,8 @@ SDLRenderContext::SDLRenderContext(const ApplicationConfig& config, VideoMemory*
   if (config.vsync) {
     vsync = SDL_RENDERER_PRESENTVSYNC;
   }
-  ren = std::unique_ptr<SDL_Renderer, sdl_deleter>(
-      SDL_CreateRenderer(win.get(), -1, SDL_RENDERER_ACCELERATED | vsync), sdl_deleter());
+  ren = std::unique_ptr<SDL_Renderer, sdl_deleter>(SDL_CreateRenderer(win.get(), -1, SDL_RENDERER_ACCELERATED | vsync),
+                                                   sdl_deleter());
   if (!ren) {
     LogSDLError("SDL_CreateRenderer");
     return;  // TODO: what? throw exception?

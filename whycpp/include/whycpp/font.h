@@ -1,6 +1,6 @@
-#ifndef WHYCPP_FONT_H
-#define WHYCPP_FONT_H
+#pragma once
 
+#include <whycpp/types.h>
 #include <cstdint>
 #include <vector>
 
@@ -12,8 +12,7 @@
  */
 
 struct Glyph {
-  // TODO: why do we fix font size?
-  const static int SIZE = 8;
+  static const i32 SIZE = 8;  // TODO: why do we fix font size?
   uint8_t data[SIZE];
 };
 
@@ -23,20 +22,18 @@ struct Glyph {
 class Font {
  public:
   explicit Font(std::vector<Glyph> glyphs);
-  uint8_t At(char ch, int row) const;
-  int GetHeight() const;
-  int GetWidth() const;
-  int GetSpacing() const;
+  uint8_t At(char ch, i32 row) const;
+  i32 GetHeight() const;
+  i32 GetWidth() const;
+  i32 GetSpacing() const;
 
  private:
-  int spacing = 1;
-  int width = 5;
-  int height = 7;
+  i32 spacing = 1;
+  i32 width = 5;
+  i32 height = 7;
   std::vector<Glyph> glyphs;
 };
 
 /**
  * @}
  */
-
-#endif  // WHYCPP_FONT_H

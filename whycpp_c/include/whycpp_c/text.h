@@ -1,8 +1,7 @@
-#ifndef WHYCPP_C_TEXT_H
-#define WHYCPP_C_TEXT_H
+#pragma once
 
 #include <whycpp/c_api.h>
-#include "color.h"
+#include <whycpp_c/color.h>
 
 /**
  * Prints a single char at a position with color
@@ -28,5 +27,3 @@ void PrintChar_C(char ch, int x, int y, RGBA_t color, int size);
  */
 WHYCPP_C_API
 void PrintStr_C(const char* str, int x, int y, RGBA_t color, int size, int spacing);
-
-#endif  // WHYCPP_C_TEXT_H

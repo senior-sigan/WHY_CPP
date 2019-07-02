@@ -1,5 +1,4 @@
-#ifndef WHYCPP_LIFECYCLE_H
-#define WHYCPP_LIFECYCLE_H
+#pragma once
 
 class Context;
 
@@ -33,5 +32,3 @@ void ExitApp(Context &context);
 /**
  * @}
  */
-
-#endif  // WHYCPP_LIFECYCLE_H

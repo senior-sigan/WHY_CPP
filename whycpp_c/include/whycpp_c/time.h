@@ -1,5 +1,4 @@
-#ifndef WHYCPP_C_TIME_H
-#define WHYCPP_C_TIME_H
+#pragma once
 
 #include <whycpp/c_api.h>
 
@@ -15,5 +14,3 @@ double GetTime_C();
  */
 WHYCPP_C_API
 double GetDelta_C();
-
-#endif  // WHYCPP_C_TIME_H

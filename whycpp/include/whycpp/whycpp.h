@@ -1,8 +1,7 @@
-#ifndef WHYCPP_WHYCPP_H
-#define WHYCPP_WHYCPP_H
+#pragma once
 
+#include <whycpp/application_config.h>
 #include <memory>
-#include "application_config.h"
 
 class ApplicationListener;
 
@@ -40,5 +39,3 @@ void Run(ApplicationListener *listener,
          const ApplicationConfig &config = ApplicationConfig(256, 144, "Application", false, 3, 16));
 
 /** @} */
-
-#endif  // WHYCPP_WHYCPP_H

@@ -30,3 +30,12 @@ if (NOT EMSCRIPTEN)
     add_subdirectory(lib/sdl2_mixer)
 endif ()
 add_subdirectory(src)
+
+
+# Add linting before compilation
+file(GLOB_RECURSE SOURCES_LIST ${WHYCPP_INCLUDES_DIR}/*.h ${WHYCPP_SOURCES_DIR}/*.h ${WHYCPP_SOURCES_DIR}/*.cpp)
+include(CppLint)
+if (CPPLINT_FOUND)
+    ADD_STYLE_CHECK_TARGET(lint "${SOURCES_LIST}")
+    add_dependencies(${PROJECT_NAME} lint)
+endif ()

@@ -1,10 +1,7 @@
-#ifndef WHYCPP_ROOT_WHYCPP_SRC_SDL_SPECIFIC_SDL_AUDIO_CONTEXT_H_
-#define WHYCPP_ROOT_WHYCPP_SRC_SDL_SPECIFIC_SDL_AUDIO_CONTEXT_H_
+#pragma once
 
 class SDLAudioContext {
  public:
   SDLAudioContext();
   virtual ~SDLAudioContext();
 };
-
-#endif //WHYCPP_ROOT_WHYCPP_SRC_SDL_SPECIFIC_SDL_AUDIO_CONTEXT_H_

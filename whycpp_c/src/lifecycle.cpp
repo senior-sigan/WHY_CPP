@@ -1,6 +1,5 @@
 #include <whycpp/lifecycle.h>
 #include <whycpp_c/lifecycle.h>
-
 #include "internal/global_context_int.h"
 
 void PauseApp_C() {

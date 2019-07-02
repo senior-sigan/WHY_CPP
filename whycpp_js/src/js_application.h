@@ -1,5 +1,4 @@
-#ifndef WHYCPP_ROOT_WHYCPP_JS_SRC_JS_APPLICATION_H_
-#define WHYCPP_ROOT_WHYCPP_JS_SRC_JS_APPLICATION_H_
+#pragma once
 
 #include <duktape.h>
 #include <whycpp/application_listener.h>
@@ -19,5 +18,3 @@ class JsApplication : public ApplicationListener {
 
   ~JsApplication() override;
 };
-
-#endif  // WHYCPP_ROOT_WHYCPP_JS_SRC_JS_APPLICATION_H_

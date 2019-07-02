@@ -1,24 +1,23 @@
-#ifndef WHYCPP_ROOT_WHYCPP_SRC_SPRITE_H_
-#define WHYCPP_ROOT_WHYCPP_SRC_SPRITE_H_
+#pragma once
 
 #include <whycpp/color.h>
+#include <whycpp/types.h>
 #include <memory>
 #include <vector>
 
 class Sprite {
-  int width_;
-  int height_;
+  i32 width_;
+  i32 height_;
   std::vector<std::vector<RGBA>> texture;
 
-  size_t CheckX(int x) const;
-  size_t CheckY(int y) const;
- public:
-  Sprite(int width, int height);
-  ~Sprite();
-  int GetWidth() const;
-  int GetHeight() const;
-  const RGBA &Get(int x, int y) const;
-  void Set(int x, int y, const RGBA &color);
-};
+  size_t CheckX(i32 x) const;
+  size_t CheckY(i32 y) const;
 
-#endif //WHYCPP_ROOT_WHYCPP_SRC_SPRITE_H_
+ public:
+  Sprite(i32 width, i32 height);
+  ~Sprite();
+  i32 GetWidth() const;
+  i32 GetHeight() const;
+  const RGBA &Get(i32 x, i32 y) const;
+  void Set(i32 x, i32 y, const RGBA &color);
+};

@@ -1,17 +1,17 @@
-#ifndef WHYCPP_SOUND_H_
-#define WHYCPP_SOUND_H_
+#pragma once
 
+#include <whycpp/types.h>
 #include <string>
 
 class Context;
 
 /**
-* @defgroup Sound
-* @ingroup WHYCPP_PublicAPI
-* @brief Functions to play some sound and music
-* @details You need sdl2_mixer library to be installed. https://www.libsdl.org/projects/SDL_mixer/
-* @{
-*/
+ * @defgroup Sound
+ * @ingroup WHYCPP_PublicAPI
+ * @brief Functions to play some sound and music
+ * @details You need sdl2_mixer library to be installed. https://www.libsdl.org/projects/SDL_mixer/
+ * @{
+ */
 
 /**
  * Loads audio file in memory. Setup an association between sound and name.
@@ -30,7 +30,7 @@ void ImportSFX(Context &context, const std::string &path, const std::string &nam
  * @param name Name of the music to play.
  * @param loops Number of loops, -1 is infinite loops. Passing one here plays the sample twice (1 loop).
  */
-void PlayMusic(const Context &context, const std::string &name, int loops = -1);
+void PlayMusic(const Context &context, const std::string &name, i32 loops = -1);
 /**
  *
  * @param name Name of the music to play.
@@ -38,7 +38,7 @@ void PlayMusic(const Context &context, const std::string &name, int loops = -1);
  * @param ticks Millisecond limit to play sample, at most. If not enough loops or the sample chunk is not long enough,
  * then the sample may stop before this timeout occurs. -1 means play forever.
  */
-void PlaySFX(const Context &context, const std::string &name, int loops = 0, int ticks = -1);
+void PlaySFX(const Context &context, const std::string &name, i32 loops = 0, i32 ticks = -1);
 /**
  * Stop the music. Next PlayMusic call starts playing from the beginning.
  * @param context
@@ -53,5 +53,3 @@ void StopMusic(const Context &context, const std::string &name);
 void StopSFX(const Context &context, const std::string &name);
 
 /** @} */
-
-#endif  // WHYCPP_SOUND_H_

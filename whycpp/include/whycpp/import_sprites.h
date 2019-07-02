@@ -1,6 +1,6 @@
-#ifndef WHYCPP_IMPORT_SPRITES_H
-#define WHYCPP_IMPORT_SPRITES_H
+#pragma once
 
+#include <whycpp/types.h>
 #include <string>
 
 class Context;
@@ -11,6 +11,4 @@ class Context;
  * @param filename
  * @return
  */
-int ImportSprite(Context &context, const std::string &filename);
-
-#endif  // WHYCPP_IMPORT_SPRITES_H
+i32 ImportSprite(Context &context, const std::string &filename);

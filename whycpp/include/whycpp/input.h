@@ -1,7 +1,7 @@
-#ifndef WHYCPP_INPUTS_H
-#define WHYCPP_INPUTS_H
+#pragma once
 
-#include "buttons.h"
+#include <whycpp/buttons.h>
+#include <whycpp/types.h>
 
 class Context;
 
@@ -39,5 +39,3 @@ bool IsClicked(const Context& context, const Button& btn);
 void GetMouse(const Context& context, int& x, int& y);
 
 /** @} */
-
-#endif  // WHYCPP_INPUTS_H

@@ -2,24 +2,25 @@
 #include <whycpp/application_config.h>
 #include <whycpp/buttons.h>
 #include <whycpp/font.h>
+#include <whycpp/types.h>
 #include <memory>
 #include "audio.h"
 #include "logger.h"
 #include "sprite.h"
 #include "video_memory.h"
 
-void Context::KeyUp(const unsigned int code) {
+void Context::KeyUp(const u32 code) {
   if (code >= KEY_NUM_KEYS) return;
   buttons_[code] = false;
   clicked_[code] = true;
 }
-void Context::KeyDown(const unsigned int code) {
+void Context::KeyDown(const u32 code) {
   if (code >= KEY_NUM_KEYS) return;
   buttons_[code] = true;
   clicked_[code] = false;
 }
 void Context::ResetKeys() {
-  for (unsigned int i = 0; i < KEY_NUM_KEYS; i++) {
+  for (u32 i = 0; i < KEY_NUM_KEYS; i++) {
     clicked_[i] = false;
   }
 }
@@ -45,18 +46,21 @@ Font* Context::GetFont() const {
 void Context::SetFont(Font* font) {
   Context::font_ = std::unique_ptr<Font>(font);
 }
-int Context::AppendSprite(Sprite* sprite) {
+i32 Context::AppendSprite(Sprite* sprite) {
   sprites_.push_back(std::unique_ptr<Sprite>(sprite));
   return static_cast<int>(sprites_.size() - 1);
 }
-Sprite* Context::GetSprite(int index) const {
-  return sprites_.at(static_cast<unsigned long>(index)).get();
+Sprite* Context::GetSprite(i32 index) const {
+  return sprites_.at(static_cast<u64>(index)).get();
 }
 Context::~Context() {
   LOG_DEBUG("Context destroyed");
 }
 Context::Context(VideoMemory* vram, Font* font, const ApplicationConfig& config)
-    : vram_(std::unique_ptr<VideoMemory>(vram)), config_(config), font_(std::unique_ptr<Font>(font)), deltasHistory_(static_cast<size_t >(500.0 / config.ms_per_frame)) {
+    : vram_(std::unique_ptr<VideoMemory>(vram)),
+      config_(config),
+      font_(std::unique_ptr<Font>(font)),
+      deltasHistory_(static_cast<size_t>(500.0 / config.ms_per_frame)) {
   buttons_.resize(Button::KEY_NUM_KEYS);
   clicked_.resize(Button::KEY_NUM_KEYS);
   LOG_DEBUG("Context created");
@@ -94,7 +98,7 @@ SFX* Context::GetSFX(const std::string& name) const {
   }
   return sfxs_.at(name).get();
 }
-int Context::GetFPS() const {
+i32 Context::GetFPS() const {
   return static_cast<int>(deltasHistory_.Get());
 }
 void Context::SetRealDeltaTime(double delta) {

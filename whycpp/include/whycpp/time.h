@@ -1,5 +1,6 @@
-#ifndef WHYCPP_TIME_H
-#define WHYCPP_TIME_H
+#pragma once
+
+#include <whycpp/types.h>
 
 class Context;
 
@@ -22,8 +23,6 @@ double GetTime(const Context &context);
  */
 double GetDelta(const Context &context);
 
-int GetFPS(const Context& context);
+i32 GetFPS(const Context& context);
 
 /** @} */
-
-#endif  // WHYCPP_TIME_H

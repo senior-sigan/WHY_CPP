@@ -1,6 +1,6 @@
-#ifndef WHYCPP_ROOT_WHYCPP_SRC_SDL_SPECIFIC_AUDIO_H_
-#define WHYCPP_ROOT_WHYCPP_SRC_SDL_SPECIFIC_AUDIO_H_
+#pragma once
 
+#include <whycpp/types.h>
 #include <string>
 
 typedef struct _Mix_Music Mix_Music;
@@ -12,7 +12,7 @@ class Music {
 
  public:
   explicit Music(const std::string& path);
-  void Play(int loops);
+  void Play(i32 loops);
   void Stop();
   virtual ~Music();
 };
@@ -20,13 +20,11 @@ class Music {
 class SFX {
   std::string path_;
   Mix_Chunk* sound_;
-  int channel_ = -1;
+  i32 channel_ = -1;
 
  public:
   explicit SFX(const std::string& path);
-  void Play(int loops, int ticks, int channel);
+  void Play(i32 loops, i32 ticks, i32 channel);
   void Stop();
   virtual ~SFX();
 };
-
-#endif  // WHYCPP_ROOT_WHYCPP_SRC_SDL_SPECIFIC_AUDIO_H_

@@ -1,6 +1,6 @@
-#ifndef WHYCPP_CONFIG_H
-#define WHYCPP_CONFIG_H
+#pragma once
 
+#include <whycpp/types.h>
 #include <string>
 #include <utility>
 
@@ -10,16 +10,16 @@
  */
 
 struct ApplicationConfig {
-  const int width;
-  const int height;
+  const i32 width;
+  const i32 height;
   const std::string name;
   const bool is_fullscreen;
-  const int window_size_multiplier;
-  const long ms_per_frame;
+  const i32 window_size_multiplier;
+  const i32 ms_per_frame;
   const bool vsync;
 
-  explicit ApplicationConfig(const int width = 256, const int height = 144, std::string name = "Application",
-                             const bool is_fullscreen = false, int window_size_multiplier = 3, long ms_per_frame = 16,
+  explicit ApplicationConfig(const i32 width = 256, const i32 height = 144, std::string name = "Application",
+                             const bool is_fullscreen = false, i32 window_size_multiplier = 3, i32 ms_per_frame = 16,
                              bool vsync = true)
       : width(width),
         height(height),
@@ -29,14 +29,12 @@ struct ApplicationConfig {
         ms_per_frame(ms_per_frame),
         vsync(vsync) {}
 
-  int GetWindowWidth() const {
+  i32 GetWindowWidth() const {
     return width * window_size_multiplier;
   }
-  int GetWindowHeight() const {
+  i32 GetWindowHeight() const {
     return height * window_size_multiplier;
   }
 };
 
 /** @} */
-
-#endif  // WHYCPP_CONFIG_H

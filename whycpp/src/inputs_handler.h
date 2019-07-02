@@ -1,5 +1,4 @@
-#ifndef WHYCPP_INPUTS_HANDLER_H_
-#define WHYCPP_INPUTS_HANDLER_H_
+#pragma once
 
 class Context;
 class ApplicationListener;
@@ -11,5 +10,3 @@ class InputsHandler {
   explicit InputsHandler(ApplicationListener* listener);
   void HandleEvents(Context& ctx);
 };
-
-#endif  // WHYCPP_INPUTS_HANDLER_H_

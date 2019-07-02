@@ -1,5 +1,4 @@
-#ifndef WHYCPP_BUTTONS_H
-#define WHYCPP_BUTTONS_H
+#pragma once
 
 /**
  * @addtogroup Input
@@ -82,5 +81,3 @@ typedef enum Button {
 } Button_t;
 
 /** @} */
-
-#endif  // WHYCPP_BUTTONS_H

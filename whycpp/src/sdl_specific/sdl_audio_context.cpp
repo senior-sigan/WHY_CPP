@@ -20,7 +20,7 @@ SDLAudioContext::SDLAudioContext() {
     LOG_ERROR("SDL_MIXER error: %s", SDL_GetError());
   }
 }
-SDLAudioContext::~SDLAudioContext(){
+SDLAudioContext::~SDLAudioContext() {
   LOG_DEBUG("SDLAudioContext destroyed");
   Mix_CloseAudio();
 }

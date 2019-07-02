@@ -9,6 +9,6 @@ double GetDelta(const Context& ctx) {
   return ctx.GetDelta();
 }
 
-int GetFPS(const Context& ctx) {
+i32 GetFPS(const Context& ctx) {
   return ctx.GetFPS();
 }

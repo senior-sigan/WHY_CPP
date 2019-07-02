@@ -1,5 +1,4 @@
-#ifndef WHYCPP_ROOT_WHYCPP_SRC_AVERAGE_WINDOW_H_
-#define WHYCPP_ROOT_WHYCPP_SRC_AVERAGE_WINDOW_H_
+#pragma once
 
 #include <vector>
 
@@ -22,5 +21,3 @@ class AverageWindow {
     return sum / size_;
   }
 };
-
-#endif  // WHYCPP_ROOT_WHYCPP_SRC_AVERAGE_WINDOW_H_

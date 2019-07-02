@@ -7,7 +7,6 @@ include_directories(${WHYCPP_INCLUDES_DIR})
 if (EMSCRIPTEN)
     add_library(whycpp_js STATIC ${WHYCPP_JS_HEADERS} ${WHYCPP_JS_INCLUDES} ${WHYCPP_JS_SOURCES})
 else ()
-    message(STATUS "${WHYCPP_JS_HEADERS}")
     add_library(whycpp_js SHARED STATIC ${WHYCPP_JS_HEADERS} ${WHYCPP_JS_INCLUDES} ${WHYCPP_JS_SOURCES})
 endif ()
 

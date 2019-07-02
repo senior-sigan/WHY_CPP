@@ -1,5 +1,4 @@
-#ifndef WHYCPP_ROOT_WHYCPP_JS_SRC_JS_APPLICATION_RUNNER_H_
-#define WHYCPP_ROOT_WHYCPP_JS_SRC_JS_APPLICATION_RUNNER_H_
+#pragma once
 
 #include <memory>
 #include <vector>
@@ -9,6 +8,7 @@ class JsRegistrator;
 class JsApplicationRunner {
   const char* root_path_;
   std::vector<std::unique_ptr<JsRegistrator>> registrators_{};
+
  public:
   explicit JsApplicationRunner(const char* root_path);
   virtual ~JsApplicationRunner();
@@ -24,5 +24,3 @@ class JsApplicationRunner {
    */
   void Execute();
 };
-
-#endif //WHYCPP_ROOT_WHYCPP_JS_SRC_JS_APPLICATION_RUNNER_H_

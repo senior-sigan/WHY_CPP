@@ -1,14 +1,13 @@
-#ifndef WHYCPP_CONTEXT_IMPL_H
-#define WHYCPP_CONTEXT_IMPL_H
+#pragma once
 
+#include <whycpp/application_config.h>
+#include <whycpp/buttons.h>
+#include <whycpp/types.h>
 #include <map>
 #include <memory>
 #include <string>
 #include <vector>
 #include "average_window.h"
-
-#include <whycpp/application_config.h>
-#include <whycpp/buttons.h>
 
 class Font;
 class VideoMemory;
@@ -34,7 +33,7 @@ class Music;
  */
 class Context {
  public:
-  explicit Context(VideoMemory *vram, Font *font, const ApplicationConfig& config);
+  explicit Context(VideoMemory *vram, Font *font, const ApplicationConfig &config);
   virtual ~Context();
 
   VideoMemory *GetVRAM() const;
@@ -52,8 +51,8 @@ class Context {
   void SetPaused(bool paused);
   Font *GetFont() const;
   void SetFont(Font *font);
-  int AppendSprite(Sprite *sprite);
-  Sprite *GetSprite(int index) const;
+  i32 AppendSprite(Sprite *sprite);
+  Sprite *GetSprite(i32 index) const;
 
   void RegisterMusic(const std::string &path, const std::string &name);
   Music *GetMusic(const std::string &name) const;
@@ -62,10 +61,10 @@ class Context {
 
   void Tick(double delta);
   void SetRealDeltaTime(double delta);
-  void KeyUp(unsigned int code);
-  void KeyDown(unsigned int code);
+  void KeyUp(u32 code);
+  void KeyDown(u32 code);
   void ResetKeys();
-  int GetFPS() const;
+  i32 GetFPS() const;
 
  private:
   std::unique_ptr<VideoMemory> vram_;
@@ -83,10 +82,8 @@ class Context {
   AverageWindow<double> deltasHistory_;
 
  public:
-  int mousePosX = 0;
-  int mousePosY = 0;
+  i32 mousePosX = 0;
+  i32 mousePosY = 0;
 };
 
 /** @} */
-
-#endif  // WHYCPP_CONTEXT_IMPL_H

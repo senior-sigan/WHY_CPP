@@ -1,18 +1,18 @@
+#include <whycpp/font.h>
+#include <whycpp/types.h>
 #include <utility>
 
-#include <whycpp/font.h>
-
-uint8_t Font::At(char ch, int row) const {
-  auto i = static_cast<unsigned long>(ch);
+uint8_t Font::At(char ch, i32 row) const {
+  auto i = static_cast<u64>(ch);
   return glyphs.at(i).data[row];
 }
-int Font::GetHeight() const {
+i32 Font::GetHeight() const {
   return height;
 }
-int Font::GetWidth() const {
+i32 Font::GetWidth() const {
   return width;
 }
-int Font::GetSpacing() const {
+i32 Font::GetSpacing() const {
   return spacing;
 }
 Font::Font(std::vector<Glyph> glyphs) : glyphs(std::move(glyphs)) {}

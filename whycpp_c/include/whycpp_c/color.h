@@ -1,5 +1,4 @@
-#ifndef WHYCPP_C_COLOR_H
-#define WHYCPP_C_COLOR_H
+#pragma once
 
 #include <stdint.h>
 
@@ -14,5 +13,3 @@ typedef union {
   uint32_t raw;
   struct RGBA_t_ rgba;
 } RGBA_t;
-
-#endif  // WHYCPP_C_COLOR_H

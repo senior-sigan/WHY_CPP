@@ -6,6 +6,7 @@ max_line_length = 120
 
 [*.{cpp,hpp,c,h,mm}]
 trim_trailing_whitespace = true
+insert_final_newline = true
 
 [*.py]
 indent_style = space

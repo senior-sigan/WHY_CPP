@@ -1,5 +1,4 @@
-#ifndef WHYCPP_C_APPLICATION_LISTENER_INT_H
-#define WHYCPP_C_APPLICATION_LISTENER_INT_H
+#pragma once
 
 #include <whycpp/application_listener.h>
 #include <whycpp_c/application_listener.h>
@@ -7,7 +6,7 @@
 
 class CallbackApplicationListener : public ApplicationListener {
  public:
-  CallbackApplicationListener(ApplicationListener_t *applicationListener) : listener(applicationListener) {}
+  explicit CallbackApplicationListener(ApplicationListener_t *applicationListener) : listener(applicationListener) {}
 
   void OnCreate(Context &context) override {
     SetContext_C(&context);
@@ -43,5 +42,3 @@ class CallbackApplicationListener : public ApplicationListener {
  private:
   ApplicationListener_t *listener;
 };
-
-#endif  // WHYCPP_C_APPLICATION_LISTENER_INT_H

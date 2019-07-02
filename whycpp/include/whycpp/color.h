@@ -1,7 +1,6 @@
-#ifndef WHYCPP_COLOR_H
-#define WHYCPP_COLOR_H
+#pragma once
 
-#include <cstdint>
+#include <whycpp/types.h>
 
 /**
  * @addtogroup Drawing
@@ -10,12 +9,10 @@
  */
 
 struct RGBA {
-  uint8_t red;
-  uint8_t green;
-  uint8_t blue;
-  uint8_t alpha;
+  u8 red;
+  u8 green;
+  u8 blue;
+  u8 alpha;
 };
 
 /** @} */
-
-#endif  // WHYCPP_COLOR_H

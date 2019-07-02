@@ -1,7 +1,8 @@
-#ifndef WHYCPP_ROOT_WHYCPP_SRC_INT_UTILS_H_
-#define WHYCPP_ROOT_WHYCPP_SRC_INT_UTILS_H_
+#pragma once
 
+#include <whycpp/types.h>
 #include <cstddef>
+
 template<class T>
 inline const T& clamp(const T& v, const T& lo, const T& hi) {
   if (v < lo) return lo;
@@ -9,7 +10,4 @@ inline const T& clamp(const T& v, const T& lo, const T& hi) {
   return v;
 }
 
-size_t AsSize(int value);
-
-
-#endif //WHYCPP_ROOT_WHYCPP_SRC_INT_UTILS_H_
+size_t AsSize(i32 value);

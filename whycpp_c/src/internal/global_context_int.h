@@ -1,10 +1,7 @@
-#ifndef WHYCPP_C_GLOBAL_CONTEXT_INT_H
-#define WHYCPP_C_GLOBAL_CONTEXT_INT_H
+#pragma once
 
 #include <whycpp/application_listener.h>
 
-Context *GetContext_C();
+Context* GetContext_C();
 
 void SetContext_C(Context* context);
-
-#endif //WHYCPP_C_GLOBAL_CONTEXT_INT_H

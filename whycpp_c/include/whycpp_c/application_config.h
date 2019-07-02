@@ -1,5 +1,4 @@
-#ifndef WHYCPP_C_APPLICATION_CONFIG_H
-#define WHYCPP_C_APPLICATION_CONFIG_H
+#pragma once
 
 #include <whycpp/c_api.h>
 
@@ -11,5 +10,3 @@ typedef struct ApplicationConfig_t_ {
   int window_size_multiplier;
   long ms_per_frame;
 } ApplicationConfig_t;
-
-#endif  // WHYCPP_C_APPLICATION_CONFIG_H

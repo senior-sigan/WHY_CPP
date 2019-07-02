@@ -7,7 +7,7 @@
 void InputsHandler::HandleEvents(Context& ctx) {
   SDL_Event e;
   ctx.ResetKeys();
-  int x, y;
+  i32 x, y;
   SDL_GetMouseState(&x, &y);
   if (ctx.GetVRAM()->GetScreenHeight() != 0) {
     ctx.mousePosY = y * ctx.GetVRAM()->GetHeight() / ctx.GetVRAM()->GetScreenHeight();

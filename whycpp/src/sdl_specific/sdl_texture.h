@@ -1,5 +1,4 @@
-#ifndef WHYCPP_SDLTEXTURE_H
-#define WHYCPP_SDLTEXTURE_H
+#pragma once
 
 #include <cstdint>
 #include <memory>
@@ -32,5 +31,3 @@ class SDLTexture {
 };
 
 /** @} */
-
-#endif  // WHYCPP_SDLTEXTURE_H
