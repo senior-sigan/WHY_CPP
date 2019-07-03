@@ -1,14 +1,15 @@
 #include <whycpp/lifecycle.h>
 #include "context.h"
+#include "holders/lifecycle_holder.h"
 
 void PauseApp(Context &context) {
-  context.SetPaused(false);
+  context.container->Get<LifecycleHolder>()->SetPaused(false);
 }
 
 void ResumeApp(Context &context) {
-  context.SetPaused(true);
+  context.container->Get<LifecycleHolder>()->SetPaused(true);
 }
 
 void ExitApp(Context &context) {
-  context.SetQuit(true);
+  context.container->Get<LifecycleHolder>()->SetQuit(true);
 }

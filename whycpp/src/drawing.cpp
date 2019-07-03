@@ -3,24 +3,25 @@
 #include <whycpp/types.h>
 #include <algorithm>
 #include "context.h"
+#include "holders/sprites_holder.h"
 #include "sprite.h"
 #include "video_memory.h"
 
 i32 GetDisplayWidth(const Context &ctx) {
-  return ctx.GetVRAM()->GetWidth();
+  return ctx.container->Get<VideoMemory>()->GetWidth();
 }
 i32 GetDisplayHeight(const Context &ctx) {
-  return ctx.GetVRAM()->GetHeight();
+  return ctx.container->Get<VideoMemory>()->GetHeight();
 }
 void SetPixel(Context &ctx, i32 x, i32 y, const RGBA &color) {
   if (color.alpha == 0) return;
-  ctx.GetVRAM()->Set(x, y, color);
+  ctx.container->Get<VideoMemory>()->Set(x, y, color);
 }
 const RGBA GetPixel(const Context &ctx, i32 x, i32 y) {
-  return ctx.GetVRAM()->Get(x, y);
+  return ctx.container->Get<VideoMemory>()->Get(x, y);
 }
 void DrawClearScreen(Context &ctx, const RGBA &color) {
-  ctx.GetVRAM()->Fill(color);
+  ctx.container->Get<VideoMemory>()->Fill(color);
 }
 void DrawLine(Context &ctx, i32 x0, i32 y0, i32 x1, i32 y1, const RGBA &color) {
   i32 dx = std::abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
@@ -91,7 +92,7 @@ void DrawCircleFill(Context &context, i32 x, i32 y, i32 radius, const RGBA &colo
 
 void DrawSprite(Context &context, i32 sprite_id, i32 screen_x, i32 screen_y, i32 sheet_x, i32 sheet_y, i32 width,
                 i32 height) {
-  auto spr = context.GetSprite(sprite_id);
+  auto spr = context.container->Get<SpritesHolder>()->GetSprite(sprite_id);
   for (auto y = 0; y < height; y++) {
     for (auto x = 0; x < width; x++) {
       SetPixel(context, screen_x + x, screen_y + y, spr->Get(sheet_x + x, sheet_y + y));

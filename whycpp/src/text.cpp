@@ -2,9 +2,10 @@
 #include <whycpp/text.h>
 #include <whycpp/types.h>
 #include "context.h"
+#include "holders/fonts_holder.h"
 
 void Print(Context &ctx, char ch, i32 x, i32 y, const RGBA &color, i32 size) {
-  auto font = ctx.GetFont();
+  auto font = ctx.container->Get<FontsHolder>()->GetFont();
   for (uint8_t row = 0; row < Glyph::SIZE; row++) {
     for (uint8_t col = 0; col < 8; col++) {
       if (((font->At(ch, row) >> col) & 0x1) == 1) {
@@ -19,7 +20,7 @@ void Print(Context &ctx, char ch, i32 x, i32 y, const RGBA &color, i32 size) {
 }
 
 void Print(Context &ctx, const std::string &str, i32 x, i32 y, const RGBA &color, i32 size, i32 spacing) {
-  auto font = ctx.GetFont();
+  auto font = ctx.container->Get<FontsHolder>()->GetFont();
   // TODO: add \n, \t, \r and other escape symbols support
   i32 x_ = x;
   i32 y_ = y;
