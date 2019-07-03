@@ -1,7 +1,7 @@
 #include "loop.h"
 #include <whycpp/application_listener.h>
 #include <cstdint>
-#include "container.h"
+#include "context.h"
 #include "holders/fps_holder.h"
 #include "holders/lifecycle_holder.h"
 #include "int_utils.h"
@@ -40,12 +40,12 @@ void Loop::Update() {
   delta_time = now - last;
   lag += delta_time;
   if (delta_time > 0) {
-    ctx.container->Get<FpsHolder>()->SetRealDeltaTime(1000.0 / delta_time);
+    ctx.Get<FpsHolder>()->SetRealDeltaTime(1000.0 / delta_time);
   }
 
   UpdateWithDelay();
 
-  isRunning = !ctx.container->Get<LifecycleHolder>()->IsQuit();
+  isRunning = !ctx.Get<LifecycleHolder>()->IsQuit();
   if (!isRunning) {
     first_start_ = true;
     listener->OnDispose(ctx);

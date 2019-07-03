@@ -5,14 +5,14 @@
 class SDLAudioContext;
 class SDLRenderContext;
 struct ApplicationConfig;
-class VideoMemory;
+class VideoMemoryHolder;
 
 class SDLContext {
   std::unique_ptr<SDLRenderContext> render_;
   std::unique_ptr<SDLAudioContext> audio_;
 
  public:
-  SDLContext(const ApplicationConfig& config, VideoMemory* vram);
+  SDLContext(const ApplicationConfig& config, VideoMemoryHolder* vram);
   virtual ~SDLContext();
   SDLRenderContext* GetRenderer() const;
 };

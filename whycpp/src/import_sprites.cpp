@@ -46,5 +46,5 @@ i32 ImportSprite(Context &context, const std::string &filename) {
     }
   }
 
-  return context.container->Get<SpritesHolder>()->AppendSprite(sprite);
+  return context.Get<SpritesHolder>()->AppendSprite(sprite);
 }

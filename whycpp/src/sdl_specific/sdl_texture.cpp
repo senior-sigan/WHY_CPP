@@ -4,10 +4,10 @@
 #include <whycpp/types.h>
 #include <algorithm>
 #include <cmath>
+#include "../holders/video_memory_holder.h"
 #include "../logger.h"
-#include "../video_memory.h"
 
-SDLTexture::SDLTexture(SDL_Renderer* ren, VideoMemory* vram) : ren(ren), vram(vram) {
+SDLTexture::SDLTexture(SDL_Renderer* ren, VideoMemoryHolder* vram) : ren(ren), vram(vram) {
   tex = std::unique_ptr<SDL_Texture, sdl_deleter>(
       SDL_CreateTexture(ren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, vram->GetWidth(),
                         vram->GetHeight()),

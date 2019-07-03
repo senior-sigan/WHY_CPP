@@ -4,7 +4,7 @@
 #include <whycpp/types.h>
 #include <memory>
 #include <vector>
-#include "i_object.h"
+#include "../i_object.h"
 
 /**
  * @defgroup DrawingInternals Drawing
@@ -15,13 +15,13 @@
  */
 
 /**
- * @class VideoMemory
+ * @class VideoMemoryHolder
  * Holds information about screen pixels in the RGBA matrix.
  */
-class VideoMemory : public IObject {
+class VideoMemoryHolder : public IObject {
  public:
-  explicit VideoMemory(i32 width, i32 height);
-  ~VideoMemory() override;
+  explicit VideoMemoryHolder(i32 width, i32 height);
+  ~VideoMemoryHolder() override;
 
   i32 GetScreenWidth() const;
   void SetScreenWidth(i32 screen_width);

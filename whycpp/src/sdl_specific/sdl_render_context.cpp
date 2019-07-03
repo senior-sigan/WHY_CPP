@@ -2,12 +2,12 @@
 #include <SDL.h>
 #include <whycpp/application_config.h>
 #include <memory>
+#include "../holders/video_memory_holder.h"
 #include "../logger.h"
-#include "../video_memory.h"
 #include "sdl_deleter.h"
 #include "sdl_texture.h"
 
-SDLRenderContext::SDLRenderContext(const ApplicationConfig& config, VideoMemory* vram) {
+SDLRenderContext::SDLRenderContext(const ApplicationConfig& config, VideoMemoryHolder* vram) {
   LOG_DEBUG("SDLRenderContext created");
   if (SDL_Init(SDL_INIT_VIDEO) != 0) {
     LogSDLError("SDL_Init");

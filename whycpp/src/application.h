@@ -5,7 +5,6 @@
 #include <string>
 
 class ApplicationListener;
-class VideoMemory;
 class Context;
 class SDLContext;
 class Loop;

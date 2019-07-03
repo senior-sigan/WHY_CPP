@@ -3,13 +3,13 @@
 #include "holders/lifecycle_holder.h"
 
 void PauseApp(Context &context) {
-  context.container->Get<LifecycleHolder>()->SetPaused(false);
+  context.Get<LifecycleHolder>()->SetPaused(false);
 }
 
 void ResumeApp(Context &context) {
-  context.container->Get<LifecycleHolder>()->SetPaused(true);
+  context.Get<LifecycleHolder>()->SetPaused(true);
 }
 
 void ExitApp(Context &context) {
-  context.container->Get<LifecycleHolder>()->SetQuit(true);
+  context.Get<LifecycleHolder>()->SetQuit(true);
 }

@@ -4,7 +4,7 @@
 #include "sdl_deleter.h"
 
 struct ApplicationConfig;
-class VideoMemory;
+class VideoMemoryHolder;
 class SDLTexture;
 struct SDL_Window;
 struct SDL_Renderer;
@@ -15,7 +15,7 @@ class SDLRenderContext {
   std::unique_ptr<SDLTexture> texture;
 
  public:
-  explicit SDLRenderContext(const ApplicationConfig& config, VideoMemory* vram);
+  explicit SDLRenderContext(const ApplicationConfig& config, VideoMemoryHolder* vram);
   virtual ~SDLRenderContext();
 
   void Render();
