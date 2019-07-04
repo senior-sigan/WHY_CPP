@@ -1,3 +1,4 @@
+#include "sdl_inputs_handler.h"
 #include <SDL_events.h>
 #include <whycpp/application_listener.h>
 #include "../context.h"
@@ -5,9 +6,8 @@
 #include "../holders/lifecycle_holder.h"
 #include "../holders/mouse_holder.h"
 #include "../holders/video_memory_holder.h"
-#include "../inputs_handler.h"
 
-void InputsHandler::HandleEvents(Context& ctx) {
+void SDLInputsHandler::HandleEvents() {
   SDL_Event e;
   ctx.Get<KeyboardHolder>()->ResetKeys();
   i32 x, y;
@@ -46,4 +46,4 @@ void InputsHandler::HandleEvents(Context& ctx) {
     }
   }
 }
-InputsHandler::InputsHandler(ApplicationListener* listener) : listener_(listener) {}
+SDLInputsHandler::SDLInputsHandler(Context& ctx, ApplicationListener* listener) : ctx(ctx), listener_(listener) {}

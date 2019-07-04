@@ -1,7 +1,8 @@
 #pragma once
 
-class SDLAudioContext {
+#include "../i_object.h"
+class SDLAudioContext: public IObject {
  public:
   SDLAudioContext();
-  virtual ~SDLAudioContext();
+  ~SDLAudioContext() override;
 };

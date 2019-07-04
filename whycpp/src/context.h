@@ -34,8 +34,15 @@ class Context {
     LOG_DEBUG("Context destroyed");
   }
   template<typename TObject, typename... Args>
-  void Put(Args&&... args) {
+  TObject* Put(Args&&... args) {
     memory[typeid(TObject)] = std::make_unique<TObject>(std::forward<Args>(args)...);
+    return Get<TObject>();
+  }
+
+  template<typename TObject, typename TAsObject, typename... Args>
+  TAsObject* PutAs(Args&&... args) {
+    memory[typeid(TAsObject)] = std::make_unique<TObject>(std::forward<Args>(args)...);
+    return Get<TAsObject>();
   }
 
   template<typename TObject>
