@@ -5,7 +5,3 @@
 i64 GetTicks() {
   return static_cast<i64>(SDL_GetTicks());
 }
-
-void Delay(u32 time) {
-  SDL_Delay(time);
-}
