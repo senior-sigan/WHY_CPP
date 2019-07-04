@@ -6,6 +6,7 @@
 #include <memory>
 #include <vector>
 #include "context.h"
+#include "holders/sprites_holder.h"
 #include "logger.h"
 #include "sprite.h"
 
@@ -45,5 +46,5 @@ i32 ImportSprite(Context &context, const std::string &filename) {
     }
   }
 
-  return context.AppendSprite(sprite);
+  return context.Get<SpritesHolder>()->AppendSprite(sprite);
 }
