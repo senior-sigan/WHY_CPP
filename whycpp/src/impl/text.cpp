@@ -1,8 +1,8 @@
 #include <whycpp/drawing.h>
 #include <whycpp/text.h>
 #include <whycpp/types.h>
-#include "context.h"
-#include "holders/fonts_holder.h"
+#include "../context.h"
+#include "../holders/fonts_holder.h"
 
 void Print(Context &ctx, char ch, i32 x, i32 y, const RGBA &color, i32 size) {
   auto font = ctx.Get<FontsHolder>()->GetFont();

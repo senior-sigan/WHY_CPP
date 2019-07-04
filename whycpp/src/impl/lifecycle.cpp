@@ -1,6 +1,6 @@
 #include <whycpp/lifecycle.h>
-#include "context.h"
-#include "holders/lifecycle_holder.h"
+#include "../context.h"
+#include "../holders/lifecycle_holder.h"
 
 void PauseApp(Context &context) {
   context.Get<LifecycleHolder>()->SetPaused(false);

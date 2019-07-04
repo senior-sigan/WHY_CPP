@@ -2,10 +2,10 @@
 #include <whycpp/drawing.h>
 #include <whycpp/types.h>
 #include <algorithm>
-#include "context.h"
-#include "holders/sprites_holder.h"
-#include "sprite.h"
-#include "holders/video_memory_holder.h"
+#include "../context.h"
+#include "../holders/sprites_holder.h"
+#include "../sprite.h"
+#include "../holders/video_memory_holder.h"
 
 i32 GetDisplayWidth(const Context &ctx) {
   return ctx.Get<VideoMemoryHolder>()->GetWidth();

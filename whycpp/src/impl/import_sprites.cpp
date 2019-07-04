@@ -5,10 +5,10 @@
 #include <fstream>
 #include <memory>
 #include <vector>
-#include "context.h"
-#include "holders/sprites_holder.h"
-#include "logger.h"
-#include "sprite.h"
+#include "../context.h"
+#include "../holders/sprites_holder.h"
+#include "../logger.h"
+#include "../sprite.h"
 
 i32 ImportSprite(Context &context, const std::string &filename) {
   std::ifstream file(filename.c_str(), std::ios::in | std::ios::binary | std::ios::ate);

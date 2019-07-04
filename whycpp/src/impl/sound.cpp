@@ -1,9 +1,9 @@
 #include <whycpp/sound.h>
 #include <whycpp/types.h>
 #include <string>
-#include "audio.h"
-#include "context.h"
-#include "holders/audio_holder.h"
+#include "../audio.h"
+#include "../context.h"
+#include "../holders/audio_holder.h"
 
 void ImportMusic(Context& context, const std::string& path, const std::string& name) {
   context.Get<AudioHolder>()->RegisterMusic(path, name);

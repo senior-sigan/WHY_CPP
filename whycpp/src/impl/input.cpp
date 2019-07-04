@@ -1,6 +1,6 @@
-#include "context.h"
-#include "holders/keyboard_holder.h"
-#include "holders/mouse_holder.h"
+#include "../context.h"
+#include "../holders/keyboard_holder.h"
+#include "../holders/mouse_holder.h"
 
 bool IsPressed(const Context& ctx, const Button& btn) {
   return ctx.Get<KeyboardHolder>()->IsButtonPressed(btn);
