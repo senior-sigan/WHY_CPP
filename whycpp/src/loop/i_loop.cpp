@@ -47,8 +47,6 @@ ILoop::ILoop(Context &ctx, ApplicationListener *listener, i64 ms_per_frame)
     : ctx(ctx), listener(listener), ms_per_frame(ms_per_frame) {
   inputs = ctx.Get<IInputsHandler>();
   renderer = ctx.Get<IRenderHandler>();
-  assert(inputs != nullptr);
-  assert(renderer != nullptr);
   LOG_DEBUG("Loop created");
 }
 ILoop::~ILoop() {
