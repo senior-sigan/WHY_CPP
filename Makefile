@@ -34,7 +34,7 @@ reload: mkdir_build
 	cd cmake-build-debug;cmake .. $(FLAGS)
 
 example-compile:
-	cd cmake-build-debug;cmake --build . --target example
+	cd cmake-build-debug;cmake --build . --target example -j4
 
 example-run:
 	cd cmake-build-debug/example;./example
@@ -44,13 +44,13 @@ doxygen:
 	doxygen Doxyfile
 
 example-js-compile:
-	cd cmake-build-debug;cmake --build . --target example_js
+	cd cmake-build-debug;cmake --build . --target example_js -j4
 
 example-js-run:
 	cd cmake-build-debug/example_js/;./example_js
 
 example-c-compile:
-	cd cmake-build-debug;cmake --build . --target example_c
+	cd cmake-build-debug;cmake --build . --target example_c -j4
 
 example-c-run:
 	cd cmake-build-debug/example_c/;./example_c
