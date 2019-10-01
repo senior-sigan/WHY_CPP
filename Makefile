@@ -10,7 +10,7 @@ reload-web:
 	cd cmake-build-debug-web;emcmake cmake ..
 
 compile-web:
-	cd cmake-build-debug-web/example;make -j4
+	cd cmake-build-debug-web/example;$(MAKE) -j4
 
 serve:
 	cd cmake-build-debug-web/example;emrun index.html
@@ -18,10 +18,10 @@ serve:
 reload:
 	rm -rf cmake-build-debug
 	mkdir cmake-build-debug
-	cd cmake-build-debug;cmake .. -DUSE_PYTHON=ON -DUSE_JS=ON
+	cd cmake-build-debug;cmake .. -DUSE_C=ON -DUSE_JS=ON
 
 compile:
-	cd cmake-build-debug/example;make -j4
+	cd cmake-build-debug/example;$(MAKE) -j4
 
 run:
 	cd cmake-build-debug/example;./example
@@ -31,7 +31,7 @@ doxygen:
 	doxygen Doxyfile
 
 example-js-compile:
-	cd cmake-build-debug/example_js;make -j4
+	cd cmake-build-debug/example_js;$(MAKE) -j4
 
 example-js-run:
 	cd cmake-build-debug/example_js/;./example_js
