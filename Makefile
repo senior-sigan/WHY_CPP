@@ -5,11 +5,13 @@ else
 endif
 
 
-desktop: reload compile run
+desktop: reload example-compile example-run
 
 web: reload-web compile-web serve
 
-desktop-js: reload whycpp-js-compile whycpp-js-run
+desktop-js: reload example-js-compile example-js-run
+
+desktop-c: reload example-c-compile example-c-run
 
 reload-web:
 	rm -rf cmake-build-debug-web
@@ -22,15 +24,19 @@ compile-web:
 serve:
 	cd cmake-build-debug-web/example;emrun index.html
 
-reload:
+clean:
 	rm -rf cmake-build-debug
-	mkdir cmake-build-debug
+
+mkdir_build:
+	[ -d ./cmake-build-debug ] | mkdir -p cmake-build-debug
+
+reload: mkdir_build
 	cd cmake-build-debug;cmake .. $(FLAGS)
 
-compile:
-	cd cmake-build-debug/example;$(MAKE) -j4
+example-compile:
+	cd cmake-build-debug;cmake --build . --target example
 
-run:
+example-run:
 	cd cmake-build-debug/example;./example
 
 doxygen:
@@ -38,7 +44,13 @@ doxygen:
 	doxygen Doxyfile
 
 example-js-compile:
-	cd cmake-build-debug/example_js;$(MAKE) -j4
+	cd cmake-build-debug;cmake --build . --target example_js
 
 example-js-run:
 	cd cmake-build-debug/example_js/;./example_js
+
+example-c-compile:
+	cd cmake-build-debug;cmake --build . --target example_c
+
+example-c-run:
+	cd cmake-build-debug/example_c/;./example_c
