@@ -19,7 +19,7 @@ reload-web:
 	cd cmake-build-debug-web;emcmake cmake ..
 
 compile-web:
-	cd cmake-build-debug-web/example;$(MAKE) -j4
+	cd cmake-build-debug-web/example;$(MAKE) -j 4
 
 serve:
 	cd cmake-build-debug-web/example;emrun index.html
@@ -34,7 +34,7 @@ reload: mkdir_build
 	cd cmake-build-debug;cmake .. $(FLAGS)
 
 example-compile:
-	cd cmake-build-debug;cmake --build . --target example -j4
+	cd cmake-build-debug;cmake --build . --target example -j 4
 
 example-run:
 	cd cmake-build-debug/example;./example
@@ -44,13 +44,13 @@ doxygen:
 	doxygen Doxyfile
 
 example-js-compile:
-	cd cmake-build-debug;cmake --build . --target example_js -j4
+	cd cmake-build-debug;cmake --build . --target example_js -j 4
 
 example-js-run:
 	cd cmake-build-debug/example_js/;./example_js
 
 example-c-compile:
-	cd cmake-build-debug;cmake --build . --target example_c -j4
+	cd cmake-build-debug;cmake --build . --target example_c -j 4
 
 example-c-run:
 	cd cmake-build-debug/example_c/;./example_c
