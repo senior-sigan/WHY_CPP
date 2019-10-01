@@ -14,23 +14,13 @@ file(GLOB_RECURSE WHYCPP_INCLUDES ${WHYCPP_INCLUDES_DIR}/*.h)
 file(GLOB_RECURSE WHYCPP_HEADERS ${WHYCPP_SOURCES_DIR}/*.h)
 file(GLOB_RECURSE WHYCPP_SOURCES ${WHYCPP_SOURCES_DIR}/*.cpp)
 
-if (NOT DEFINED SDL2_FROM_SOURCE AND NOT EMSCRIPTEN)
-    message(STATUS "By default SDL2_FROM_SOURCE=ON")
-    set(SDL2_FROM_SOURCE ON) # if you have libsdl2 installed use OFF instead
-endif ()
-
-if (SDL2_FROM_SOURCE AND NOT EMSCRIPTEN)
-    include(ConfigureSDL2)
-endif ()
-
 set(LODEPNG_HEADERS ${PROJECT_SOURCE_DIR}/lib/lodepng/include)
 set(SDL2MIXER_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/lib/sdl2_mixer/include)
 add_subdirectory(lib/lodepng)
+add_subdirectory(src)
 if (NOT EMSCRIPTEN)
     add_subdirectory(lib/sdl2_mixer)
 endif ()
-add_subdirectory(src)
-
 
 # Add linting before compilation
 file(GLOB_RECURSE SOURCES_LIST ${WHYCPP_INCLUDES_DIR}/*.h ${WHYCPP_SOURCES_DIR}/*.h ${WHYCPP_SOURCES_DIR}/*.cpp)
