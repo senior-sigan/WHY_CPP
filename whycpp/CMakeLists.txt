@@ -15,12 +15,8 @@ file(GLOB_RECURSE WHYCPP_HEADERS ${WHYCPP_SOURCES_DIR}/*.h)
 file(GLOB_RECURSE WHYCPP_SOURCES ${WHYCPP_SOURCES_DIR}/*.cpp)
 
 set(LODEPNG_HEADERS ${PROJECT_SOURCE_DIR}/lib/lodepng/include)
-set(SDL2MIXER_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/lib/sdl2_mixer/include)
 add_subdirectory(lib/lodepng)
 add_subdirectory(src)
-if (NOT EMSCRIPTEN)
-    add_subdirectory(lib/sdl2_mixer)
-endif ()
 
 # Add linting before compilation
 file(GLOB_RECURSE SOURCES_LIST ${WHYCPP_INCLUDES_DIR}/*.h ${WHYCPP_SOURCES_DIR}/*.h ${WHYCPP_SOURCES_DIR}/*.cpp)

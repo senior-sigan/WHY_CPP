@@ -1,3 +1,10 @@
+ifeq ($(OS),Windows_NT)
+	FLAGS = -DCMAKE_SH="CMAKE_SH-NOTFOUND" -G "CodeBlocks - MinGW Makefiles" -DUSE_C=ON -DUSE_JS=ON
+else
+	FLAGS = -DUSE_C=ON -DUSE_JS=ON
+endif
+
+
 desktop: reload compile run
 
 web: reload-web compile-web serve
@@ -18,7 +25,7 @@ serve:
 reload:
 	rm -rf cmake-build-debug
 	mkdir cmake-build-debug
-	cd cmake-build-debug;cmake .. -DUSE_C=ON -DUSE_JS=ON
+	cd cmake-build-debug;cmake .. $(FLAGS)
 
 compile:
 	cd cmake-build-debug/example;$(MAKE) -j4
