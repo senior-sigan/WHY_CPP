@@ -9,7 +9,13 @@ jobs:
       language: cpp
       os: linux
       dist: xenial
-      script: make reload compile example-js-compile
+      script: make
+      addons:
+        apt:
+          update: true
+          packages:
+            - libsdl2-dev
+            - libsdl2-mixer-dev
     - stage: compile with clang
       branches:
         except:
@@ -17,7 +23,13 @@ jobs:
       language: cpp
       os: osx
       osx_image: xcode10.2
-      script: make reload compile example-js-compile
+      script: make
+      addons:
+        homebrew:
+          update: true
+          packages:
+            - sdl2
+            - sdl2_mixer
     - stage: documentation
       language: bash
       branches:
@@ -25,6 +37,7 @@ jobs:
           - master
       addons:
         apt:
+          update: true
           packages:
             - doxygen
 
