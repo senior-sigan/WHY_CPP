@@ -14,6 +14,7 @@ file(GLOB_RECURSE WHYCPP_JS_INCLUDES ${WHYCPP_JS_INCLUDES_DIR}/*.h)
 file(GLOB_RECURSE WHYCPP_JS_HEADERS ${WHYCPP_JS_SOURCES_DIR}/*.h)
 file(GLOB_RECURSE WHYCPP_JS_SOURCES ${WHYCPP_JS_SOURCES_DIR}/*.cpp)
 
-include(ConfigureDuktape)
+add_subdirectory(lib/duktape)
+set(DUKTAPE_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/lib/duktape)
 
 add_subdirectory(src)

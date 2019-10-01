@@ -8,20 +8,14 @@ file(GLOB_RECURSE SDL2MIXER_INCLUDES include/*.h)
 file(GLOB_RECURSE SDL2MIXER_HEADERS src/*.h)
 file(GLOB_RECURSE SDL2MIXER_SOURCES src/*.c)
 
-if (SDL2_FROM_SOURCE OR EMSCRIPTEN)
-else ()
-    if (SDL2_FROM_SOURCE)
-        add_dependencies(whycpp SDL2-static SDL2main)
-    else ()
-        find_package(SDL2 REQUIRED)
-        string(STRIP ${SDL2_LIBRARIES} SDL2_LIBRARIES)
-    endif ()
+if (NOT EMSCRIPTEN)
+    find_package(SDL2 REQUIRED)
+    string(STRIP ${SDL2_LIBRARIES} SDL2_LIBRARIES)
 endif ()
 
 include_directories(include)
 
-add_library(SDL2-mixer SHARED STATIC
-        ${SDL2MIXER_SOURCES} ${SDL2MIXER_HEADERS} ${SDL2MIXER_INCLUDES})
+add_library(SDL2-mixer SHARED STATIC ${SDL2MIXER_SOURCES} ${SDL2MIXER_HEADERS} ${SDL2MIXER_INCLUDES})
 
 target_include_directories(SDL2-mixer SYSTEM PRIVATE ${SDL2_INCLUDE_DIRS})
 target_link_libraries(SDL2-mixer ${SDL2_LIBRARIES})

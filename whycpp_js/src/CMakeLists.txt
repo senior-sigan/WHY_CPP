@@ -10,5 +10,5 @@ else ()
     add_library(whycpp_js SHARED STATIC ${WHYCPP_JS_HEADERS} ${WHYCPP_JS_INCLUDES} ${WHYCPP_JS_SOURCES})
 endif ()
 
-target_link_libraries(whycpp_js whycpp duktape duktape_modules)
-target_include_directories(whycpp_js PUBLIC SYSTEM ${DUKTAPE_INCLUDE_DIR} ${DUKTAPE_MODULES_INCLUDE_DIR})
+target_include_directories(whycpp_js PUBLIC SYSTEM ${DUKTAPE_INCLUDE_DIR})
+target_link_libraries(whycpp_js whycpp duktape)
