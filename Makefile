@@ -4,6 +4,7 @@ else
 	FLAGS = -DUSE_C=ON -DUSE_JS=ON
 endif
 
+all: clean reload example-compile example-js-compile example-c-compile
 
 desktop: reload example-compile example-run
 

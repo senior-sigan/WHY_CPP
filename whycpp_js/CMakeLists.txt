@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.6)
 project(whycpp_js CXX)
 
 set(CMAKE_C_STANDARD 11)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 
 set(CMAKE_DIR "${PROJECT_SOURCE_DIR}/CMake")
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_DIR})

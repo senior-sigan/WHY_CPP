@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.6)
 project(example_js CXX)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 
 include_directories(${WHYCPP_JS_INCLUDES_DIR})
 include_directories(${WHYCPP_INCLUDES_DIR})
