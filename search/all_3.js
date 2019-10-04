@@ -1,0 +1,11 @@
+var searchData=
+[
+  ['drawcircle',['DrawCircle',['../group__Drawing.html#ga55c2068980a7e3762dc0ad714b269b0a',1,'DrawCircle(Context &amp;context, i32 x, i32 y, i32 radius, const RGBA &amp;color):&#160;drawing.cpp'],['../group__Drawing.html#ga55c2068980a7e3762dc0ad714b269b0a',1,'DrawCircle(Context &amp;context, i32 x, i32 y, i32 radius, const RGBA &amp;color):&#160;drawing.cpp']]],
+  ['drawcirclefill',['DrawCircleFill',['../group__Drawing.html#ga4933b0cf8b7a180360d8ca99e63f304c',1,'DrawCircleFill(Context &amp;context, i32 x, i32 y, i32 radius, const RGBA &amp;color):&#160;drawing.cpp'],['../group__Drawing.html#ga4933b0cf8b7a180360d8ca99e63f304c',1,'DrawCircleFill(Context &amp;context, i32 x, i32 y, i32 radius, const RGBA &amp;color):&#160;drawing.cpp']]],
+  ['drawclearscreen',['DrawClearScreen',['../group__Drawing.html#ga540dc704dc11f8aebb070f4bfb34eaac',1,'DrawClearScreen(Context &amp;ctx, const RGBA &amp;color):&#160;drawing.cpp'],['../group__Drawing.html#ga540dc704dc11f8aebb070f4bfb34eaac',1,'DrawClearScreen(Context &amp;context, const RGBA &amp;color={0, 0, 0, 255}):&#160;drawing.cpp']]],
+  ['drawing',['Drawing',['../group__Drawing.html',1,'']]],
+  ['drawing',['Drawing',['../group__DrawingInternals.html',1,'']]],
+  ['drawline',['DrawLine',['../group__Drawing.html#ga9f4eb6e42a386e9345bebdae17289860',1,'DrawLine(Context &amp;ctx, i32 x0, i32 y0, i32 x1, i32 y1, const RGBA &amp;color):&#160;drawing.cpp'],['../group__Drawing.html#ga9f4eb6e42a386e9345bebdae17289860',1,'DrawLine(Context &amp;context, i32 x0, i32 y0, i32 x1, i32 y1, const RGBA &amp;color):&#160;drawing.cpp']]],
+  ['drawrect',['DrawRect',['../group__Drawing.html#gab07e16791ac67c969ce8bd7f6c109647',1,'DrawRect(Context &amp;ctx, i32 x, i32 y, i32 w, i32 h, const RGBA &amp;color):&#160;drawing.cpp'],['../group__Drawing.html#gab07e16791ac67c969ce8bd7f6c109647',1,'DrawRect(Context &amp;context, i32 x, i32 y, i32 w, i32 h, const RGBA &amp;color):&#160;drawing.cpp']]],
+  ['drawrectfill',['DrawRectFill',['../group__Drawing.html#ga3d26ebf73979889007596b2c3a51a7cb',1,'DrawRectFill(Context &amp;ctx, i32 x, i32 y, i32 w, i32 h, const RGBA &amp;color):&#160;drawing.cpp'],['../group__Drawing.html#ga3d26ebf73979889007596b2c3a51a7cb',1,'DrawRectFill(Context &amp;context, i32 x, i32 y, i32 w, i32 h, const RGBA &amp;color):&#160;drawing.cpp']]]
+];
