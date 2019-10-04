@@ -35,7 +35,7 @@ else ()
     target_link_libraries(whycpp ${SDL2_LIBRARY} ${SDL2_MIXER_LIBRARIES})
 endif ()
 
-set(OUTPUT_DIR ${CMAKE_BINARY_DIR}/why_cpp)
+set(OUTPUT_DIR ${CMAKE_BINARY_DIR}/whycpp_install)
 set(OUTPUT_LIB_DIR ${OUTPUT_DIR}/${CMAKE_SYSTEM_NAME}${BITNESS})
 set_target_properties(whycpp PROPERTIES PUBLIC_HEADER "${INCLUDES}")
 
@@ -52,3 +52,6 @@ install(TARGETS whycpp
         ARCHIVE DESTINATION ${OUTPUT_LIB_DIR}
         LIBRARY DESTINATION ${OUTPUT_LIB_DIR}
         PUBLIC_HEADER DESTINATION ${OUTPUT_DIR}/include)
+
+configure_file(../whycpp.pc.in whycpp.pc @ONLY)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/whycpp.pc DESTINATION "${OUTPUT_LIB_DIR}/pkgconfig")
